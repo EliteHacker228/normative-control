@@ -1,0 +1,22 @@
+.app-wrapper {
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*        "header"*/
+    /*        "content"*/
+    /*        "footer";*/
+    /*grid-template-rows: 120px 1fr 60px;*/
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-wrapper-content {
+    /*grid-area: content;*/
+    flex: 1;
+    background-image: url("background.png");
+    background-size: cover;
+    /*background-size: 100% 100%;*/
+    background-repeat: no-repeat;
+    /*background-position: center center;*/
+}
