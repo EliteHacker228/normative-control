@@ -18,7 +18,7 @@ function App() {
                         <Route path='' element={<FileUpload/>}/>
                         <Route path='upload' element={<FileUpload/>}/>
                         <Route path='test' element={<GetStatus/>}/>
-                        {/*<Route path='result' element={<GetResult/>}/>*/}
+                        <Route path='result' element={<GetResult/>}/>
                     </Routes>
                 </div>
                 <Footer/>

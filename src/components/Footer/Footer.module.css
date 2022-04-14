@@ -3,3 +3,8 @@
     color: #FFFFFF;
     height: 50px;
 }
+
+.footer p{
+    padding: 0;
+    margin: 0;
+}

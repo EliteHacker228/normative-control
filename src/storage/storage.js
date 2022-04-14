@@ -2,4 +2,8 @@ let state = {
 
 };
 
-export default state;
+let fileStorage = {
+
+};
+
+export default fileStorage;
