@@ -5,19 +5,17 @@ import uploading_file_ico from './Frame.svg';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
-// import state from "../../../storage/storage";
+import state from "../../../storage/storage";
 
 
 class FileUpload extends Component {
 
-    state = {
-        renderUploadInput: true,
-        renderUploadProgressbar: false,
-        file: undefined,
-        fileId: undefined
-    };
-
-    fileStorage = {};
+    // state = {
+    //     renderUploadInput: true,
+    //     renderUploadProgressbar: false,
+    //     file: undefined,
+    //     fileId: undefined
+    // };
 
     fileInputOnInput = (evt) => {
         // this.state['file'] = evt.target.files[0];
@@ -75,12 +73,11 @@ class FileUpload extends Component {
             .then(response => response.text())
             .then(result => {
                 console.log(result);
-                this.state['fileId'] = result['id'];
 
-                this.state['fileName'] = file.name;
-
-                this.state['renderUploadInput'] = false;
-                this.state['renderUploadProgressbar'] = true;
+                state['fileId'] = result['id'];
+                state['fileName'] = file.name;
+                state['renderUploadInput'] = false;
+                state['renderUploadProgressbar'] = true;
 
                 this.forceUpdate();
 
@@ -99,7 +96,7 @@ class FileUpload extends Component {
                     Сервис поддерживает файлы формата <b>docx</b> объемом до <b>5МБ.</b>
                 </p>
 
-                <div style={{display: this.state['renderUploadInput'] ? "block" : "none"}}
+                <div style={{display: state['renderUploadInput'] ? "block" : "none"}}
                      className={css.file_upload_form}>
                     <img className={css.doc_icon} src={icon} alt="file"/>
                     <button className={css.file_upload_button} onClick={this.fileSendButtonOnClick}>Выбрать файл
@@ -107,13 +104,13 @@ class FileUpload extends Component {
                     <p className={css.subtext}>Или перетащите файл сюда</p>
                 </div>
 
-                <div style={{display: this.state['renderUploadProgressbar'] ? "block" : "none"}}
+                <div style={{display: state['renderUploadProgressbar'] ? "block" : "none"}}
                      className={css.file_upload_form}>
                     <img className={css.file_uploading} src={uploading} alt="upload_man"/>
 
                     <div className={css.file_uploading_description}>
                         <img className={css.file_uploading_icon} src={uploading_file_ico}/>
-                        <span>{this.state['fileName']}</span>
+                        <span>{state['fileName']}</span>
                         <div className={css.progressbar_container}>
                             <div className={css.progressbar}/>
                         </div>

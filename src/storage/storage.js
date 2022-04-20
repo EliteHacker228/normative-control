@@ -1,9 +1,6 @@
 let state = {
-
+    renderUploadInput: true,
+    renderUploadProgressbar: false
 };
 
-let fileStorage = {
-
-};
-
-export default fileStorage;
+export default state;
