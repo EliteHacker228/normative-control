@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 const Header = () => {
     return (
         <header className={css.header}>
-            <NavLink to='/upload'>
+            <NavLink to='/'>
                 <img className={css.logo}
                      src={logo}
                 />
