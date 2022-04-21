@@ -150,10 +150,10 @@ class FileUpload extends Component {
                 this.forceUpdate();
                 break;
             default:
-                console.log('х3 чё))0)')
+                console.log('х3 чё))0)');
                 break;
         }
-    }
+    };
 
     render() {
 
