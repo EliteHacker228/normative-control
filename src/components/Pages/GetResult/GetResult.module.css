@@ -1,32 +1,49 @@
 .result_box {
     border-style: dashed;
     border-radius: 15px;
-    border-color: #D3D3D3;
+    border-color: var(--main-white);
     width: 66%;
     height: 66%;
     margin: 65px auto;
-    padding: 60px;
+    padding: 45px;
 
-    display: flex;
+    display: grid;
     gap: 40px;
+    grid-template:
+            "a a a" 40px
+            "b c c"
+            "b c c"  / 1fr 1fr 1fr;
 }
 
 .statistics {
 
     border-style: dashed;
-    border-color: #D3D3D3;
-
-    width: 30%;
-
+    border-color: var(--main-white);
     background-color: #FFFFFF;
+    /*width: 30%;*/
+
+    grid-area: b;
 
 }
 
 .document_content {
-    border-style: dashed;
-    border-color: #D3D3D3;
-
     background-color: #FFFFFF;
+    /*width: 60%;*/
 
-    width: 60%;
+    grid-area: c;
+}
+
+.result_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    grid-area: a;
+}
+
+.file_block {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

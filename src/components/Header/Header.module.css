@@ -1,6 +1,14 @@
+:root {
+    --main-blue: #0A8ECD;
+    --main-dark: #292929;
+    --main-white: #F2F2F2;
+    --main-gray: #D3D3D3;
+    --main-green: #55DC8B;
+}
+
 .header {
-    background-color: #292929;
-    color: #FFFFFF;
+    background-color:var(--main-dark);
+    color: var(--main-white);
     display: flex;
     column-gap: 400px;
     height: 100px;
@@ -13,10 +21,13 @@
 
 .name {
     position: absolute;
-    margin-left: 250px;
-    margin-top: 20px;
-    font-weight: bold;
+    margin-left: 262px;
+    margin-top: 22px;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    line-height: 140%;
 }
 
 .menu {
@@ -40,7 +51,7 @@
 /*}*/
 
 .menu_element {
-    color: #F2F2F2;
+    color: var(--main-white);
     /*text-transform: uppercase;*/
     text-decoration: none;
     font-size: 1.5em;
@@ -59,7 +70,7 @@
     /*background: none repeat scroll 0 0 transparent;*/
     height: 4px;
     width: 0;
-    background: #F2F2F2;
+    background: var(--main-white);
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
 }
 

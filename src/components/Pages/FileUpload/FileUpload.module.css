@@ -4,8 +4,21 @@
 
 .introduction {
     width: 55%;
-    margin: 60px auto;
-    font-size: 1.813em;
+    margin: 78px auto;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 29px;
+    letter-spacing: 0.02em;
+    line-height: 140%;
+}
+
+.docx {
+    font-family: 'Consolas', sans-serif;
+    font-weight: 700;
+    font-size: 29px;
+    letter-spacing: 0.02em;
+    line-height: 140%;
 }
 
 .doc_icon {
@@ -35,8 +48,16 @@
     border-color: #D3D3D3;
     width: 33%;
     height: 33%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 165px;
     padding: 60px;
+    /*margin-bottom: 105px;*/
+}
+
+.status {
+    margin-bottom: 101px;
 }
 
 .file_upload_input {
@@ -47,28 +68,49 @@
 
 .file_upload_button {
     margin: 0 auto;
-    background-color: #0A8ECD;
-    color: #FFFFFF;
+    background-color: var(--main-blue);
+    color: var(--main-white);
     border-style: none;
     border-radius: 38px;
-    width: 40%;
-    height: 50px;
+    width: 325px;
+    height: 75px;
     display: block;
-    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
     transition: 0.5s all;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    line-height: 140%;
+
+    border-style: solid;
+    border-color: var(--main-blue);
 }
 
 .file_upload_button:hover {
     cursor: pointer;
-    background-color: #086d9c;
+    color: var(--main-blue);
+    background-color: var(--main-white);
     transition: 0.5s all;
+}
+
+.file_upload_button:active {
+    color: var(--main-dark);
+    background-color: var(--main-gray);
+    border-color: var(--main-gray);
+
 }
 
 .subtext {
     text-transform: lowercase;
     margin-top: 0;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    line-height: 140%;
 }
 
 .queue_text {
@@ -112,11 +154,11 @@
 }
 
 .progressbar_ready {
-    background-color: #0ACD58;
+    background-color: var(--main-green);
 }
 
 .progressbar_processing {
-    background-color: orange;
+    background-color: var(--main-blue);
 }
 
 .progressbar_error {
@@ -128,12 +170,32 @@
     /*border-color: #55DC8B;*/
     border-style: solid;
     border-radius: 18px;
-    padding: 5px 20px;
+    /*padding: 5px 20px;*/
     /*background-color: white;*/
+
+    transition: 0.5s all;
+
+    width: 136px;
+    height: 35px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    line-height: 140%;
 }
 
 .result_button:hover {
     cursor: pointer;
+    color: var(--main-white);
+    background-color: var(--main-green);
+}
+
+.result_button:active {
+    cursor: pointer;
+    color: var(--main-dark);
+    background-color: var(--main-gray);
+    border-color: var(--main-gray);
 }
 
 .button_queue {
@@ -143,9 +205,9 @@
 }
 
 .button_ready {
-    color: #55DC8B;
-    border-color: #55DC8B;
-    background-color: white;
+    color: var(--main-green);
+    border-color: var(--main-green);
+    background-color: var(--main-white);
 }
 
 .button_processing {
@@ -157,7 +219,7 @@
 .button_error {
     color: red;
     border-color: red;
-    background-color: white;
+    background-color: var(--main-white);
 }
 
 

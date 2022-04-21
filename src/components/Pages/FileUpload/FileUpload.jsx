@@ -163,7 +163,7 @@ class FileUpload extends Component {
 
                 <p className={css.introduction}>Этот бесплатный онлайн-сервис проверит вашу дипломную работу <br/>
                     на наличие ошибок оформления документа.<br/>
-                    Сервис поддерживает файлы формата <b>docx</b> объемом до <b>5МБ.</b>
+                    Сервис поддерживает файлы формата <span className={css.docx}>docx</span> объемом до <b>5МБ.</b>
                 </p>
 
                 <div style={{display: state['renderUploadInput'] ? "block" : "none"}}
@@ -175,7 +175,7 @@ class FileUpload extends Component {
                 </div>
 
                 <div style={{display: state['renderUploadProgressbar'] ? "block" : "none"}}
-                     className={css.file_upload_form}>
+                     className={css.file_upload_form + ' ' + css.status}>
                     <img className={css.file_uploading} src={uploading} alt="upload_man"/>
 
                     <div className={css.file_uploading_description}>

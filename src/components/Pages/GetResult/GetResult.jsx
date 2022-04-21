@@ -3,6 +3,8 @@ import icon from "../FileUpload/Uploading.svg";
 import file from "../FileUpload/Frame.svg";
 import React, {Component} from "react";
 import state from "../../../storage/storage";
+import back_arrow from "../GetResult/back_arrow.svg";
+import file_ico from "../GetResult/file_ico.svg";
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -52,6 +54,13 @@ class GetResult extends Component {
         }
         return (
             <div className={css.result_box}>
+                <div className={css.result_header}>
+                    <img src={back_arrow}/>
+                    <span className={css.file_block}>
+                        <img src={file_ico}/>
+                        <span>{state['fileName']}</span>
+                    </span>
+                </div>
                 <div className={css.statistics}>
                     <p color="red">Ошибки</p>
                     <RenderList elements={state['errors']}/>
