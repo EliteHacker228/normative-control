@@ -15,7 +15,7 @@ function App() {
                 <Header/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='' element={<FileUpload/>}/>
+                        <Route path='' element={<Welcome/>}/>
                         <Route path='upload' element={<FileUpload/>}/>
                         <Route path='test' element={<GetStatus/>}/>
                         <Route path='result' element={<GetResult/>}/>

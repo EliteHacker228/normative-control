@@ -5,56 +5,21 @@ import uploading_file_ico from './Frame.svg';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
-import state from "../../../storage/storage";
+// import state from "../../../storage/storage";
 
+let state = JSON.parse(localStorage.getItem('normokontrol_state'));
 
 class FileUpload extends Component {
 
-    // state = {
-    //     renderUploadInput: true,
-    //     renderUploadProgressbar: false,
-    //     file: undefined,
-    //     fileId: undefined
-    // };
 
-    fileInputOnInput = (evt) => {
-        // this.state['file'] = evt.target.files[0];
-        // console.log(this.state['file']);
-        console.log('test');
-        // localStorage.setItem('fileName', this.state['file'].name);
+    constructor() {
+        super();
+        console.log('HEYYYYYYYYYY');
+        console.log(localStorage.getItem('normokontrol_state'));
+        this.checkFileStatusOnServer(state['fileId'])
+        this.updateProgressBar();
+    }
 
-        this.sendFileToCheckOnServer(evt.target.files[0]);
-    };
-
-    fileSendButtonOnClick = (evt) => {
-        evt.preventDefault();
-
-        let input = document.createElement('input');
-        input.type = 'file';
-        input.oninput = this.fileInputOnInput;
-        input.click();
-
-        // let formdata = new FormData();
-        //
-        // /*TODO:
-        //  * Сделать проверку на null в файле, по итогам которой
-        //  * будет разблокироваться кнопка отправки.
-        //  * До этого будет заблокированной
-        // */
-        //
-        // formdata.append("file", state['file'], state['file'].name);
-        // let requestOptions = {
-        //     method: 'POST',
-        //     body: formdata,
-        //     redirect: 'follow'
-        // };
-        // fetch("https://normative-control.herokuapp.com/api/upload-document", requestOptions)
-        //     .then(response => response.text())
-        //     .then(result => console.log(result))
-        //     .catch(error => console.log('error', error));
-    };
-
-    //api-check
     checkFileStatusOnServer = (id) => {
         let requestOptions = {
             method: 'GET',
@@ -69,53 +34,6 @@ class FileUpload extends Component {
                 console.log(result);
                 state['checkStatus'] = result;
                 console.log(state);
-            })
-            .catch(error => console.log('error', error));
-    };
-
-
-    //api-upload
-    sendFileToCheckOnServer = (file) => {
-        let formdata = new FormData();
-
-        /*TODO:
-         * Сделать проверку на null в файле, по итогам которой
-         * будет разблокироваться кнопка отправки.
-         * До этого будет заблокированной
-        */
-
-        formdata.append("file", file, file.name);
-        let requestOptions = {
-            method: 'POST',
-            body: formdata,
-            redirect: 'follow'
-        };
-        return fetch("https://normative-control-api.herokuapp.com/documents/upload", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                // console.log(result);
-                let resultObj = JSON.parse(result);
-
-                console.log(resultObj);
-
-                state['fileId'] = resultObj['id'];
-                state['fileName'] = file.name;
-                state['renderUploadInput'] = false;
-                state['renderUploadProgressbar'] = true;
-
-                state['checkStatus'] = 'QUEUE';
-                state['button_status'] = css.button_queue;
-
-                console.log(state);
-
-                this.forceUpdate();
-                const checkIntervalId = setInterval(() => {
-                    this.checkFileStatusOnServer(state['fileId']);
-                    this.updateDownloadingStatus(checkIntervalId);
-                }, 200);
-
-                // this.forceUpdate();
-
             })
             .catch(error => console.log('error', error));
     };
@@ -155,27 +73,26 @@ class FileUpload extends Component {
         }
     };
 
-    render() {
+    updateProgressBar = () => {
+        console.log(state);
 
+        const checkIntervalId = setInterval(() => {
+            this.checkFileStatusOnServer(state['fileId']);
+            this.updateDownloadingStatus(checkIntervalId);
+        }, 200);
+    };
+
+    render() {
 
         return (
             <div className={css.file_upload}>
 
                 <p className={css.introduction}>Этот бесплатный онлайн-сервис проверит вашу дипломную работу <br/>
                     на наличие ошибок оформления документа.<br/>
-                    Сервис поддерживает файлы формата <span className={css.docx}>docx</span> объемом до <b>5МБ.</b>
+                    Сервис поддерживает файлы формата <span className={css.docx}>docx</span> объемом до <b>20МБ.</b>
                 </p>
 
-                <div style={{display: state['renderUploadInput'] ? "block" : "none"}}
-                     className={css.file_upload_form}>
-                    <img className={css.doc_icon} src={icon} alt="file"/>
-                    <button className={css.file_upload_button} onClick={this.fileSendButtonOnClick}>Выбрать файл
-                    </button>
-                    <p className={css.subtext}>Или перетащите файл сюда</p>
-                </div>
-
-                <div style={{display: state['renderUploadProgressbar'] ? "block" : "none"}}
-                     className={css.file_upload_form + ' ' + css.status}>
+                <div className={css.file_upload_form + ' ' + css.status}>
                     <img className={css.file_uploading} src={uploading} alt="upload_man"/>
 
                     <div className={css.file_uploading_description}>

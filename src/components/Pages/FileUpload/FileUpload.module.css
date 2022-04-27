@@ -21,6 +21,20 @@
     line-height: 140%;
 }
 
+.error_message {
+    width: 55%;
+    /*margin: 39px auto;*/
+    margin: -39px auto 39px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 29px;
+    letter-spacing: 0.02em;
+    line-height: 140%;
+
+    color: red;
+}
+
 .doc_icon {
     width: 120px;
     margin: 30px;
