@@ -140,27 +140,31 @@
 }
 
 .progressbar_container {
-    display: inline-block;
-
+    position: relative;
     width: 25%;
     height: 10px;
-
-    border-radius: 12px;
-
-    box-shadow: 0 5px 14px -1px #00000040 inset;
-
-    /*border-color: black;*/
-    /*border-style: solid;*/
+    border-radius: 50px;
+    border: 2px solid #ededed;
+    overflow: hidden;
 }
 
 .progressbar {
-    /*display: inline-block;*/
     opacity: 69%;
     width: 100%;
     height: 10px;
+    position: absolute;
+    border-radius: 50px;
+    left: -100%;
+    animation: load 3s linear infinite;
+}
 
-    border-radius: 12px;
-
+@keyframes load{
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 100%;
+    }
 }
 
 .progressbar_queue {
@@ -169,6 +173,8 @@
 
 .progressbar_ready {
     background-color: var(--main-green);
+    left: 0%;
+    animation: none;
 }
 
 .progressbar_processing {
