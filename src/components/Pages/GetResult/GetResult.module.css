@@ -27,14 +27,12 @@
 }
 
 .back_arrow_link{
-    width: 30px;
-    margin: 0 auto;
+    padding: 10px;
+    margin-left: -10px;
 }
 
 .document_content {
     background-color: #FFFFFF;
-    /*width: 60%;*/
-
     grid-area: c;
 }
 
