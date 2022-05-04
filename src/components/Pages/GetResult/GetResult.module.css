@@ -26,6 +26,11 @@
 
 }
 
+.back_arrow_link{
+    width: 30px;
+    margin: 0 auto;
+}
+
 .document_content {
     background-color: #FFFFFF;
     /*width: 60%;*/

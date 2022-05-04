@@ -57,9 +57,12 @@
 }
 
 .file_upload_form {
-    border-style: dashed;
-    border-radius: 15px;
-    border-color: #D3D3D3;
+    /*border-style: dashed;*/
+    /*border-radius: 15px;*/
+    /*border-color: #D3D3D3;*/
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    background-size:cover;
     width: 33%;
     height: 33%;
     margin-left: auto;
