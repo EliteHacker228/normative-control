@@ -7,15 +7,16 @@ import {NavLink} from "react-router-dom";
 
 // import state from "../../../storage/storage";
 
-let state = JSON.parse(localStorage.getItem('normokontrol_state'));
+let state;
 
 class FileUpload extends Component {
 
 
     constructor() {
         super();
-        console.log('HEYYYYYYYYYY');
-        console.log(localStorage.getItem('normokontrol_state'));
+        state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        console.log('Получаем state из localStorage');
+        console.log(state)
         this.checkFileStatusOnServer(state['fileId'])
         this.updateProgressBar();
     }
@@ -31,9 +32,7 @@ class FileUpload extends Component {
             .then(result => {
                 result = JSON.parse(result)['state'];
 
-                console.log(result);
                 state['checkStatus'] = result;
-                console.log(state);
             })
             .catch(error => console.log('error', error));
     };
@@ -74,8 +73,6 @@ class FileUpload extends Component {
     };
 
     updateProgressBar = () => {
-        console.log(state);
-
         const checkIntervalId = setInterval(() => {
             this.checkFileStatusOnServer(state['fileId']);
             this.updateDownloadingStatus(checkIntervalId);

@@ -17,8 +17,6 @@ class Welcome extends Component {
     }
 
     fileInputOnInput = (evt) => {
-        console.log('test');
-        console.log(evt.target.files[0]);
         this.sendFileToCheckOnServer(evt.target.files[0]);
     };
 
@@ -34,6 +32,8 @@ class Welcome extends Component {
     //api-upload
     sendFileToCheckOnServer = (file) => {
         let formdata = new FormData();
+        console.log('Получили файл для отправки:');
+        console.log(file);
 
         /*TODO:
          * Сделать проверку на null в файле, по итогам которой
@@ -63,22 +63,14 @@ class Welcome extends Component {
         fetch("https://normative-control-api.herokuapp.com/documents/upload", requestOptions)
             .then(response => response.text())
             .then(result => {
-                // console.log(result);
                 let resultObj = JSON.parse(result);
 
-                console.log(resultObj);
-
                 if ('status' in resultObj && resultObj['status'] === 422) {
-                    console.log('Файл фигня')
-
                     state['renderFormatError'] = true;
                     state['renderSizeError'] = false;
-
-
                     // } else if ('status' in resultObj && resultObj['status'] === 500 && 'upload' &&  resultObj['message']) {
 
                 } else {
-                    console.log('Файл ОК');
                     state['fileId'] = resultObj['id'];
                     state['fileName'] = file.name;
                     state['renderUploadInput'] = false;
@@ -86,30 +78,25 @@ class Welcome extends Component {
                     state['renderFormatError'] = false;
                     state['checkStatus'] = 'QUEUE';
                     state['button_status'] = css.button_queue;
-
-                    console.log(state);
-
                     // this.forceUpdate();
                     // const checkIntervalId = setInterval(() => {
                     //     this.checkFileStatusOnServer(state['fileId']);
                     //     this.updateDownloadingStatus(checkIntervalId);
                     // }, 200);
+                    console.log('Успешно отправили файл:');
+                    console.log(file);
                 }
 
-                this.setState({redirect: "/someRoute"});
+                console.log('Помещаем в localStorage:');
+                console.log(state);
+                console.log(JSON.stringify(state));
                 localStorage.setItem('normokontrol_state', JSON.stringify(state));
-                // this.forceUpdate();
                 document.getElementById('reroute').click();
-
-
             })
             .catch(error => console.log('error', error));
     };
 
     render() {
-
-        console.log(state);
-
         return (
             <div className={css.file_upload}>
 
