@@ -1,7 +1,10 @@
 .result_box {
-    border-style: dashed;
-    border-radius: 15px;
-    border-color: var(--main-white);
+    /*border-style: dashed;*/
+    /*border-radius: 15px;*/
+    /*border-color: var(--main-white);*/
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    background-size:cover;
     width: 66%;
     height: 66%;
     margin: 65px auto;
@@ -16,14 +19,15 @@
 }
 
 .statistics {
-
-    border-style: dashed;
-    border-color: var(--main-white);
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    border-radius: 16px;
+    /*border-style: dashed;*/
+    /*border-color: var(--main-white);*/
     background-color: #FFFFFF;
     /*width: 30%;*/
-
     grid-area: b;
-
 }
 
 .errors {
