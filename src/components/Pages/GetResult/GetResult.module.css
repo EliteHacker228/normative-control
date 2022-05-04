@@ -26,6 +26,11 @@
 
 }
 
+.errors {
+    color: red;
+    margin-left: 20px;
+}
+
 .back_arrow_link{
     padding: 10px;
     margin-left: -10px;

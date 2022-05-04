@@ -2,11 +2,13 @@ import css from './GetResult.module.css';
 import icon from "../FileUpload/Uploading.svg";
 import file from "../FileUpload/Frame.svg";
 import React, {Component} from "react";
-import state from "../../../storage/storage";
+// import state from "../../../storage/storage";
 import back_arrow from "../GetResult/back_arrow.svg";
 import file_ico from "../GetResult/file_ico.svg";
 import {NavLink} from "react-router-dom";
 import logo from "../../Header/normokontrol-logo-white-backgroundBlack.svg";
+
+let state;
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -23,6 +25,7 @@ class GetResult extends Component {
 
     constructor() {
         super();
+        state = JSON.parse(localStorage.getItem('normokontrol_state'));
         state['errors'] = [];
     }
 
@@ -32,13 +35,14 @@ class GetResult extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/documents/result?id=${state['fileId']}`, requestOptions)
+        fetch(`https://normative-control-api.herokuapp.com/documents/errors?id=${state['fileId']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 state['checkResult'] = JSON.parse(result);
-                let res = state.checkResult['result']['errors'];
-                console.log(res);
-                console.log(res.map(x => x['errorType']));
+                // console.log(state.checkResult.errors)
+                let res = state.checkResult.errors;
+                // console.log(res);
+                // console.log(res.map(x => x['errorType']));
                 state['errors'] = res.map(x => x['errorType']);
                 this.forceUpdate();
             })
@@ -66,7 +70,7 @@ class GetResult extends Component {
                     </span>
                 </div>
                 <div className={css.statistics}>
-                    <p color="red">Ошибки</p>
+                    <p className={css.errors}>Ошибки</p>
                     <RenderList elements={state['errors']}/>
                 </div>
                 <div className={css.document_content}></div>
