@@ -73,7 +73,9 @@ class GetResult extends Component {
                     <p className={css.errors}>Ошибки</p>
                     <RenderList elements={state['errors']}/>
                 </div>
-                <div className={css.document_content}></div>
+                <div className={css.document_content}>
+                    <iframe src="https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/documents/file?id=b827f5fe-43c6-48c5-b963-f7ae2fb9d447&embedded=true"></iframe>
+                </div>
             </div>
         );
     };
