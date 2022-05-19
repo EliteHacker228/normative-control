@@ -5,19 +5,20 @@ import uploading_file_ico from './Frame.svg';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
-// import state from "../../../storage/storage";
+import state from "../../../storage/storage";
 
-let state;
+// Стейт стоит сохранять в локалсторидже, иначе при обновлении страницы всё сломается
+// let state;
 
 class FileUpload extends Component {
 
 
     constructor() {
         super();
-        state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        // state = JSON.parse(localStorage.getItem('normokontrol_state'));
         console.log('Получаем state из localStorage');
         console.log(state)
-        this.checkFileStatusOnServer(state['fileId'])
+        this.checkFileStatusOnServer(state['documentId'])
         this.updateProgressBar();
     }
 
@@ -27,7 +28,7 @@ class FileUpload extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/documents/state?id=${id}`, requestOptions)
+        fetch(`https://normative-control-api.herokuapp.com/documents/state?documentId=${id}&accessKey=${state['accessKey']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result)['state'];
@@ -59,6 +60,7 @@ class FileUpload extends Component {
                 clearInterval(intervalId);
                 this.forceUpdate();
                 break;
+            case 'SAVED':
             case 'READY':
                 console.log('GREEN', 'Файл обработан');
                 state['button_status'] = css.button_ready;
@@ -68,13 +70,14 @@ class FileUpload extends Component {
                 break;
             default:
                 console.log('х3 чё))0)');
+                console.log(checkStatus);
                 break;
         }
     };
 
     updateProgressBar = () => {
         const checkIntervalId = setInterval(() => {
-            this.checkFileStatusOnServer(state['fileId']);
+            this.checkFileStatusOnServer(state['documentId']);
             this.updateDownloadingStatus(checkIntervalId);
         }, 200);
     };
@@ -99,7 +102,7 @@ class FileUpload extends Component {
                             <div className={`${css.progressbar} ${state['progressbar_status']}`}/>
                         </div>
                         {/*<span>Status</span>*/}
-                        <NavLink to='/result' style={{display: state['checkStatus'] === 'READY' ? "block" : "none"}}>
+                        <NavLink to='/result' style={{display: (state['checkStatus'] === 'READY' || state['checkStatus'] === 'SAVED') ? "block" : "none"}}>
                             <button className={`${css.result_button} ${state['button_status']}`}>
                                 Результат
                             </button>

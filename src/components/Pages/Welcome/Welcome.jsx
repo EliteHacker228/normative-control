@@ -1,7 +1,5 @@
 import css from './Welcome.module.css';
 import icon from './doc.svg';
-import uploading from './Uploading.svg';
-import uploading_file_ico from './Frame.svg';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
@@ -14,10 +12,33 @@ class Welcome extends Component {
         super();
         state['renderSizeError'] = false;
         state['renderFormatError'] = false;
+        // console.log(localStorage.getItem('accessKey'));
+        // if (localStorage.getItem('accessKey') === null) {
+            console.log('генерим ключ');
+            let accessKey = this.generateAccessKey(4);
+            localStorage.setItem('accessKey', accessKey);
+        // }
+        state['accessKey'] = localStorage.getItem('accessKey');
+        console.log(state['accessKey']);
+    };
+
+    componentDidMount() {
+        this.getPlaceInQueue().then(() => console.log(state['documentId']));
     }
 
+    generateAccessKey = (length) => {
+        let result = '';
+        let characters = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    };
+
     fileInputOnInput = (evt) => {
-        this.sendFileToCheckOnServer(evt.target.files[0]);
+        this.getPlaceInQueue().then(() => this.sendFileToCheckOnServer(evt.target.files[0]));
     };
 
     fileSendButtonOnClick = (evt) => {
@@ -27,6 +48,17 @@ class Welcome extends Component {
         input.type = 'file';
         input.oninput = this.fileInputOnInput;
         input.click();
+    };
+
+    async getPlaceInQueue() {
+        let requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
+
+        let response = await fetch(`https://normative-control-api.herokuapp.com/documents/queue?accessKey=${state['accessKey']}`, requestOptions);
+        let document = await response.json();
+        state['documentId'] = document['documentId'];
     };
 
     //api-upload
@@ -53,6 +85,7 @@ class Welcome extends Component {
             return;
         }
 
+
         formdata.append("file", file, file.name);
         let requestOptions = {
             method: 'POST',
@@ -60,40 +93,60 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        fetch("https://normative-control-api.herokuapp.com/documents/upload", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                let resultObj = JSON.parse(result);
+        // console.log('До отправки');
+        // console.log(state);
+        fetch(`https://normative-control-api.herokuapp.com/documents/upload?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
+            .then(response => {
+                let status = response['status'];
+                if (status === 202) {
 
-                if ('status' in resultObj && resultObj['status'] === 422) {
-                    state['renderFormatError'] = true;
-                    state['renderSizeError'] = false;
-                    // } else if ('status' in resultObj && resultObj['status'] === 500 && 'upload' &&  resultObj['message']) {
-
-                } else {
-                    state['fileId'] = resultObj['id'];
                     state['fileName'] = file.name;
                     state['renderUploadInput'] = false;
-                    state['renderUploadProgressbar'] = true;
-                    state['renderFormatError'] = false;
                     state['checkStatus'] = 'QUEUE';
                     state['button_status'] = css.button_queue;
-                    // this.forceUpdate();
-                    // const checkIntervalId = setInterval(() => {
-                    //     this.checkFileStatusOnServer(state['fileId']);
-                    //     this.updateDownloadingStatus(checkIntervalId);
-                    // }, 200);
-                    console.log('Успешно отправили файл:');
-                    console.log(file);
-                }
 
-                console.log('Помещаем в localStorage:');
-                console.log(state);
-                console.log(JSON.stringify(state));
-                localStorage.setItem('normokontrol_state', JSON.stringify(state));
-                document.getElementById('reroute').click();
+                    console.log('Всё окей, отправляем этот стейт');
+                    console.log(state);
+                    // console.log(state['documentId']);
+                    document.getElementById('reroute').click();
+                }
             })
-            .catch(error => console.log('error', error));
+
+
+        // fetch(`https://normative-control-api.herokuapp.com/documents/upload?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
+        //     .then(response => console.log(response['status']))
+            // .then(result => {
+            //     let resultObj = JSON.parse(result);
+            //
+            //     if ('status' in resultObj && resultObj['status'] === 422) {
+            //         state['renderFormatError'] = true;
+            //         state['renderSizeError'] = false;
+            //         // } else if ('status' in resultObj && resultObj['status'] === 500 && 'upload' &&  resultObj['message']) {
+            //
+            //     } else {
+            //         state['fileId'] = resultObj['id'];
+            //         state['fileName'] = file.name;
+            //         state['renderUploadInput'] = false;
+            //         state['renderUploadProgressbar'] = true;
+            //         state['renderFormatError'] = false;
+            //         state['checkStatus'] = 'QUEUE';
+            //         state['button_status'] = css.button_queue;
+            //         // this.forceUpdate();
+            //         // const checkIntervalId = setInterval(() => {
+            //         //     this.checkFileStatusOnServer(state['fileId']);
+            //         //     this.updateDownloadingStatus(checkIntervalId);
+            //         // }, 200);
+            //         console.log('Успешно отправили файл:');
+            //         console.log(file);
+            //     }
+            //
+            //     console.log('Помещаем в localStorage:');
+            //     console.log(state);
+            //     console.log(JSON.stringify(state));
+            //     localStorage.setItem('normokontrol_state', JSON.stringify(state));
+            //     document.getElementById('reroute').click();
+            // })
+            // .catch(error => console.log('error', error));
     };
 
     render() {

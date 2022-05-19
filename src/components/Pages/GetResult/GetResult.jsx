@@ -2,13 +2,13 @@ import css from './GetResult.module.css';
 import icon from "../FileUpload/Uploading.svg";
 import file from "../FileUpload/Frame.svg";
 import React, {Component} from "react";
-// import state from "../../../storage/storage";
+import state from "../../../storage/storage";
 import back_arrow from "../GetResult/back_arrow.svg";
 import file_ico from "../GetResult/file_ico.svg";
 import {NavLink} from "react-router-dom";
 import logo from "../../Header/normokontrol-logo-white-backgroundBlack.svg";
 
-let state;
+// let state;
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -25,8 +25,10 @@ class GetResult extends Component {
 
     constructor() {
         super();
-        state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        // state = JSON.parse(localStorage.getItem('normokontrol_state'));
         state['errors'] = [];
+        console.log('Имеем вот такой стейт');
+        console.log(state);
     }
 
     getResult = () => {
@@ -35,14 +37,15 @@ class GetResult extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/documents/errors?id=${state['fileId']}`, requestOptions)
+        fetch(`https://normative-control-api.herokuapp.com/documents/errors?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
+                console.log(result);
                 state['checkResult'] = JSON.parse(result);
                 // console.log(state.checkResult.errors)
                 let res = state.checkResult.errors;
                 // console.log(res);
-                // console.log(res.map(x => x['errorType']));
+                console.log(res.map(x => x['errorType']));
                 state['errors'] = res.map(x => x['errorType']);
                 this.forceUpdate();
             })
@@ -58,6 +61,9 @@ class GetResult extends Component {
         if (!state['errors'].length) {
             this.getResult();
         }
+
+        let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/documents/file?data=${state['documentId']}_${state['accessKey']}&embedded=true`;
+
         return (
             <div className={css.result_box}>
                 <div className={css.result_header}>
@@ -74,7 +80,7 @@ class GetResult extends Component {
                     <RenderList elements={state['errors']}/>
                 </div>
                 <div className={css.document_content}>
-                    <iframe src="https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/documents/file?id=b827f5fe-43c6-48c5-b963-f7ae2fb9d447&embedded=true"></iframe>
+                    <iframe className={css.document_view} src={url}/>
                 </div>
             </div>
         );
