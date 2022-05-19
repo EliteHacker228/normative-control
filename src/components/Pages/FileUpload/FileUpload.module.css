@@ -187,6 +187,8 @@
 
 .progressbar_error {
     background-color: red;
+    left: 0%;
+    animation: none;
 }
 
 .result_button {
