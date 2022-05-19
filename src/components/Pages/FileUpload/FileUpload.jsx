@@ -5,17 +5,17 @@ import uploading_file_ico from './Frame.svg';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
-import state from "../../../storage/storage";
+// import state from "../../../storage/storage";
 
 // Стейт стоит сохранять в локалсторидже, иначе при обновлении страницы всё сломается
-// let state;
+let state;
 
 class FileUpload extends Component {
 
 
     constructor() {
         super();
-        // state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        state = JSON.parse(localStorage.getItem('normokontrol_state'));
         console.log('Получаем state из localStorage');
         console.log(state)
         this.checkFileStatusOnServer(state['documentId'])

@@ -2,13 +2,13 @@ import css from './GetResult.module.css';
 import icon from "../FileUpload/Uploading.svg";
 import file from "../FileUpload/Frame.svg";
 import React, {Component} from "react";
-import state from "../../../storage/storage";
+// import state from "../../../storage/storage";
 import back_arrow from "../GetResult/back_arrow.svg";
 import file_ico from "../GetResult/file_ico.svg";
 import {NavLink} from "react-router-dom";
 import logo from "../../Header/normokontrol-logo-white-backgroundBlack.svg";
 
-// let state;
+let state;
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -25,7 +25,7 @@ class GetResult extends Component {
 
     constructor() {
         super();
-        // state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        state = JSON.parse(localStorage.getItem('normokontrol_state'));
         state['errors'] = [];
         console.log('Имеем вот такой стейт');
         console.log(state);

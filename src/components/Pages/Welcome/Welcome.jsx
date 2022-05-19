@@ -108,6 +108,7 @@ class Welcome extends Component {
                     console.log('Всё окей, отправляем этот стейт');
                     console.log(state);
                     // console.log(state['documentId']);
+                    localStorage.setItem('normokontrol_state', JSON.stringify(state));
                     document.getElementById('reroute').click();
                 }
             })
