@@ -1,5 +1,6 @@
 import css from './Welcome.module.css';
 import icon from './doc.svg';
+import loading from './loading-11.gif';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
@@ -14,9 +15,9 @@ class Welcome extends Component {
         state['renderFormatError'] = false;
         // console.log(localStorage.getItem('accessKey'));
         // if (localStorage.getItem('accessKey') === null) {
-            console.log('генерим ключ');
-            let accessKey = this.generateAccessKey(4);
-            localStorage.setItem('accessKey', accessKey);
+        console.log('генерим ключ');
+        let accessKey = this.generateAccessKey(4);
+        localStorage.setItem('accessKey', accessKey);
         // }
         state['accessKey'] = localStorage.getItem('accessKey');
         console.log(state['accessKey']);
@@ -85,6 +86,10 @@ class Welcome extends Component {
             return;
         }
 
+        let form = document.getElementById('upload_block');
+        form.style.display = 'none';
+        let load = document.getElementById('download');
+        load.style.display = 'block';
 
         formdata.append("file", file, file.name);
         let requestOptions = {
@@ -116,38 +121,38 @@ class Welcome extends Component {
 
         // fetch(`https://normative-control-api.herokuapp.com/documents/upload?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
         //     .then(response => console.log(response['status']))
-            // .then(result => {
-            //     let resultObj = JSON.parse(result);
-            //
-            //     if ('status' in resultObj && resultObj['status'] === 422) {
-            //         state['renderFormatError'] = true;
-            //         state['renderSizeError'] = false;
-            //         // } else if ('status' in resultObj && resultObj['status'] === 500 && 'upload' &&  resultObj['message']) {
-            //
-            //     } else {
-            //         state['fileId'] = resultObj['id'];
-            //         state['fileName'] = file.name;
-            //         state['renderUploadInput'] = false;
-            //         state['renderUploadProgressbar'] = true;
-            //         state['renderFormatError'] = false;
-            //         state['checkStatus'] = 'QUEUE';
-            //         state['button_status'] = css.button_queue;
-            //         // this.forceUpdate();
-            //         // const checkIntervalId = setInterval(() => {
-            //         //     this.checkFileStatusOnServer(state['fileId']);
-            //         //     this.updateDownloadingStatus(checkIntervalId);
-            //         // }, 200);
-            //         console.log('Успешно отправили файл:');
-            //         console.log(file);
-            //     }
-            //
-            //     console.log('Помещаем в localStorage:');
-            //     console.log(state);
-            //     console.log(JSON.stringify(state));
-            //     localStorage.setItem('normokontrol_state', JSON.stringify(state));
-            //     document.getElementById('reroute').click();
-            // })
-            // .catch(error => console.log('error', error));
+        // .then(result => {
+        //     let resultObj = JSON.parse(result);
+        //
+        //     if ('status' in resultObj && resultObj['status'] === 422) {
+        //         state['renderFormatError'] = true;
+        //         state['renderSizeError'] = false;
+        //         // } else if ('status' in resultObj && resultObj['status'] === 500 && 'upload' &&  resultObj['message']) {
+        //
+        //     } else {
+        //         state['fileId'] = resultObj['id'];
+        //         state['fileName'] = file.name;
+        //         state['renderUploadInput'] = false;
+        //         state['renderUploadProgressbar'] = true;
+        //         state['renderFormatError'] = false;
+        //         state['checkStatus'] = 'QUEUE';
+        //         state['button_status'] = css.button_queue;
+        //         // this.forceUpdate();
+        //         // const checkIntervalId = setInterval(() => {
+        //         //     this.checkFileStatusOnServer(state['fileId']);
+        //         //     this.updateDownloadingStatus(checkIntervalId);
+        //         // }, 200);
+        //         console.log('Успешно отправили файл:');
+        //         console.log(file);
+        //     }
+        //
+        //     console.log('Помещаем в localStorage:');
+        //     console.log(state);
+        //     console.log(JSON.stringify(state));
+        //     localStorage.setItem('normokontrol_state', JSON.stringify(state));
+        //     document.getElementById('reroute').click();
+        // })
+        // .catch(error => console.log('error', error));
     };
 
     render() {
@@ -166,13 +171,22 @@ class Welcome extends Component {
                     Слишком большой файл. Пожалуйста, загрузите файл объёмом до <b>20 МБ</b> включительно.</p>
 
                 <div className={css.file_upload_form}>
-                    <img className={css.doc_icon} src={icon} alt="file"/>
-                    <button className={css.file_upload_button} onClick={this.fileSendButtonOnClick}>Выбрать файл
-                    </button>
-                    <p className={css.subtext}>Или перетащите файл сюда</p>
+                    <div id="upload_block">
+                        <img className={css.doc_icon} src={icon} alt="file"/>
+                        <button className={css.file_upload_button}
+                                onClick={this.fileSendButtonOnClick}>Выбрать файл
+                        </button>
+                        <p className={css.subtext}>Или перетащите файл сюда</p>
 
-                    <NavLink id="reroute" to='/upload' style={{display: "none"}}/>
+                        <NavLink id="reroute" to='/upload' style={{display: "none"}}/>
+                    </div>
+
+                    <div id = "download" style={{display: 'none'}}>
+                        <img src={loading}/>
+                        <p className={css.subtext}>Идёт отправка файла на сервер...</p>
+                    </div>
                 </div>
+
             </div>
         );
     }

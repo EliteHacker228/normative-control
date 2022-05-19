@@ -69,7 +69,7 @@ class FileUpload extends Component {
                 this.forceUpdate();
                 break;
             default:
-                console.log('х3 чё))0)');
+                console.log('Неизвестная ошибка');
                 console.log(checkStatus);
                 break;
         }
