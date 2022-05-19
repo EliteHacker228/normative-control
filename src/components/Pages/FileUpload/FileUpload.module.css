@@ -211,13 +211,13 @@
     line-height: 140%;
 }
 
-.result_button:hover {
+.button_ready:hover {
     cursor: pointer;
     color: var(--main-white);
     background-color: var(--main-green);
 }
 
-.result_button:active {
+.button_ready:active {
     cursor: pointer;
     color: var(--main-dark);
     background-color: var(--main-gray);
@@ -246,6 +246,19 @@
     color: red;
     border-color: red;
     background-color: var(--main-white);
+}
+
+.button_error:hover {
+    cursor: pointer;
+    color: var(--main-white);
+    background-color: red;
+}
+
+.button_error:active {
+    cursor: pointer;
+    color: var(--main-dark);
+    background-color: var(--main-gray);
+    border-color: var(--main-gray);
 }
 
 

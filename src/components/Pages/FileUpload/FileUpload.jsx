@@ -108,8 +108,16 @@ class FileUpload extends Component {
                             </button>
                         </NavLink>
 
-                        <p style={{display: state['checkStatus'] === 'ERROR' ? "block" : "none"}}>Ошибка при
-                            обработке</p>
+                        <p style={{display: state['checkStatus'] === 'ERROR' ? "block" : "none"}}>
+                            Ошибка при обработке
+                        </p>
+
+                        <NavLink to='/' style={{display: state['checkStatus'] === 'ERROR' ? "block" : "none"}}>
+                            <button className={`${css.result_button} ${state['button_status']}`}>
+                                Повторить
+                            </button>
+                        </NavLink>
+
                         <p style={{display: state['checkStatus'] === 'PROCESSING' ? "block" : "none"}}>Файл
                             обрабатывается</p>
                         <p style={{display: state['checkStatus'] === 'QUEUE' ? "block" : "none"}}>В очереди на
