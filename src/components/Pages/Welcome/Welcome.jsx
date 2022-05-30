@@ -16,7 +16,7 @@ class Welcome extends Component {
         // console.log(localStorage.getItem('accessKey'));
         // if (localStorage.getItem('accessKey') === null) {
         console.log('генерим ключ');
-        let accessKey = this.generateAccessKey(4);
+        let accessKey = this.generateAccessKey(128);
         localStorage.setItem('accessKey', accessKey);
         // }
         state['accessKey'] = localStorage.getItem('accessKey');

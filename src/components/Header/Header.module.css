@@ -10,8 +10,9 @@
     background-color:var(--main-dark);
     color: var(--main-white);
     display: flex;
-    column-gap: 400px;
+    column-gap: 100px;
     height: 100px;
+    align-items: center;
 }
 
 .logo {
@@ -28,6 +29,24 @@
     font-weight: bold;
     letter-spacing: 0.05em;
     line-height: 140%;
+}
+
+.faq {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    line-height: 140%;
+    color: var(--main-white);
+}
+
+.about {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    line-height: 140%;
+    color: var(--main-white);
 }
 
 .menu {
