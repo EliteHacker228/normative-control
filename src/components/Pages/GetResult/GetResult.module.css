@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     background-size:cover;
     width: 66%;
-    height: 66%;
+    min-height: 66%;
     margin: 65px auto;
     padding: 45px;
 

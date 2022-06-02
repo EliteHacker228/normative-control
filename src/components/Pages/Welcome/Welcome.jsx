@@ -39,7 +39,9 @@ class Welcome extends Component {
     };
 
     fileInputOnInput = (evt) => {
-        this.getPlaceInQueue().then(() => this.sendFileToCheckOnServer(evt.target.files[0]));
+        let file = evt.target.files[0];
+        this.getPlaceInQueue().then(() => this.sendFileToCheckOnServer(file));
+
     };
 
     fileSendButtonOnClick = (evt) => {
@@ -181,7 +183,7 @@ class Welcome extends Component {
                         <NavLink id="reroute" to='/upload' style={{display: "none"}}/>
                     </div>
 
-                    <div id = "download" style={{display: 'none'}}>
+                    <div id="download" style={{display: 'none'}}>
                         <img style={{width: '50%'}} src={loading}/>
                         <p className={css.subtext}>Идёт отправка файла на сервер...</p>
                     </div>

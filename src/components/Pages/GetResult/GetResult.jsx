@@ -123,7 +123,8 @@ class GetResult extends Component {
                 // console.log(res);
                 console.log(res.map(x => x['errorType']));
                 // state['errors'] = res.map(x => x['errorType']);
-                state['errors'] = res.map(x => x['errorType']).map(error_code => translations[error_code]);
+                state['errors'] = res.map(x => x['errorType']).map(error_code => translations[error_code]).filter(x => x !== undefined);
+                console.log(state.errors);
                 this.forceUpdate();
             })
             .catch(error => console.log('error', error));
