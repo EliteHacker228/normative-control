@@ -13,12 +13,9 @@ class Welcome extends Component {
         super();
         state['renderSizeError'] = false;
         state['renderFormatError'] = false;
-        // console.log(localStorage.getItem('accessKey'));
-        // if (localStorage.getItem('accessKey') === null) {
         console.log('генерим ключ');
         let accessKey = this.generateAccessKey(128);
         localStorage.setItem('accessKey', accessKey);
-        // }
         state['accessKey'] = localStorage.getItem('accessKey');
         console.log(state['accessKey']);
     };
@@ -64,7 +61,6 @@ class Welcome extends Component {
         state['documentId'] = document['documentId'];
     };
 
-    //api-upload
     sendFileToCheckOnServer = (file) => {
         let formdata = new FormData();
         console.log('Получили файл для отправки:');
@@ -100,8 +96,6 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        // console.log('До отправки');
-        // console.log(state);
         fetch(`https://normative-control-api.herokuapp.com/documents/upload?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
             .then(response => {
                 let status = response['status'];
@@ -119,42 +113,6 @@ class Welcome extends Component {
                     document.getElementById('reroute').click();
                 }
             })
-
-
-        // fetch(`https://normative-control-api.herokuapp.com/documents/upload?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
-        //     .then(response => console.log(response['status']))
-        // .then(result => {
-        //     let resultObj = JSON.parse(result);
-        //
-        //     if ('status' in resultObj && resultObj['status'] === 422) {
-        //         state['renderFormatError'] = true;
-        //         state['renderSizeError'] = false;
-        //         // } else if ('status' in resultObj && resultObj['status'] === 500 && 'upload' &&  resultObj['message']) {
-        //
-        //     } else {
-        //         state['fileId'] = resultObj['id'];
-        //         state['fileName'] = file.name;
-        //         state['renderUploadInput'] = false;
-        //         state['renderUploadProgressbar'] = true;
-        //         state['renderFormatError'] = false;
-        //         state['checkStatus'] = 'QUEUE';
-        //         state['button_status'] = css.button_queue;
-        //         // this.forceUpdate();
-        //         // const checkIntervalId = setInterval(() => {
-        //         //     this.checkFileStatusOnServer(state['fileId']);
-        //         //     this.updateDownloadingStatus(checkIntervalId);
-        //         // }, 200);
-        //         console.log('Успешно отправили файл:');
-        //         console.log(file);
-        //     }
-        //
-        //     console.log('Помещаем в localStorage:');
-        //     console.log(state);
-        //     console.log(JSON.stringify(state));
-        //     localStorage.setItem('normokontrol_state', JSON.stringify(state));
-        //     document.getElementById('reroute').click();
-        // })
-        // .catch(error => console.log('error', error));
     };
 
     render() {
