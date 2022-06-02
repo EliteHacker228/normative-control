@@ -5,7 +5,6 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Welcome from "./components/Pages/Welcome/Welcome";
 import FileUpload from "./components/Pages/FileUpload/FileUpload";
-import GetStatus from "./components/Pages/GetStatus/GetStatus";
 import GetResult from "./components/Pages/GetResult/GetResult";
 import About from "./components/Pages/About/About";
 import Faq from "./components/Pages/Faq/Faq";
@@ -19,7 +18,6 @@ function App() {
                     <Routes>
                         <Route path='' element={<Welcome/>}/>
                         <Route path='upload' element={<FileUpload/>}/>
-                        <Route path='test' element={<GetStatus/>}/>
                         <Route path='result' element={<GetResult/>}/>
                         <Route path='about' element={<About/>}/>
                         <Route path='faq' element={<Faq/>}/>
