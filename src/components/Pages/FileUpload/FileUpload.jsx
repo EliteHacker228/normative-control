@@ -28,11 +28,16 @@ class FileUpload extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/documents/state?documentId=${id}&accessKey=${state['accessKey']}`, requestOptions)
-            .then(response => response.text())
+        fetch(`https://normative-control-api.herokuapp.com/document/${id}/status?access-key=${state['accessKey']}`, requestOptions)
+            .then(response => {
+                return response.text();
+            })
             .then(result => {
-                result = JSON.parse(result)['state'];
-
+                console.log("РЕСПОООООНЗ");
+                console.log(result);
+                result = JSON.parse(result)['status'];
+                console.log("ТУТА РЕЗУЛЬТ");
+                console.log(result);
                 state['checkStatus'] = result;
             })
             .catch(error => console.log('error', error));
@@ -42,13 +47,13 @@ class FileUpload extends Component {
         let checkStatus = state['checkStatus'];
         switch (checkStatus) {
             case 'QUEUE':
-                console.log('GRAY', 'Загружаем файл');
+                console.log('GRAY', 'Файл в очереди');
                 state['button_status'] = css.button_queue;
                 state['progressbar_status'] = css.progressbar_queue;
                 this.forceUpdate();
                 break;
             case 'PROCESSING':
-                console.log('YELLOW', 'Обрабатываем файл');
+                console.log('YELLOW', 'Файл обрабатывается');
                 state['button_status'] = css.button_processing;
                 state['progressbar_status'] = css.progressbar_processing;
                 this.forceUpdate();
@@ -68,6 +73,12 @@ class FileUpload extends Component {
                 clearInterval(intervalId);
                 this.forceUpdate();
                 break;
+            case 'READY_TO_ENQUEUE':
+
+            case 'UNDEFINED ':
+                console.log('Состояние неизвестно');
+                console.log('Состояние неизвестно');
+                break;
             default:
                 console.log('Неизвестная ошибка');
                 console.log(checkStatus);
@@ -79,7 +90,7 @@ class FileUpload extends Component {
         const checkIntervalId = setInterval(() => {
             this.checkFileStatusOnServer(state['documentId']);
             this.updateDownloadingStatus(checkIntervalId);
-        }, 200);
+        }, 2000);
     };
 
     render() {
@@ -102,7 +113,8 @@ class FileUpload extends Component {
                             <div className={`${css.progressbar} ${state['progressbar_status']}`}/>
                         </div>
                         {/*<span>Status</span>*/}
-                        <NavLink to='/result' style={{display: (state['checkStatus'] === 'READY' || state['checkStatus'] === 'SAVED') ? "block" : "none"}}>
+                        <NavLink to='/result'
+                                 style={{display: (state['checkStatus'] === 'READY' || state['checkStatus'] === 'SAVED') ? "block" : "none"}}>
                             <button className={`${css.result_button} ${state['button_status']}`}>
                                 Результат
                             </button>

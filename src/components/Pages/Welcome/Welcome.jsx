@@ -21,7 +21,7 @@ class Welcome extends Component {
     };
 
     componentDidMount() {
-        this.getPlaceInQueue().then(() => console.log(state['documentId']));
+        this.reservePlaceInQueue().then(() => console.log(state['documentId']));
     }
 
     generateAccessKey = (length) => {
@@ -37,26 +37,67 @@ class Welcome extends Component {
 
     fileInputOnInput = (evt) => {
         let file = evt.target.files[0];
-        this.getPlaceInQueue().then(() => this.sendFileToCheckOnServer(file));
 
+        let form = document.getElementById('upload_block');
+        form.style.display = 'none';
+        let load = document.getElementById('download');
+        load.style.display = 'block';
+
+        this.reservePlaceInQueue().then(() => {
+            let si = setInterval(() => {
+                this.checkFileStatusOnServer(state['documentId'])
+                let checkStatus = state['checkStatus'];
+                switch (checkStatus) {
+                    case 'READY_TO_ENQUEUE':
+                        clearInterval(si);
+                        this.sendFileToCheckOnServer(file);
+                        break;
+                    default:
+                        console.log('Неизвестная ошибка');
+                        console.log(checkStatus);
+                        break;
+                }
+            }, 2000);
+        });
+
+    };
+
+    checkFileStatusOnServer = (id) => {
+        let requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch(`https://normative-control-api.herokuapp.com/document/${id}/status?access-key=${state['accessKey']}`, requestOptions)
+            .then(response => {
+                return response.text();
+            })
+            .then(result => {
+                console.log("РЕСПОООООНЗ");
+                console.log(result);
+                result = JSON.parse(result)['status'];
+                console.log("ТУТА РЕЗУЛЬТ");
+                console.log(result);
+                state['checkStatus'] = result;
+            })
+            .catch(error => console.log('error', error));
     };
 
     fileSendButtonOnClick = (evt) => {
         evt.preventDefault();
-
         let input = document.createElement('input');
         input.type = 'file';
         input.oninput = this.fileInputOnInput;
         input.click();
     };
 
-    async getPlaceInQueue() {
+    async reservePlaceInQueue() {
         let requestOptions = {
             method: 'POST',
             redirect: 'follow'
         };
 
-        let response = await fetch(`https://normative-control-api.herokuapp.com/documents/queue?accessKey=${state['accessKey']}`, requestOptions);
+        let response = await fetch(`https://normative-control-api.herokuapp.com/queue/reserve?access-key=${state['accessKey']}`, requestOptions);
         let document = await response.json();
         state['documentId'] = document['documentId'];
     };
@@ -84,19 +125,19 @@ class Welcome extends Component {
             return;
         }
 
-        let form = document.getElementById('upload_block');
-        form.style.display = 'none';
-        let load = document.getElementById('download');
-        load.style.display = 'block';
+        state['file'] = file;
 
         formdata.append("file", file, file.name);
+        formdata.append("access-key", state['accessKey']);
+        formdata.append("document-id", state['documentId']);
+
         let requestOptions = {
             method: 'POST',
             body: formdata,
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/documents/upload?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
+        fetch(`https://normative-control-api.herokuapp.com/queue/enqueue`, requestOptions)
             .then(response => {
                 let status = response['status'];
                 if (status === 202) {
@@ -105,6 +146,7 @@ class Welcome extends Component {
                     state['renderUploadInput'] = false;
                     state['checkStatus'] = 'QUEUE';
                     state['button_status'] = css.button_queue;
+                    state['progressbar_status'] = css.progressbar_queue;
 
                     console.log('Всё окей, отправляем этот стейт');
                     console.log(state);

@@ -11,80 +11,100 @@ import logo from "../../Header/normokontrol-logo-white-backgroundBlack.svg";
 let state;
 
 let translations = {
-        "ANNOTATION_MUST_NOT_CONTAINS_MEDIA" : "Реферат не должен содержать медиа-ресурсы",
-        "CHAPTER_ANNOTATION_NOT_FOUND" : "Главы реферата отсутствуют",
-        "CHAPTER_ANNOTATION_POSITION_MISMATCH" : "Глава реферата находится на некорректной позиции",
-        "CHAPTER_APPENDIX_NOT_FOUND" : "Приложение главы отсутствует",
-        "CHAPTER_APPENDIX_POSITION_MISMATCH" : "Приложение главы находится на некорректной позиции",
-        "CHAPTER_BODY_NOT_FOUND" : "Основная часть главы отсутствует",
-        "CHAPTER_BODY_POSITION_MISMATCH" : "Основная часть главы находится на некорректной позиции",
-        "CHAPTER_CONCLUSION_NOT_FOUND" : "Заключение главы отсутствует",
-        "CHAPTER_CONCLUSION_POSITION_MISMATCH" : "Заключение главы находится на некорректной позиции",
-        "CHAPTER_CONTENTS_NOT_FOUND" : "Содержимое главы отсутствует",
-        "CHAPTER_CONTENTS_POSITION_MISMATCH" : "Содержимое главы находится на некорректной позиции",
-        "CHAPTER_EMPTY" : "Глава пустая",
-        "CHAPTER_FRONT_PAGE_NOT_FOUND" : "Титульный лист главы отсутствует",
-        "CHAPTER_FRONT_PAGE_POSITION_MISMATCH" : "Титульный лист главы находится на некорректной позиции",
-        "CHAPTER_INTRODUCTION_NOT_FOUND" : "Введение главы отсутствует",
-        "CHAPTER_INTRODUCTION_POSITION_MISMATCH" : "Введение главы находится на некорректной позиции",
-        "CHAPTER_NO_ONE_CHAPTER_FOUND" : "Главы отсутствуют",
-        "CHAPTER_REFERENCES_NOT_FOUND" : "Список источников в главе отсутствует",
-        "CHAPTER_REFERENCES_POSITION_MISMATCH" : "Список литературы находится на некорректной позиции",
-        "CHAPTER_UNDEFINED_CHAPTER" : "Глава неопределена",
-        "PAGE_HEIGHT_IS_INCORRECT" : "Некорректная высота страницы",
-        "PAGE_MARGIN_BOTTOM_IS_INCORRECT" : "Некорректный нижний отступ страницы",
-        "PAGE_MARGIN_LEFT_IS_INCORRECT" : "Некорректный левый отступ страницы",
-        "PAGE_MARGIN_RIGHT_IS_INCORRECT" : "Некорректный правый отступ страницы",
-        "PAGE_MARGIN_TOP_IS_INCORRECT" : "Некорректный верхний отступ страницы",
-        "PAGE_WIDTH_IS_INCORRECT" : "Некорректная ширина страницы",
-        "TEXT_COMMON_BACKGROUND_FILL" : "Некорректная заливка текста",
-        "TEXT_COMMON_BORDER" : "Некорректная границы текста",
-        "TEXT_COMMON_FONT" : "Некорректный шрифт",
-        "TEXT_COMMON_HIGHLIGHT" : "Некорректная подсветка текста",
-        "TEXT_COMMON_INCORRECT_DIRECTION" : "Некорректное направление текста",
-        "TEXT_COMMON_INCORRECT_FONT_SIZE" : "Некорректный размер шрифта",
-        "TEXT_COMMON_INDENT_FIRST_LINES" : "Некорректный отступ первой строки",
-        "TEXT_COMMON_INDENT_LEFT"  : "Некорректный отступ слева",
-        "TEXT_COMMON_INDENT_RIGHT" : "Некорректный отступ слева",
-        "TEXT_COMMON_ITALIC_TEXT" : "Курсивный шрифт",
-        "TEXT_COMMON_RUN_SPACING" : "Некорректный интервал",
-        "TEXT_COMMON_STRIKETHROUGH" : "Перечёркнутый текст",
-        "TEXT_COMMON_TEXT_COLOR" : "Некорректный цвет текста",
-        "TEXT_COMMON_UNDERLINED" : "Подчёркнутый текст",
-        "TEXT_HEADER_ALIGNMENT" : "Некорректное выравнивание заголовка",
-        "TEXT_HEADER_EMPTY" : "Пустой заголовок",
-        "TEXT_HEADER_EMPTY_LINE_AFTER_HEADER_REQUIRED" : "Отсутствует пустая строка после заголовка",
-        "TEXT_HEADER_LINE_SPACING" : "Некорректная расстановка пробелов в заголовке",
-        "TEXT_HEADER_NOT_BOLD" : "Полужирный текст в заголовке",
-        "TEXT_HEADER_NOT_UPPERCASE"  : "Текст в верхнем регистре в заголовке",
-        "TEXT_HEADER_REDUNDANT_DOT" : "Избыточная точка в заголовке",
-        "TEXT_REGULAR_INCORRECT_ALIGNMENT" : "Некорректное выравнивание в заголовке",
-        "TEXT_REGULAR_LINE_SPACING" : "Некорректная расстановка пробелов в тексте",
-        "TEXT_REGULAR_UPPERCASE" : "Текст в верхнем регистре",
-        "TEXT_REGULAR_WAS_BOLD" : "Полужирный текст",
-        "TEXT_WHITESPACE_AFTER_HEADER_ALIGNMENT" : "Пробел после выравнивания заголовка",
-        "TEXT_WHITESPACE_AFTER_HEADER_BOLD" : "Пробел после полужирного заголовка",
-        "TEXT_WHITESPACE_AFTER_HEADER_UPPERCASE"  : "Пробел после заголовка в верхнем регистре",
-        "TEXT_WHITESPACE_ALIGNMENT" : "Выравнивание пустой строки",
-        "TEXT_WHITESPACE_BACKGROUND_FILL" : "Заливка пустой строки",
-        "TEXT_WHITESPACE_BOLD" : "Полужирная пустая строка",
-        "TEXT_WHITESPACE_BORDER" : "Граница пустой строки",
-        "TEXT_WHITESPACE_FONT" : "Некорректный шрифт пустой строки",
-        "TEXT_WHITESPACE_HIGHLIGHT" : "Некорректная подсветка пустой строки",
-        "TEXT_WHITESPACE_INCORRECT_DIRECTION" : "Некорректное направление текста в пустой строке",
-        "TEXT_WHITESPACE_INCORRECT_FONT_SIZE" : "Некорректный размер шрифта в пустой строке",
-        "TEXT_WHITESPACE_INDENT_FIRST_LINES" : "Некорректный отступ первой пустой строки",
-        "TEXT_WHITESPACE_INDENT_LEFT" : "Некорректный отступ пустой строки слева",
-        "TEXT_WHITESPACE_INDENT_RIGHT" : "Некорректный отступ пустой строки справа",
-        "TEXT_WHITESPACE_ITALIC" : "Курсивный шрифт в пустой строке",
-        "TEXT_WHITESPACE_LINE_SPACING" : "Некорректная расстановка пробелов в пустой строке",
-        "TEXT_WHITESPACE_RUN_SPACING"  : "Некорректный интервал в пустой строке",
-        "TEXT_WHITESPACE_STRIKETHROUGH" : "Перечёркнутый текст в пустой строке",
-        "TEXT_WHITESPACE_TEXT_COLOR" : "Некорректный цвет текста в пустой строке",
-        "TEXT_WHITESPACE_UNDERLINED" : "Перечёркнутый текст в пустой строке",
-        "TEXT_WHITESPACE_UPPERCASE" : "Текст в верхнем регистре в пустой строке",
-        "TODO_ERROR" : "Ошибка TODO"
-    };
+    'CHAPTER_ANNOTATION_NOT_FOUND': 'Раздел "Реферат" не найден',
+    'CHAPTER_ANNOTATION_POSITION_MISMATCH': 'Раздел "Реферат": некорректная позиция',
+    'CHAPTER_APPENDIX_NOT_FOUND': 'Раздел "Приложение" не найден',
+    'CHAPTER_APPENDIX_POSITION_MISMATCH': 'Раздел "Приложение": некорректная позиция',
+    'CHAPTER_BODY_DISORDER': 'Основная часть находится на некорректной позиции',
+    'CHAPTER_BODY_NOT_FOUND': 'Раздел "Основная часть" не найден',
+    'CHAPTER_BODY_POSITION_MISMATCH': 'Раздел "Основная часть": некорректная позиция',
+    'CHAPTER_CONCLUSION_NOT_FOUND': 'Раздел "Заключение" не найден',
+    'CHAPTER_CONCLUSION_POSITION_MISMATCH': 'Раздел "Заключение": некорректная позиция',
+    'CHAPTER_CONTENTS_NOT_FOUND': 'Раздел "Содержание" не найден',
+    'CHAPTER_CONTENTS_POSITION_MISMATCH': 'Раздел "Содержание": некорректная позиция',
+    'CHAPTER_EMPTY': 'Пустая часть',
+    'CHAPTER_FRONT_PAGE_NOT_FOUND': 'Раздел "Титульный лист" не найден',
+    'CHAPTER_FRONT_PAGE_POSITION_MISMATCH': 'Раздел "Титульный лист": некорректная позиция',
+    'CHAPTER_INTRODUCTION_NOT_FOUND': 'Раздел "Введение" не найден',
+    'CHAPTER_INTRODUCTION_POSITION_MISMATCH': 'Раздел "Введение": некорректная позиция',
+    'CHAPTER_NO_ONE_CHAPTER_FOUND': 'Не найдено ни одного раздела',
+    'CHAPTER_REFERENCES_NOT_FOUND': 'Раздел "Список литературы" не найден',
+    'CHAPTER_REFERENCES_POSITION_MISMATCH': 'Раздел "Список литературы": некорректная позиция',
+    'CHAPTER_UNDEFINED_CHAPTER': 'Неопознанная часть',
+    'DOCUMENT_UNEXPECTED_CONTENT': 'Неопознанный контент на уровне параграфа',
+    'LIST_LEVEL_MORE_THAN_2': 'Уровень вложенности списка больше 2',
+    'ORDERED_LIST_INCORRECT_MARKER_FORMAT': 'Некорректный формат маркера ненумерованного списка',
+    'ORDERED_LIST_INCORRECT_MARKER_FORMAT_AT_LEVEL_1': 'Некорректный формат маркера первого уровня нумерованного списка',
+    'ORDERED_LIST_INCORRECT_MARKER_FORMAT_AT_LEVEL_2': 'Некорректный формат маркера второго уровня нумерованного списка',
+    'PAGE_HEIGHT_IS_INCORRECT': 'Некорректная ширина страницы',
+    'PAGE_MARGIN_BOTTOM_IS_INCORRECT': 'Некорректный нижний отступ страницы',
+    'PAGE_MARGIN_LEFT_IS_INCORRECT': 'Некорректный левый отступ страницы',
+    'PAGE_MARGIN_RIGHT_IS_INCORRECT': 'Некорректный правый отступ страницы',
+    'PAGE_MARGIN_TOP_IS_INCORRECT': 'Некорректный верхний отступ страницы',
+    'PAGE_WIDTH_IS_INCORRECT': 'Некорректная высота страницы',
+    'PARAGRAPH_UNEXPECTED_CONTENT': 'Неопознанный контент на уровне рана',
+    'PICTURE_IS_NOT_INLINED': 'Изображение не встроено в текст',
+    'PICTURE_REQUIRED_BLANK_LINE_AFTER_PICTURE_TITLE': 'Необходима пустая строка после подписи изображения',
+    'PICTURE_REQUIRED_BLANK_LINE_BEFORE_PICTURE': 'Необходима пустая строка перед изображением',
+    'PICTURE_TITLE_ENDS_WITH_DOT': 'Точка в конце подписи к изображению',
+    'PICTURE_TITLE_NOT_CENTERED': 'Некорректное выравнивание подписи к изображению',
+    'PICTURE_TITLE_NUMBER_DISORDER': 'Неверный порядок нумерации изображений',
+    'PICTURE_TITLE_REQUIRED_LINE_BREAK_BETWEEN_PICTURE_AND_TITLE': 'Необходим перенос строки между изображением и подписью к нему',
+    'PICTURE_TITLE_WRONG_FORMAT': 'Неверный формат подписи изображений',
+    'RUN_UNEXPECTED_CONTENT': 'Неопознанный контент на уровне текста',
+    'TEXT_BODY_SUBHEADER_LEVEL_WAS_MORE_THAN_3': 'Уровень вложенности подразделов больше 3',
+    'TEXT_BODY_SUBHEADER_NUMBER_ORDER_MISMATCH': 'Неверный порядок нумерации подразделов',
+    'TEXT_COMMON_BACKGROUND_FILL': 'Найдена заливка фона у текста',
+    'TEXT_COMMON_BORDER': 'Найдена рамка у параграфа',
+    'TEXT_COMMON_FONT': 'Некорректный шрифт текста',
+    'TEXT_COMMON_HIGHLIGHT': 'Найден текст с выделением',
+    'TEXT_COMMON_INCORRECT_FONT_SIZE': 'Некорректный размер шрифта текста',
+    'TEXT_COMMON_INDENT_FIRST_LINES': 'Некорректный отступ первой строки параграфа',
+    'TEXT_COMMON_INDENT_LEFT': 'Некорректный левый отступ параграфа',
+    'TEXT_COMMON_INDENT_RIGHT': 'Некорректный правый отступ параграфа',
+    'TEXT_COMMON_ITALIC_TEXT': 'Найден курсивный текст',
+    'TEXT_COMMON_RUN_SPACING': 'Некорректный межсимвольный интервал текста',
+    'TEXT_COMMON_STRIKETHROUGH': 'Найден перечеркнутый текст',
+    'TEXT_COMMON_TEXT_COLOR': 'Некорректный цвет текста',
+    'TEXT_COMMON_UNDERLINED': 'Текст подчеркнут',
+    'TEXT_HEADER_ALIGNMENT': 'Некорректное выравнивание заголовка раздела',
+    'TEXT_HEADER_BODY_ALIGNMENT': 'Некорректное выравнивание заголовка/подзаголовка основной части',
+    'TEXT_HEADER_BODY_UPPERCASE': 'Заголовок основной части написан строчными буквами',
+    'TEXT_HEADER_EMPTY': 'Пустой заголовок раздела',
+    'TEXT_HEADER_EMPTY_LINE_AFTER_HEADER_REQUIRED': 'Не найдена пустая строка после заголовка',
+    'TEXT_HEADER_LINE_SPACING': 'Некорректный межстрочный интервал заголовка',
+    'TEXT_HEADER_NOT_BOLD': 'Не полужирный заголовок',
+    'TEXT_HEADER_NOT_UPPERCASE': 'Заголовок раздела написан не строчными буквами',
+    'TEXT_HEADER_REDUNDANT_DOT': 'Точка на конце заголовка',
+    'TEXT_HYPERLINKS_NOT_ALLOWED_HERE': 'Ссылки запрещены в данном разделе',
+    'TEXT_REGULAR_INCORRECT_ALIGNMENT': 'Некорректное выравнивание текста',
+    'TEXT_REGULAR_LINE_SPACING': 'Некорректный межстрочный интервал текста',
+    'TEXT_REGULAR_UPPERCASE': 'Текст написан строчными буквами',
+    'TEXT_REGULAR_WAS_BOLD': 'Полужирный текст',
+    'TEXT_WHITESPACE_AFTER_HEADER_ALIGNMENT': 'Некорректное выравнивание пустой строки после заголовка',
+    'TEXT_WHITESPACE_AFTER_HEADER_BOLD': 'Полужирная пустая строка после заголовка',
+    'TEXT_WHITESPACE_AFTER_HEADER_UPPERCASE': 'Пустая строка после заголовка отформатирована в режиме только строчных букв',
+    'TEXT_WHITESPACE_ALIGNMENT': 'Некорректное выравнивание пустой строки',
+    'TEXT_WHITESPACE_BACKGROUND_FILL': 'Найдена заливка фона у пустой строки',
+    'TEXT_WHITESPACE_BOLD': 'Полужирная пустая строка',
+    'TEXT_WHITESPACE_BORDER': 'Найдена рамка у пустого параграфа',
+    'TEXT_WHITESPACE_FONT': 'Некорректный шрифт пустой строки',
+    'TEXT_WHITESPACE_HIGHLIGHT': 'Найдена пустая строка с выделением',
+    'TEXT_WHITESPACE_INCORRECT_FONT_SIZE': 'Некорректный размер шрифта пустой строки',
+    'TEXT_WHITESPACE_INDENT_FIRST_LINES': 'Некорректный отступ первой строки пустого параграфа',
+    'TEXT_WHITESPACE_INDENT_LEFT': 'Некорректный левый отступ пустого параграфа',
+    'TEXT_WHITESPACE_INDENT_RIGHT': 'Некорректный правый отступ пустого параграфа',
+    'TEXT_WHITESPACE_ITALIC': 'Найден курсивная пустая строка',
+    'TEXT_WHITESPACE_LINE_SPACING': 'Некорректный межстрочный интервал пустой строки',
+    'TEXT_WHITESPACE_RUN_SPACING': 'Некорректный межсимвольный интервал пустой строки',
+    'TEXT_WHITESPACE_STRIKETHROUGH': 'Найдена перечеркнутая пустая строка',
+    'TEXT_WHITESPACE_TEXT_COLOR': 'Некорректный цвет пустой строки',
+    'TEXT_WHITESPACE_UNDERLINED': 'Пустая строка подчеркнута',
+    'TEXT_WHITESPACE_UPPERCASE': 'Пустая строка отформатирована в режиме только строчных букв',
+    'TODO_ERROR': 'Неопределенная ошибка (будет обработана позже)',
+    'WORD_GRAMMATICAL_ERROR': 'Грамматическая ошибка, которую нашел Word',
+    'WORD_SPELL_ERROR': 'Ошибка правописания, которую нашел Word'
+};
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -113,7 +133,7 @@ class GetResult extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/documents/errors?documentId=${state['documentId']}&accessKey=${state['accessKey']}`, requestOptions)
+        fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/mistakes?access-key=${state['accessKey']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
@@ -121,9 +141,10 @@ class GetResult extends Component {
                 // console.log(state.checkResult.errors)
                 let res = state.checkResult.errors;
                 // console.log(res);
-                console.log(res.map(x => x['errorType']));
+                console.log(res.map(x => x['mistakeType']));
                 // state['errors'] = res.map(x => x['errorType']);
-                state['errors'] = res.map(x => x['errorType']).map(error_code => translations[error_code]).filter(x => x !== undefined);
+                // state['errors'] = res.map(x => x['errorType']).map(error_code => translations[error_code]).filter(x => x !== undefined);
+                state['errors'] = res.map(x => x['mistakeType']).sort(x => x['paragraphId']).map(error_code => translations[error_code]);
                 console.log(state.errors);
                 this.forceUpdate();
             })
@@ -140,7 +161,7 @@ class GetResult extends Component {
             this.getResult();
         }
 
-        let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/documents/file?data=${state['documentId']}_${state['accessKey']}&embedded=true`;
+        let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}&embedded=true`;
 
         return (
             <div className={css.result_box}>
