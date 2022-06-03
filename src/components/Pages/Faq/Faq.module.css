@@ -1,10 +1,16 @@
 .introduction {
-    border-style: dashed;
-    border-color: var(--main-gray);
-    border-radius: 25px;
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    padding: 15px;
+    background-size:cover;
     text-align: center;
     width: 60%;
     margin: 75px auto 80px auto;
+}
+
+.back_arrow_link{
+    position: absolute;
+    left: 12%;
 }
 
 .introduction h1 {
