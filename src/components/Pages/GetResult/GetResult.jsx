@@ -179,9 +179,7 @@ class GetResult extends Component {
                         <p className={css.errors}>Ошибки</p>
                         <RenderList elements={state['errors']}/>
                     </div>
-                    <div className={css.document_content}>
-                        <iframe className={css.document_view} src={url}/>
-                    </div>
+                    <iframe className={css.document_view} src={url}/>
                 </div>
             </div>
         );
