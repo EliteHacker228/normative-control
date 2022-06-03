@@ -1,16 +1,24 @@
 .introduction {
     background-image: url("Rectangle 17.svg");
     background-repeat: no-repeat;
-    padding: 15px;
+    padding: 17px 0 34px;
     background-size:cover;
     text-align: center;
-    width: 60%;
+    width: 52%;
     margin: 75px auto 80px auto;
+}
+
+.introduction h1 {
+    margin: 0;
+}
+
+.introduction p {
+    margin: 0;
 }
 
 .back_arrow_link{
     position: absolute;
-    left: 12%;
+    left: 5%;
 }
 
 .introduction h1 {
@@ -33,7 +41,7 @@
     display: grid;
     grid-template-columns: 50% 50%;
     grid-column-gap: 80px;
-    width: 90%;
+    width: 70%;
     margin: 0 auto 0 auto;
 }
 

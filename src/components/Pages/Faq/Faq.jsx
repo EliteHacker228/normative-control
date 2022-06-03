@@ -12,7 +12,7 @@ const Faq = () => {
         <div>
 
             <NavLink className={css.back_arrow_link} to='/'>
-                <img src={back_arrow}/>
+                <img src={back_arrow} title="На главную"/>
             </NavLink>
 
             <div className={css.introduction}>
@@ -33,10 +33,7 @@ const Faq = () => {
                         копировать
                         или анализировать ваши файлы.</p>
                 </div>
-
-
                 <div className={css.question}>
-
                     <h2><img src={globe_ico}/> Каковы системные требования?</h2>
                     <p>У нас есть <b>основные системные требования.</b> Для бесперебойной работы нашего сервиса мы
                         рекомендуем
