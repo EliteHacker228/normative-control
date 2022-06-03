@@ -167,7 +167,7 @@ class GetResult extends Component {
             <div className={css.result_box}>
                 <div className={css.result_header}>
                     <NavLink className={css.back_arrow_link} to='/upload'>
-                        <img src={back_arrow}/>
+                        <img src={back_arrow} title="На главную"/>
                     </NavLink>
                     <span className={css.file_block}>
                         <img src={file_ico}/>
