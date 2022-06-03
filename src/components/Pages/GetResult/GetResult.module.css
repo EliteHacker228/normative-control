@@ -45,6 +45,10 @@
     margin-left: -10px;
 }
 
+ul {
+    list-style: url("forward_red_arrow.svg");
+}
+
 .document_content {
     background-color: #FFFFFF;
     grid-area: c;
