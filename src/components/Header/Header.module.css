@@ -20,15 +20,29 @@
     margin-left: 100px;
 }
 
-.name {
+.linkname {
+    color: var(--main-white);
     position: absolute;
-    margin-left: 262px;
-    margin-top: 22px;
+    margin-left: 200px;
+    padding-left: 50px;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 0.05em;
     line-height: 140%;
+    text-decoration: none;
+}
+
+.name {
+
+}
+
+.linkfaq{
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    padding-top: 30px;
+    text-decoration: none;
 }
 
 .faq {

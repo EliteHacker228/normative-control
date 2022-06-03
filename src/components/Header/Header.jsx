@@ -11,7 +11,10 @@ const Header = () => {
                      src={logo}
                 />
             </NavLink>
-            <p className={css.name}>normative<br/>control</p>
+
+            <NavLink to='/' className={css.linkname}>
+                <p className={css.name}>normative<br/>control</p>
+            </NavLink>
 
             {/*<ul className={css.menu}>*/}
             {/*    <li><NavLink className={css.menu_element} to='/'>Welcome</NavLink></li>*/}
@@ -23,7 +26,7 @@ const Header = () => {
             {/*<NavLink to='/about' style={{textDecoration: 'none'}}>*/}
             {/*    <p className={css.about}>О сервисе</p>*/}
             {/*</NavLink>*/}
-            <NavLink to='/faq' style={{textDecoration: 'none'}}>
+            <NavLink to='/faq' className={css.linkfaq}>
                 <p className={css.faq}>FAQ</p>
             </NavLink>
         </header>
