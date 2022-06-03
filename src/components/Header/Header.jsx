@@ -9,10 +9,11 @@ const Header = () => {
             <NavLink to='/'>
                 <img className={css.logo}
                      src={logo}
+                     title="На главную"
                 />
             </NavLink>
 
-            <NavLink to='/' className={css.linkname}>
+            <NavLink to='/' className={css.linkname} title="На главную">
                 <p className={css.name}>normative<br/>control</p>
             </NavLink>
 
