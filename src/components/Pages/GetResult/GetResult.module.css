@@ -23,7 +23,7 @@
     border-style: solid;
     border-color: var(--main-dark);
     border-width: 2px;
-    height: 66vh;
+    height: 57vh;
     overflow-y: scroll;
     padding: 5px;
 
@@ -48,7 +48,7 @@
 .document_content {
     background-color: #FFFFFF;
     grid-area: c;
-    height: 66vh;
+    height: 57vh;
 }
 
 .result_header {
