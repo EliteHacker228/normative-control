@@ -23,12 +23,11 @@ const Header = () => {
             {/*    <li><NavLink className={css.menu_element} to='/status'>Get Status</NavLink></li>*/}
             {/*</ul>*/}
             <div style={{width: '60%'}}/>
-            {/*<NavLink to='/about' style={{textDecoration: 'none'}}>*/}
-            {/*    <p className={css.about}>О сервисе</p>*/}
-            {/*</NavLink>*/}
             <NavLink to='/faq' className={css.linkfaq}>
                 <p className={css.faq}>FAQ</p>
             </NavLink>
+
+
         </header>
     );
 };
