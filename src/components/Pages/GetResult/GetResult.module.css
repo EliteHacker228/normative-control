@@ -6,10 +6,8 @@
     background-repeat: no-repeat;
     background-size:cover;
     width: 66%;
-    height: 66%;
     margin: 65px auto;
-    padding: 45px;
-
+    padding: 45px 45px 45px;
     display: grid;
     gap: 40px;
     grid-template:
@@ -19,11 +17,15 @@
 }
 
 .statistics {
-    background-image: url("Rectangle 17.svg");
-    background-repeat: no-repeat;
-    background-size:cover;
-    border-radius: 16px;
+    /*background-image: url("Rectangle 17.svg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size:cover;*/
+    border-style: solid;
+    border-color: var(--main-dark);
+    border-width: 2px;
+    height: 66vh;
     overflow-y: scroll;
+    padding: 5px;
 
     /*border-style: dashed;*/
     /*border-color: var(--main-white);*/
@@ -46,6 +48,7 @@
 .document_content {
     background-color: #FFFFFF;
     grid-area: c;
+    height: 66vh;
 }
 
 .result_header {

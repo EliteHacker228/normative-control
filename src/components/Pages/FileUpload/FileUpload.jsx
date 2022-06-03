@@ -50,12 +50,14 @@ class FileUpload extends Component {
                 console.log('GRAY', 'Файл в очереди');
                 state['button_status'] = css.button_queue;
                 state['progressbar_status'] = css.progressbar_queue;
+                localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
                 break;
             case 'PROCESSING':
                 console.log('YELLOW', 'Файл обрабатывается');
                 state['button_status'] = css.button_processing;
                 state['progressbar_status'] = css.progressbar_processing;
+                localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
                 break;
             case 'ERROR':
@@ -63,6 +65,7 @@ class FileUpload extends Component {
                 state['button_status'] = css.button_error;
                 state['progressbar_status'] = css.progressbar_error;
                 clearInterval(intervalId);
+                localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
                 break;
             case 'SAVED':
@@ -71,10 +74,9 @@ class FileUpload extends Component {
                 state['button_status'] = css.button_ready;
                 state['progressbar_status'] = css.progressbar_ready;
                 clearInterval(intervalId);
+                localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
                 break;
-            case 'READY_TO_ENQUEUE':
-
             case 'UNDEFINED ':
                 console.log('Состояние неизвестно');
                 console.log('Состояние неизвестно');

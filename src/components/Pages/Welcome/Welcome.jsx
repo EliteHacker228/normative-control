@@ -184,7 +184,7 @@ class Welcome extends Component {
                     </div>
 
                     <div id="download" style={{display: 'none'}}>
-                        <img style={{width: '50%'}} src={loading}/>
+                        <img style={{width: '70%'}} src={loading}/>
                         <p className={css.subtext}>Идёт отправка файла на сервер...</p>
                     </div>
                 </div>

@@ -164,22 +164,24 @@ class GetResult extends Component {
         let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}&embedded=true`;
 
         return (
-            <div className={css.result_box}>
-                <div className={css.result_header}>
-                    <NavLink className={css.back_arrow_link} to='/upload'>
-                        <img src={back_arrow} title="На главную"/>
-                    </NavLink>
-                    <span className={css.file_block}>
+            <div>
+                <div className={css.result_box}>
+                    <div className={css.result_header}>
+                        <NavLink className={css.back_arrow_link} to='/upload'>
+                            <img src={back_arrow} title="На главную"/>
+                        </NavLink>
+                        <span className={css.file_block}>
                         <img src={file_ico}/>
                         <span>{state['fileName']}</span>
                     </span>
-                </div>
-                <div className={css.statistics}>
-                    <p className={css.errors}>Ошибки</p>
-                    <RenderList elements={state['errors']}/>
-                </div>
-                <div className={css.document_content}>
-                    <iframe className={css.document_view} src={url}/>
+                    </div>
+                    <div className={css.statistics}>
+                        <p className={css.errors}>Ошибки</p>
+                        <RenderList elements={state['errors']}/>
+                    </div>
+                    <div className={css.document_content}>
+                        <iframe className={css.document_view} src={url}/>
+                    </div>
                 </div>
             </div>
         );
