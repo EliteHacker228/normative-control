@@ -99,7 +99,9 @@ class Welcome extends Component {
 
         let response = await fetch(`https://normative-control-api.herokuapp.com/queue/reserve?access-key=${state['accessKey']}`, requestOptions);
         let document = await response.json();
-        state['documentId'] = document['documentId'];
+        console.log('=======================================');
+        console.log(document);
+        state['documentId'] = document['document-id'];
     };
 
     sendFileToCheckOnServer = (file) => {
