@@ -7,6 +7,7 @@ import Welcome from "./components/Pages/Welcome/Welcome";
 import FileUpload from "./components/Pages/FileUpload/FileUpload";
 import GetResult from "./components/Pages/GetResult/GetResult";
 import Faq from "./components/Pages/Faq/Faq";
+import Login from "./components/Admin/Pages/Login/Login";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path='upload' element={<FileUpload/>}/>
                         <Route path='result' element={<GetResult/>}/>
                         <Route path='faq' element={<Faq/>}/>
+                        <Route path='auth/login' element={<Login/>}/>
                     </Routes>
                 </div>
                 <Footer/>

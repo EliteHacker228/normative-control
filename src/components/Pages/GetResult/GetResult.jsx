@@ -157,6 +157,18 @@ class GetResult extends Component {
     //     this.forceUpdate();
     // };
 
+    downloadResult = () => {
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    };
+
     render() {
         if (!state['errors'].length) {
             this.getResult();
