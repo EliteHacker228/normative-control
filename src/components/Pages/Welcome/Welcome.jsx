@@ -38,10 +38,10 @@ class Welcome extends Component {
     fileInputOnInput = (evt) => {
         let file = evt.target.files[0];
 
-        let form = document.getElementById('upload_block');
-        form.style.display = 'none';
-        let load = document.getElementById('download');
-        load.style.display = 'block';
+        // let form = document.getElementById('upload_block');
+        // form.style.display = 'none';
+        // let load = document.getElementById('download');
+        // load.style.display = 'block';
 
         this.reservePlaceInQueue().then(() => {
             let si = setInterval(() => {
@@ -57,7 +57,7 @@ class Welcome extends Component {
                         console.log(checkStatus);
                         break;
                 }
-            }, 2000);
+            }, 100);
         });
 
     };
@@ -129,6 +129,11 @@ class Welcome extends Component {
 
         state['file'] = file;
 
+        let form = document.getElementById('upload_block');
+        form.style.display = 'none';
+        let load = document.getElementById('download');
+        load.style.display = 'block';
+
         formdata.append("file", file, file.name);
         formdata.append("access-key", state['accessKey']);
         formdata.append("document-id", state['documentId']);
@@ -159,7 +164,46 @@ class Welcome extends Component {
             })
     };
 
+    onDragEnter = (evt) => {
+        evt.preventDefault();
+        console.log('onDragEnter');
+        let uploadBlock = document.getElementById('drop_area');
+        uploadBlock.style.backgroundColor = 'transparent';
+    };
+
+    onDragLeave = (evt) => {
+        evt.preventDefault();
+        console.log('onDragLeave');
+        let uploadBlock = document.getElementById('drop_area');
+        uploadBlock.style.backgroundColor = 'transparent';
+    };
+
+    onDragOver = (evt) => {
+        evt.preventDefault();
+        console.log('onDragOver');
+        let uploadBlock = document.getElementById('drop_area');
+        uploadBlock.style.backgroundColor = 'rgba(192, 192, 192, 0.3)';
+        uploadBlock.style.borderRadius = '25px';
+
+    };
+
+    onDrop = (evt) => {
+        evt.preventDefault();
+        console.log('onDrop');
+        let uploadBlock = document.getElementById('drop_area');
+        uploadBlock.style.backgroundColor = 'transparent';
+
+        let file = evt.dataTransfer.files[0];
+        console.log(file);
+
+        evt.file = file;
+        evt.target.files = [file];
+        this.fileInputOnInput(evt);
+    };
+
     render() {
+
+
         return (
             <div className={css.file_upload}>
 
@@ -174,7 +218,14 @@ class Welcome extends Component {
                 <p style={{display: state['renderSizeError'] ? "block" : "none"}} className={css.error_message}>Ошибка!
                     Слишком большой файл. Пожалуйста, загрузите файл объёмом до <b>20 МБ</b> включительно.</p>
 
-                <div className={css.file_upload_form}>
+                <div className={css.file_upload_form} id="drop_area"
+                     onDragEnter={this.onDragEnter}
+                     onDragLeave={this.onDragLeave}
+                     onDragOver={this.onDragOver}
+                     onDrop={this.onDrop}
+                     onDragEnd={this.onDragEnd}
+                     onDragExit={this.onDragExit}
+                >
                     <div id="upload_block">
                         <img className={css.doc_icon} src={icon} alt="file"/>
                         <button className={css.file_upload_button}

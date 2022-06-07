@@ -144,7 +144,8 @@ class GetResult extends Component {
                 console.log(res.map(x => x['mistakeType']));
                 // state['errors'] = res.map(x => x['errorType']);
                 // state['errors'] = res.map(x => x['errorType']).map(error_code => translations[error_code]).filter(x => x !== undefined);
-                state['errors'] = res.map(x => x['mistakeType']).sort(x => x['paragraphId']).map(error_code => translations[error_code]);
+                state['errors'] = res.map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code]);
+                console.log('Выводим ошибки');
                 console.log(state.errors);
                 this.forceUpdate();
             })
@@ -162,6 +163,7 @@ class GetResult extends Component {
         }
 
         let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}&embedded=true`;
+        // let url = `https://view.officeapps.live.com/op/embed.aspx?src=https://normative-control-api.herokuapp.com/document/1bc7aa15d7d84912b8a246efceec5123/raw-file?access-key=DAvapNGQVoIuYQsnpzxhvOn9BXbjvQLjgisQdo1IdnU4rBctrWfe52aMablY8YQHSDjQ2xzpj6rYudcAk559Hz6ovDpyQb7RRnWfeBy8eIrlHxbupzalx9LfQJE51jlH`;
 
         return (
             <div>
@@ -180,6 +182,7 @@ class GetResult extends Component {
                         <RenderList elements={state['errors']}/>
                     </div>
                     <iframe className={css.document_view} src={url}/>
+                    {/*<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://vk.com/s/v1/doc/8jezo_i9TzyPHZ1Kfxm2-vYi68Zk5uQZNdIFidX5O2UoMbKOQgY'/>*/}
                 </div>
             </div>
         );
