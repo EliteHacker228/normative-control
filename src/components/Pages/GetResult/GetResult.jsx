@@ -150,6 +150,8 @@ class GetResult extends Component {
                 this.forceUpdate();
             })
             .catch(error => console.log('error', error));
+
+        this.downloadResult();
     };
 
     // getZezult = () => {
@@ -164,15 +166,28 @@ class GetResult extends Component {
         };
 
         fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`, requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${state['fileName']}`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
             .catch(error => console.log('error', error));
     };
 
-    render() {
+    componentDidMount() {
         if (!state['errors'].length) {
             this.getResult();
         }
+    };
+
+    render() {
+
 
         let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}&embedded=true`;
         // let url = `https://view.officeapps.live.com/op/embed.aspx?src=https://normative-control-api.herokuapp.com/document/1bc7aa15d7d84912b8a246efceec5123/raw-file?access-key=DAvapNGQVoIuYQsnpzxhvOn9BXbjvQLjgisQdo1IdnU4rBctrWfe52aMablY8YQHSDjQ2xzpj6rYudcAk559Hz6ovDpyQb7RRnWfeBy8eIrlHxbupzalx9LfQJE51jlH`;
