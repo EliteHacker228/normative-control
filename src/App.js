@@ -8,6 +8,7 @@ import FileUpload from "./components/Pages/FileUpload/FileUpload";
 import GetResult from "./components/Pages/GetResult/GetResult";
 import Faq from "./components/Pages/Faq/Faq";
 import Login from "./components/Admin/Pages/Login/Login";
+import SearchFile from "./components/Admin/Pages/Search File/SearchFile";
 
 function App() {
     return (
@@ -21,6 +22,8 @@ function App() {
                         <Route path='result' element={<GetResult/>}/>
                         <Route path='faq' element={<Faq/>}/>
                         <Route path='auth/login' element={<Login/>}/>
+                        <Route path='auth/login' element={<Login/>}/>
+                        <Route path='admin_panel/search_file' element={<SearchFile/>}/>
                     </Routes>
                 </div>
                 <Footer/>
