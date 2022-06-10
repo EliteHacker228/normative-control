@@ -22,7 +22,6 @@ function App() {
                         <Route path='result' element={<GetResult/>}/>
                         <Route path='faq' element={<Faq/>}/>
                         <Route path='auth/login' element={<Login/>}/>
-                        <Route path='auth/login' element={<Login/>}/>
                         <Route path='admin_panel/search_file' element={<SearchFile/>}/>
                     </Routes>
                 </div>
