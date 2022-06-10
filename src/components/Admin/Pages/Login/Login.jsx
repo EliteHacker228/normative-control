@@ -30,7 +30,9 @@ class Login extends Component {
             .then(response => response.text())
             .then(result => {
                 state['credentials'] = result;
+                localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 console.log(result);
+                console.log(state);
             })
             .catch(error => console.log('error', error));
     };
