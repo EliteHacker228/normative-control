@@ -1,10 +1,10 @@
 .result_box {
     /*border-style: dashed;*/
-    /*border-radius: 15px;*/
+    border-radius: 15px;
     /*border-color: var(--main-white);*/
     background-image: url("Rectangle 17.svg");
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size: cover;
     width: 66%;
     margin: 65px auto;
     padding: 45px 45px 45px;
@@ -12,21 +12,199 @@
     gap: 40px;
     grid-template:
             "a a a" 40px
-            "b c c"
-            "b c c"  / 1fr 1fr 1fr;
+            "c c c"
+            "c c c"  / 1fr 1fr 1fr;
+}
+
+.content {
+    grid-area: c;
+    text-align: center;
+}
+
+.content h1 {
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 45px;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.content p {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.document_id {
+    background-color: white;
+    /*background-image: url("Rectangle 17.svg");*/
+    border-style: dashed;
+    border-color: #D3D3D3;
+    border-width: 2px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 50px auto 0 auto;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 4px 0 4px 140px;
+}
+
+.document_id p {
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 45px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    width: fit-content;
+}
+
+.document_id button {
+    margin-left: 25px;
+    margin-right: 13px;
+    border: 0;
+    background: transparent;
+    background-image: url("Group 1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 45px;
+    height: 45px;
+}
+
+.document_id button:hover {
+    cursor: pointer;
+}
+
+.document_id div {
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    padding: 6px;
+    border-radius: 15px;
+    display: none;
+    margin-left: 25px;
+    margin-right: 13px;
+    color: var(--main-white);
+    text-align: center;
+    color: green;
+    border: 0;
+    width: 33px;
+    height: 33px;
+}
+
+.file_download_button {
+    margin: 0 auto;
+    background-color: var(--main-blue);
+    color: var(--main-white);
+    border-style: none;
+    border-radius: 38px;
+    width: 325px;
+    height: 75px;
+    display: block;
+    text-transform: uppercase;
+    transition: 0.5s all;
+
+    margin-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    line-height: 140%;
+
+    border-style: solid;
+    border-color: var(--main-blue);
+}
+
+.file_download_button:hover {
+    cursor: pointer;
+    color: var(--main-blue);
+    background-color: var(--main-white);
+    transition: 0.5s all;
+}
+
+.file_download_button:active {
+    color: var(--main-dark);
+    background-color: var(--main-gray);
+    border-color: var(--main-gray);
+
+}
+
+.toggle_statistics {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle_statistics p {
+    user-select: none;
+}
+
+.toggle_statistics button {
+    border: 0;
+
+    width: 45px;
+    height: 45px;
+}
+
+.toggle_statistics button[id="toggle_button_show"] {
+    background: transparent;
+    background-image: url("show_statisctics.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: block;
+}
+
+.toggle_statistics button[id="toggle_button_hide"] {
+    background: transparent;
+    background-image: url("hide_statisctics.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: none;
+}
+
+.toggle_statistics p:hover, .toggle_statistics button:hover {
+    cursor: pointer;
 }
 
 .statistics {
     /*background-image: url("Rectangle 17.svg");*/
     /*background-repeat: no-repeat;*/
     /*background-size:cover;*/
-    border-style: solid;
-    border-color: var(--main-gray);
-    border-width: 2px;
     height: 58vh;
     overflow-y: scroll;
-    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     box-sizing: border-box;
+    width: 71%;
+    padding-left: 20%;
+    margin: 0 auto 92px auto;
+
+    display: none;
+
+    font-family: Montserrat;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    text-align: left;
+
+
+
 
     /*border-style: dashed;*/
     /*border-color: var(--main-white);*/
@@ -37,17 +215,23 @@
 }
 
 .errors {
-    color: red;
-    margin-left: 20px;
+    font-family: Montserrat;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: black;
+    margin-left: 4%;
 }
 
-.back_arrow_link{
+.back_arrow_link {
     padding: 10px;
     margin-left: -10px;
 }
 
 ul {
-    list-style: url("forward_red_arrow.svg");
+    list-style: none;
 }
 
 .document_content {

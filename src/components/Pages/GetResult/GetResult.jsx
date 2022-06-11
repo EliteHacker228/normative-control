@@ -123,6 +123,8 @@ class GetResult extends Component {
         super();
         state = JSON.parse(localStorage.getItem('normokontrol_state'));
         state['errors'] = [];
+        state['checkResult'] = {};
+        state['checkResult']['document-id'] = '';
         console.log('Имеем вот такой стейт');
         console.log(state);
     }
@@ -151,7 +153,7 @@ class GetResult extends Component {
             })
             .catch(error => console.log('error', error));
 
-        this.downloadResult();
+        // this.downloadResult();
     };
 
     // getZezult = () => {
@@ -186,6 +188,57 @@ class GetResult extends Component {
         }
     };
 
+    copyId() {
+        // state['checkResult']['document-id']
+        // Create a "hidden" input
+        var aux = document.createElement("input");
+
+        // Assign it the value of the specified element
+        aux.setAttribute("value", state['checkResult']['document-id']);
+
+        // Append it to the body
+        document.body.appendChild(aux);
+
+        // Highlight its content
+        aux.select();
+
+        // Copy the highlighted text
+        document.execCommand("copy");
+
+        // Remove it from the body
+        document.body.removeChild(aux);
+
+        let copy_button = document.getElementById("copy_button");
+        copy_button.style.display = "none";
+        let copy_alert = document.getElementById("copy_alert");
+        copy_alert.style.display = "block";
+
+
+        setTimeout(() => {
+            copy_button.style.display = "block";
+            copy_alert.style.display = "none";
+        }, 5000);
+    };
+
+    toggleListDisplay(evt) {
+        evt.preventDefault();
+        let list = document.getElementById('errors_list');
+        let toggle_button_show = document.getElementById('toggle_button_show');
+        let toggle_button_hide = document.getElementById('toggle_button_hide');
+        let toggle_title = document.getElementById('toggle_title');
+        if (list.style.display !== 'none') {
+            list.style.display = 'none';
+            toggle_button_show.style.display = 'block';
+            toggle_button_hide.style.display = 'none';
+            toggle_title.textContent = "Развернуть список ошибок";
+        } else {
+            list.style.display = 'block';
+            toggle_button_show.style.display = 'none';
+            toggle_button_hide.style.display = 'block';
+            toggle_title.textContent = "Свернуть список ошибок";
+        }
+    };
+
     render() {
 
 
@@ -200,19 +253,62 @@ class GetResult extends Component {
                             <img src={back_arrow} title="На главную"/>
                         </NavLink>
                         <span className={css.file_block}>
-                        <img src={file_ico}/>
-                        <span>{state['fileName']}</span>
-                    </span>
+                            <img src={file_ico}/>
+                            <span>{state['fileName']}</span>
+                        </span>
                     </div>
-                    <div className={css.statistics}>
-                        <p className={css.errors}>Ошибки</p>
-                        <RenderList elements={state['errors']}/>
+                    <div className={css.content}>
+                        <h1>Мы проверили ваш файл и нашли в нем <span
+                            style={{color: 'red'}}>{state['errors'].length}</span> ошибок</h1>
+                        <p>Чтобы преподаватель смог просмотреть результат, скопируйте и отправьте ему ID документа:</p>
+                        <div className={css.document_id}>
+                            <p id="document_id">{state['checkResult']['document-id']}</p>
+                            <button id="copy_button" onClick={this.copyId} title="Скопировать">
+                            </button>
+                            <div id="copy_alert" title="Скопировано">
+                                ✔
+                            </div>
+                        </div>
+                        <button className={css.file_download_button}
+                                onClick={this.downloadResult}>Скачать файл
+                        </button>
                     </div>
-                    <iframe className={css.document_view} src={url}/>
-                    {/*<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://vk.com/s/v1/doc/8jezo_i9TzyPHZ1Kfxm2-vYi68Zk5uQZNdIFidX5O2UoMbKOQgY'/>*/}
+                </div>
+
+                <div className={css.toggle_statistics}>
+                    <button id="toggle_button_hide" onClick={this.toggleListDisplay}/>
+                    <button id="toggle_button_show" onClick={this.toggleListDisplay}/>
+                    <p id="toggle_title" onClick={this.toggleListDisplay}>Развернуть список ошибок</p>
+                </div>
+                <div className={css.statistics} id="errors_list" style={{display: 'none'}}>
+                    <p className={css.errors}>{'}'}</p>
+                    <RenderList elements={state['errors']}/>
+                    <p className={css.errors}>{'{'}</p>
                 </div>
             </div>
         );
+
+        // return (
+        //     <div>
+        //         <div className={css.result_box}>
+        //             <div className={css.result_header}>
+        //                 <NavLink className={css.back_arrow_link} to='/upload'>
+        //                     <img src={back_arrow} title="На главную"/>
+        //                 </NavLink>
+        //                 <span className={css.file_block}>
+        //                 <img src={file_ico}/>
+        //                 <span>{state['fileName']}</span>
+        //             </span>
+        //             </div>
+        //             <div className={css.statistics}>
+        //                 <p className={css.errors}>Ошибки</p>
+        //                 <RenderList elements={state['errors']}/>
+        //             </div>
+        //             <iframe className={css.document_view} src={url}/>
+        //             {/*<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://vk.com/s/v1/doc/8jezo_i9TzyPHZ1Kfxm2-vYi68Zk5uQZNdIFidX5O2UoMbKOQgY'/>*/}
+        //         </div>
+        //     </div>
+        // );
     };
 }
 
