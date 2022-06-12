@@ -257,22 +257,30 @@ class GetResult extends Component {
             // Сворачиваем
             list.style.height = '0px';
             list.style.overflowY = 'hidden';
+            list.scrollTop = 0;
+
             list.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+
             toggle_button_show.style.display = 'block';
             toggle_button_hide.style.display = 'none';
             toggle_title.textContent = "Развернуть список ошибок";
 
             holder.style.height = '58vh';
+            // document.getElementById('result_box').scrollIntoView();
+            window.scrollTo(0, 0);
         } else {
             //Разворачиваем
             list.style.height = '58vh';
             list.style.overflowY = 'scroll';
+
             list.style.backgroundColor = '#FFFFFF';
+
             toggle_button_show.style.display = 'none';
             toggle_button_hide.style.display = 'block';
             toggle_title.textContent = "Свернуть список ошибок";
 
             holder.style.height = '0px';
+            holder.scrollIntoView();
         }
     };
 
@@ -284,7 +292,7 @@ class GetResult extends Component {
 
         return (
             <div>
-                <div className={css.result_box}>
+                <div id="result_box" className={css.result_box}>
                     <div className={css.result_header}>
                         <NavLink className={css.back_arrow_link} to='/upload'>
                             <img src={back_arrow} title="На главную"/>
