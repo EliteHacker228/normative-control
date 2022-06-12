@@ -16,6 +16,7 @@
     flex: 1;
     background-image: url("background.png");
     background-size: cover;
+    background-attachment: fixed;
     /*background-size: 100% 100%;*/
     background-repeat: no-repeat;
     /*background-position: center center;*/
