@@ -226,16 +226,53 @@ class GetResult extends Component {
         let toggle_button_show = document.getElementById('toggle_button_show');
         let toggle_button_hide = document.getElementById('toggle_button_hide');
         let toggle_title = document.getElementById('toggle_title');
-        if (list.style.display !== 'none') {
-            list.style.display = 'none';
+        let holder = document.getElementById('holder');
+        // if (list.style.display !== 'none') {
+        //     list.style.display = 'none';
+        //     toggle_button_show.style.display = 'block';
+        //     toggle_button_hide.style.display = 'none';
+        //     toggle_title.textContent = "Развернуть список ошибок";
+        // } else {
+        //     list.style.display = 'block';
+        //     toggle_button_show.style.display = 'none';
+        //     toggle_button_hide.style.display = 'block';
+        //     toggle_title.textContent = "Свернуть список ошибок";
+        // }
+
+        // if (list.style.height !== '0px') {
+        //     list.style.height = '0px';
+        //     setTimeout(()=>{list.style.display = 'none'}, 500);
+        //     toggle_button_show.style.display = 'block';
+        //     toggle_button_hide.style.display = 'none';
+        //     toggle_title.textContent = "Развернуть список ошибок";
+        // } else {
+        //     list.style.display = 'block';
+        //     setTimeout(()=>{list.style.height = '58vh';}, 10);
+        //     toggle_button_show.style.display = 'none';
+        //     toggle_button_hide.style.display = 'block';
+        //     toggle_title.textContent = "Свернуть список ошибок";
+        // }
+
+        if (list.style.height !== '0px') {
+            // Сворачиваем
+            list.style.height = '0px';
+            list.style.overflowY = 'hidden';
+            list.style.backgroundColor = 'rgba(0, 0, 0, 0)';
             toggle_button_show.style.display = 'block';
             toggle_button_hide.style.display = 'none';
             toggle_title.textContent = "Развернуть список ошибок";
+
+            holder.style.height = '58vh';
         } else {
-            list.style.display = 'block';
+            //Разворачиваем
+            list.style.height = '58vh';
+            list.style.overflowY = 'scroll';
+            list.style.backgroundColor = '#FFFFFF';
             toggle_button_show.style.display = 'none';
             toggle_button_hide.style.display = 'block';
             toggle_title.textContent = "Свернуть список ошибок";
+
+            holder.style.height = '0px';
         }
     };
 
@@ -280,10 +317,14 @@ class GetResult extends Component {
                     <button id="toggle_button_show" onClick={this.toggleListDisplay}/>
                     <p id="toggle_title" onClick={this.toggleListDisplay}>Развернуть список ошибок</p>
                 </div>
-                <div className={css.statistics} id="errors_list" style={{display: 'none'}}>
+                {/*<div className={css.statistics} id="errors_list" style={{display: 'none'}}>*/}
+                {/*<div className={css.statistics} id="errors_list" style={{height: '0px', display: 'none'}}>*/}
+                <div className={css.statistics} id="errors_list" style={{height: '0px'}}>
                     <p className={css.errors}>{'}'}</p>
                     <RenderList elements={state['errors']}/>
                     <p className={css.errors}>{'{'}</p>
+                </div>
+                <div id="holder" style={{height: '58vh', transition: '0.5s all'}}>
                 </div>
             </div>
         );
