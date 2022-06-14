@@ -186,10 +186,13 @@ class SearchFile extends Component {
                 if (status === 200) {
                     this.state['result'] = result;
                     console.log("ABOBA", status, result);
+                    this.makeVisible();
+                    this.makeErrorInvisible();
                     this.forceUpdate();
-                } else {
-                    console.log('WRONG STATUS');
-                    console.log(status);
+                } else if(status === 404) {
+                    this.makeInvisible();
+                    this.makeErrorVisible();
+                    this.forceUpdate();
                 }
             })
             .catch(error => console.log('error', error));
@@ -197,7 +200,7 @@ class SearchFile extends Component {
 
     deleteFile = (evt) => {
         evt.preventDefault();
-
+        this.makeInvisible();
         evt.preventDefault();
         let myHeaders = new Headers();
         let accessToken = `Bearer ${this.credentials['access-token']}`;
@@ -253,6 +256,28 @@ class SearchFile extends Component {
             .catch(error => console.log('error', error));
     };
 
+    makeVisible () {
+        document.getElementById("inf_block").style.visibility = "visible";
+        document.getElementById("errors_block").style.display = "block";
+        document.getElementById("errors_block").style.visibility = "visible";
+        document.getElementById("errors").style.visibility = "hidden";
+    };
+
+    makeErrorVisible () {
+        document.getElementById("wrong_id_error").style.display = "block";
+    };
+
+    makeErrorInvisible () {
+        document.getElementById("wrong_id_error").style.display = "none";
+    };
+
+    makeInvisible () {
+        document.getElementById("inf_block").style.visibility = "hidden";
+        document.getElementById("errors_block").style.display = "none";
+        document.getElementById("errors_block").style.visibility = "hidden";
+        document.getElementById("errors").style.visibility = "visible";
+    };
+
     render() {
         return (
             <div className={css.body}>
@@ -280,7 +305,8 @@ class SearchFile extends Component {
                     {/*</div>*/}
 
                     <div className={css.doc_inf}>
-                        <div className={css.inf_block}>
+                        <p id="wrong_id_error" style={{display: "none"}} className={css.wrong_id_error}>Файл с указанным ID не существует, или был удалён</p>
+                        <div className={css.inf_block} id="inf_block" style={{visibility: "hidden"}}>
                             <h1>Найденный файл</h1>
                             <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>
                             <div className={css.file_data}>
@@ -297,9 +323,9 @@ class SearchFile extends Component {
                                     <button className={css.file_data_buttons_download}
                                             onClick={this.downloadFile}
                                             title="Скачать файл"/>
-                                    {/*<button className={css.file_data_buttons_delete}*/}
-                                    {/*        onClick={this.deleteFile}*/}
-                                    {/*        title="Удалить файл"/>*/}
+                                    <button className={css.file_data_buttons_delete}
+                                            onClick={this.deleteFile}
+                                            title="Удалить файл"/>
                                 </div>
                             </div>
                         </div>
@@ -323,8 +349,8 @@ class SearchFile extends Component {
                     {/*        </div>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-                    <div className={css.errors}>
-                        <div className={css.errors_block}>
+                    <div className={css.errors} id="errors">
+                        <div className={css.errors_block} id="errors_block" style={{visibility: "hidden"}}>
                             <p className={css.error}>{'}'}</p>
                             <RenderList
                                 elements={this.state['result']['mistakes'].map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code])}/>

@@ -7,21 +7,27 @@ import {NavLink} from "react-router-dom";
 import state from "../../../storage/storage";
 
 
+// let state;
+
 class Welcome extends Component {
 
     constructor() {
         super();
-        state['renderSizeError'] = false;
-        state['renderFormatError'] = false;
+        this.state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        if (this.state === null) {
+            this.state = state;
+        }
+        this.state['renderSizeError'] = false;
+        this.state['renderFormatError'] = false;
         console.log('генерим ключ');
         let accessKey = this.generateAccessKey(128);
         localStorage.setItem('accessKey', accessKey);
-        state['accessKey'] = localStorage.getItem('accessKey');
-        console.log(state['accessKey']);
+        this.state['accessKey'] = localStorage.getItem('accessKey');
+        console.log(this.state['accessKey']);
     };
 
     componentDidMount() {
-        this.reservePlaceInQueue().then(() => console.log(state['documentId']));
+        this.reservePlaceInQueue().then(() => console.log(this.state['documentId']));
     }
 
     generateAccessKey = (length) => {
@@ -45,8 +51,8 @@ class Welcome extends Component {
 
         this.reservePlaceInQueue().then(() => {
             let si = setInterval(() => {
-                this.checkFileStatusOnServer(state['documentId'])
-                let checkStatus = state['checkStatus'];
+                this.checkFileStatusOnServer(this.state['documentId'])
+                let checkStatus = this.state['checkStatus'];
                 switch (checkStatus) {
                     case 'READY_TO_ENQUEUE':
                         clearInterval(si);
@@ -68,7 +74,7 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/document/${id}/status?access-key=${state['accessKey']}`, requestOptions)
+        fetch(`https://normative-control-api.herokuapp.com/document/${id}/status?access-key=${this.state['accessKey']}`, requestOptions)
             .then(response => {
                 return response.text();
             })
@@ -78,7 +84,7 @@ class Welcome extends Component {
                 result = JSON.parse(result)['status'];
                 console.log("ТУТА РЕЗУЛЬТ");
                 console.log(result);
-                state['checkStatus'] = result;
+                this.state['checkStatus'] = result;
             })
             .catch(error => console.log('error', error));
     };
@@ -97,11 +103,11 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        let response = await fetch(`https://normative-control-api.herokuapp.com/queue/reserve?access-key=${state['accessKey']}`, requestOptions);
+        let response = await fetch(`https://normative-control-api.herokuapp.com/queue/reserve?access-key=${this.state['accessKey']}`, requestOptions);
         let document = await response.json();
         console.log('=======================================');
         console.log(document);
-        state['documentId'] = document['document-id'];
+        this.state['documentId'] = document['document-id'];
     };
 
     sendFileToCheckOnServer = (file) => {
@@ -116,18 +122,18 @@ class Welcome extends Component {
         */
 
         if (file['size'] > 20971520) { //Это 20 Мегабайт в Байтах
-            state['renderSizeError'] = true;
-            state['renderFormatError'] = false;
+            this.state['renderSizeError'] = true;
+            this.state['renderFormatError'] = false;
             this.forceUpdate();
             return;
         } else if (file['name'].split('.').pop() !== 'docx') {
-            state['renderSizeError'] = false;
-            state['renderFormatError'] = true;
+            this.state['renderSizeError'] = false;
+            this.state['renderFormatError'] = true;
             this.forceUpdate();
             return;
         }
 
-        state['file'] = file;
+        this.state['file'] = file;
 
         let form = document.getElementById('upload_block');
         form.style.display = 'none';
@@ -135,8 +141,8 @@ class Welcome extends Component {
         load.style.display = 'block';
 
         formdata.append("file", file, file.name);
-        formdata.append("access-key", state['accessKey']);
-        formdata.append("document-id", state['documentId']);
+        formdata.append("access-key", this.state['accessKey']);
+        formdata.append("document-id", this.state['documentId']);
 
         let requestOptions = {
             method: 'POST',
@@ -149,16 +155,16 @@ class Welcome extends Component {
                 let status = response['status'];
                 if (status === 202) {
 
-                    state['fileName'] = file.name;
-                    state['renderUploadInput'] = false;
-                    state['checkStatus'] = 'QUEUE';
-                    state['button_status'] = css.button_queue;
-                    state['progressbar_status'] = css.progressbar_queue;
+                    this.state['fileName'] = file.name;
+                    this.state['renderUploadInput'] = false;
+                    this.state['checkStatus'] = 'QUEUE';
+                    this.state['button_status'] = css.button_queue;
+                    this.state['progressbar_status'] = css.progressbar_queue;
 
                     console.log('Всё окей, отправляем этот стейт');
-                    console.log(state);
+                    console.log(this.state);
                     // console.log(state['documentId']);
-                    localStorage.setItem('normokontrol_state', JSON.stringify(state));
+                    localStorage.setItem('normokontrol_state', JSON.stringify(this.state));
                     document.getElementById('reroute').click();
                 }
             })
@@ -212,10 +218,10 @@ class Welcome extends Component {
                     Сервис поддерживает файлы формата <span className={css.docx}>docx</span> объемом до <b>20МБ.</b>
                 </p>
 
-                <p style={{display: state['renderFormatError'] ? "block" : "none"}}
+                <p style={{display: this.state['renderFormatError'] ? "block" : "none"}}
                    className={css.error_message}>Ошибка! Файл загружен в неверном формате. Пожалуйста,
                     загрузите <b>docx</b> файл.</p>
-                <p style={{display: state['renderSizeError'] ? "block" : "none"}} className={css.error_message}>Ошибка!
+                <p style={{display: this.state['renderSizeError'] ? "block" : "none"}} className={css.error_message}>Ошибка!
                     Слишком большой файл. Пожалуйста, загрузите файл объёмом до <b>20 МБ</b> включительно.</p>
 
                 <div className={css.file_upload_form} id="drop_area"

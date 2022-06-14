@@ -18,8 +18,8 @@
             "b b c c"
             "b b c c";
     grid-gap: 50px;
-    height: 90%;
-    max-height: 750px;
+    height: 80vh;
+    max-height: 80vh;
     width: 90%;
 }
 
@@ -47,6 +47,7 @@
 
 .search_form {
     text-align: center;
+    margin-bottom: 50px;
 }
 
 .input_block {
@@ -64,6 +65,20 @@
     line-height: 34px;
     letter-spacing: 0.05em;
     text-align: center;
+}
+
+.wrong_id_error {
+    color: red;
+    font-family: Montserrat;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 45px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    height: 0;
+    display: inline;
+    position: absolute;
+    left: 180px;
 }
 
 .search_form input[type="submit"] {
@@ -86,6 +101,7 @@
     background-color: #787878;
     border-radius: 25px;
     grid-area: b;
+
 
     background-image: url("Rectangle 17.svg");
     background-repeat: no-repeat;
@@ -190,10 +206,10 @@
 }
 
 .errors {
-    background-color: #787878;
+    /*background-color: #787878;*/
     /*border-radius: 25px;*/
     grid-area: c;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 
     width: 700px;
     /*height: 750px;*/
@@ -202,12 +218,16 @@
     background-size: cover;
     background-color: rgba(0, 0, 0, 0);
 
-    background-color: #FFFFFF;
+    /*background-color: #FFFFFF;*/
 }
 
 .errors_block {
     /*visibility: hidden;*/
+    background-color: #FFFFFF;
+    overflow-y: scroll;
+    max-height: 80vh;
 
+    /*height: 100%;*/
     /*background-image: url("Rectangle 17.svg");*/
     /*background-repeat: no-repeat;*/
     /*background-size:cover;*/

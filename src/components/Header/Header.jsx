@@ -4,33 +4,54 @@ import {NavLink} from "react-router-dom";
 
 
 const Header = () => {
-    return (
-        <header className={css.header}>
-            <NavLink to='/'>
-                <img className={css.logo}
-                     src={logo}
-                     title="На главную"
-                />
-            </NavLink>
+    if (window.location.pathname !== "/admin_panel/search_file") {
 
-            <NavLink to='/' className={css.linkname} title="На главную">
-                <p className={css.name}>normative<br/>control</p>
-            </NavLink>
+        return (
+            <header className={css.header}>
+                <NavLink to='/'>
+                    <img className={css.logo}
+                         src={logo}
+                         title="На главную"
+                    />
+                </NavLink>
 
-            {/*<ul className={css.menu}>*/}
-            {/*    <li><NavLink className={css.menu_element} to='/'>Welcome</NavLink></li>*/}
-            {/*    <li><NavLink className={css.menu_element} to='/upload'>Upload File</NavLink></li>*/}
-            {/*    <li><NavLink className={css.menu_element} to='/result'>Get Result</NavLink></li>*/}
-            {/*    <li><NavLink className={css.menu_element} to='/status'>Get Status</NavLink></li>*/}
-            {/*</ul>*/}
-            <div style={{width: '60%'}}/>
-            <NavLink to='/faq' className={css.linkfaq}>
-                <p className={css.faq}>FAQ</p>
-            </NavLink>
+                <NavLink to='/' className={css.linkname} title="На главную">
+                    <p className={css.name}>normative<br/>control</p>
+                </NavLink>
+
+                <div style={{width: '60%'}}/>
+                <NavLink to='/faq' className={css.linkfaq}>
+                    <p className={css.faq}>FAQ</p>
+                </NavLink>
 
 
-        </header>
-    );
+            </header>
+        );
+
+    }else{
+        return (
+            <header className={css.header}>
+                <NavLink to='/'>
+                    <img className={css.logo}
+                         src={logo}
+                         title="На главную"
+                    />
+                </NavLink>
+
+                <NavLink to='/' className={css.linkname} title="На главную">
+                    <p className={css.name}>normative<br/>control</p>
+                </NavLink>
+
+
+                <div style={{width: '60%'}}/>
+                <NavLink to='auth/logout' className={css.linkfaq}>
+                    <p className={css.faq}>Выйти</p>
+                </NavLink>
+
+
+            </header>
+        );
+    }
 };
 
 export default Header;
