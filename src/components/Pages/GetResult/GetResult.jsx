@@ -267,7 +267,10 @@ class GetResult extends Component {
 
             holder.style.height = '58vh';
             // document.getElementById('result_box').scrollIntoView();
-            window.scrollTo(0, 0);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         } else {
             //Разворачиваем
             list.style.height = '58vh';
@@ -280,7 +283,9 @@ class GetResult extends Component {
             toggle_title.textContent = "Свернуть список ошибок";
 
             holder.style.height = '0px';
-            holder.scrollIntoView();
+            holder.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
     };
 
