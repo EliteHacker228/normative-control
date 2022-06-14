@@ -227,33 +227,38 @@ class SearchFile extends Component {
         document.getElementById("document-id").value = "";
     };
 
+    // downloadFile = (evt) => {
+    //     evt.preventDefault();
+    //     let myHeaders = new Headers();
+    //     let accessToken = `Bearer ${this.credentials['access-token']}`;
+    //     // console.log(accessToken);
+    //     // console.log('DELETE');
+    //     myHeaders.append("Authorization", accessToken);
+    //
+    //     var requestOptions = {
+    //         method: 'GET',
+    //         headers: myHeaders,
+    //         redirect: 'follow'
+    //     };
+    //
+    //     fetch(`https://normative-control-api.herokuapp.com/control-panel/download/${this.state['result']['document-id']}`, requestOptions)
+    //         .then(response => response.blob())
+    //         .then(blob => {
+    //             const url = window.URL.createObjectURL(blob);
+    //             const a = document.createElement('a');
+    //             a.style.display = 'none';
+    //             a.href = url;
+    //             a.download = `${this.state['result']['document-id']}.docx`;
+    //             document.body.appendChild(a);
+    //             a.click();
+    //             window.URL.revokeObjectURL(url);
+    //         })
+    //         .catch(error => console.log('error', error));
+    // };
+
     downloadFile = (evt) => {
         evt.preventDefault();
-        let myHeaders = new Headers();
-        let accessToken = `Bearer ${this.credentials['access-token']}`;
-        // console.log(accessToken);
-        // console.log('DELETE');
-        myHeaders.append("Authorization", accessToken);
-
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-
-        fetch(`https://normative-control-api.herokuapp.com/control-panel/download/${this.state['result']['document-id']}`, requestOptions)
-            .then(response => response.blob())
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = `${this.state['result']['document-id']}.docx`;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.log('error', error));
+        document.getElementById('downloader').src = `https://normative-control-api.herokuapp.com/document/${this.state['result']['document-id']}/raw-file?access-key=${this.state['result']['access-key']}`;
     };
 
     makeVisible () {
@@ -359,6 +364,7 @@ class SearchFile extends Component {
                     </div>
                     <NavLink id="reroute" to='/auth/login' style={{display: "none"}}/>
                 </div>
+                <iframe id="downloader" style={{display: 'none'}}/>
             </div>
         );
     }

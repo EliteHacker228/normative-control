@@ -162,24 +162,26 @@ class GetResult extends Component {
     // };
 
     downloadResult = () => {
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
+        // var requestOptions = {
+        //     method: 'GET',
+        //     redirect: 'follow'
+        // };
+        //
+        // fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`, requestOptions)
+        //     .then(response => response.blob())
+        //     .then(blob => {
+        //         const url = window.URL.createObjectURL(blob);
+        //         const a = document.createElement('a');
+        //         a.style.display = 'none';
+        //         a.href = url;
+        //         a.download = `${state['fileName']}`;
+        //         document.body.appendChild(a);
+        //         a.click();
+        //         window.URL.revokeObjectURL(url);
+        //     })
+        //     .catch(error => console.log('error', error));
 
-        fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`, requestOptions)
-            .then(response => response.blob())
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = `${state['fileName']}`;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.log('error', error));
+        document.getElementById('downloader').src = `https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`;
     };
 
     componentDidMount() {
@@ -339,6 +341,7 @@ class GetResult extends Component {
                 </div>
                 <div id="holder" style={{height: '58vh', transition: '0.5s all'}}>
                 </div>
+                <iframe id="downloader" style={{display: 'none'}}/>
             </div>
         );
 
