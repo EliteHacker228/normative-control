@@ -76,11 +76,16 @@
     border-width: 1px;
     border-radius: 35px;
     border-color: var(--main-white);
-    padding-left: 56px;
+    padding-left: 45px;
+}
+
+.login_form input[type="text"] {
+    background: url("login_ico.png") no-repeat 15px 15px;
 }
 
 .login_form input[type="password"] {
     margin-top: 20px;
+    background: url("password_ico.png") no-repeat 15px 17px;
 }
 
 .login_form input[type="submit"] {

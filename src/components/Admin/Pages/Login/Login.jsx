@@ -73,9 +73,9 @@ class Login extends Component {
                 <form className={css.login_form} onSubmit={this.login} id="login_form">
                     <img className={css.admin_ico} src={admin_ico}/>
                     <p>Вход в панель управления</p>
-                    <img className={css.login_ico} src={login_ico}/>
+                    {/*<img className={css.login_ico} src={login_ico}/>*/}
                     <input type="text" placeholder="email" name="email"/>
-                    <img className={css.password_ico} src={password_ico}/>
+                    {/*<img className={css.password_ico} src={password_ico}/>*/}
                     <input type="password" placeholder="password" name="password"/>
                     <input type="submit" value="Войти"/>
                 </form>
