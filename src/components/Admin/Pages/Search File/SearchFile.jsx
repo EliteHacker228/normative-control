@@ -1,7 +1,7 @@
 import css from './SearchFile.module.css';
 import {NavLink} from "react-router-dom";
 import React, {Component} from "react";
-// import state from "../../../../storage/storage";
+import state from "../../../../storage/storage";
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -112,13 +112,20 @@ let translations = {
 
 class SearchFile extends Component {
 
-    credentials = null;
-    state = null;
+    // credentials = null;
+    // state = null;
 
     constructor() {
         super();
         // this.credentials = JSON.parse(state['credentials']);
+        console.log('Состояние в локал сторидже SearchFile');
+        console.log(localStorage.getItem('normokontrol_state'));
         this.state = JSON.parse(localStorage.getItem('normokontrol_state'));
+        if (this.state === null) {
+            this.state = state;
+            this.state['credentials'] = "null"
+        }
+        this.state['result'] = {}
         this.state['result']['document-id'] = ""
         this.state['result']['password'] = ""
         this.state['result']['mistakes'] = []
@@ -126,13 +133,28 @@ class SearchFile extends Component {
         console.log(this.credentials);
     }
 
+    componentDidMount() {
+
+        if (this.state['credentials'] === "null") {
+            console.log('NULL CREDS');
+            setTimeout(() => {
+                document.getElementById('reroute').click();
+            }, 0);
+        } else {
+            console.log('CREDS');
+            console.log(this.state['credentials']);
+        }
+    }
+
     findFile = (evt) => {
         evt.preventDefault();
         let myHeaders = new Headers();
         let accessToken = `Bearer ${this.credentials['access-token']}`;
+        console.log('accessToken');
         console.log(accessToken);
         myHeaders.append("Authorization", accessToken);
 
+        console.log('this.credentials');
         console.log(this.credentials);
 
         let formData = new FormData(document.getElementById("login_form"));
@@ -140,7 +162,9 @@ class SearchFile extends Component {
         formData.forEach((value, key) => emptyFormData[key] = value);
         let raw = emptyFormData;
 
+        console.log('raw');
         console.log(raw);
+        console.log("raw['document-id']");
         console.log(raw['document-id']);
 
         let requestOptions = {
@@ -149,14 +173,24 @@ class SearchFile extends Component {
             redirect: 'follow'
         };
 
+        let status = 0;
+
         fetch(`https://normative-control-api.herokuapp.com/control-panel/find-by-id?document-id=${raw['document-id']}`, requestOptions)
-            .then(response => response.json())
+            .then(response => {
+                console.log('response');
+                status = response['status'];
+                return response.json();
+            })
+            // .then(result => console.log("ABOBA", JSON.parse(result)))
             .then(result => {
-                this.state['result'] = result;
-                console.log('STATE RESULT');
-                console.log(this.state['result']);
-                localStorage.setItem('normokontrol_state', JSON.stringify(this.state));
-                this.forceUpdate();
+                if (status === 200) {
+                    this.state['result'] = result;
+                    console.log("ABOBA", status, result);
+                    this.forceUpdate();
+                } else {
+                    console.log('WRONG STATUS');
+                    console.log(status);
+                }
             })
             .catch(error => console.log('error', error));
     };
@@ -167,18 +201,21 @@ class SearchFile extends Component {
         evt.preventDefault();
         let myHeaders = new Headers();
         let accessToken = `Bearer ${this.credentials['access-token']}`;
-        console.log(accessToken);
+        // console.log(accessToken);
+        // console.log('DELETE');
         myHeaders.append("Authorization", accessToken);
 
         var requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: myHeaders,
             redirect: 'follow'
         };
 
         fetch(`https://normative-control-api.herokuapp.com/control-panel/delete?document-id=${this.state['result']['document-id']}`, requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                console.log(result);
+            })
             .catch(error => console.log('error', error));
     };
 
@@ -187,46 +224,114 @@ class SearchFile extends Component {
         document.getElementById("document-id").value = "";
     };
 
-    // downloadResult = () => {
-    //     var requestOptions = {
-    //         method: 'GET',
-    //         redirect: 'follow'
-    //     };
-    //
-    //     fetch(`https://normative-control-api.herokuapp.com/document/${this.state['result']['documentId']}/raw-file?access-key=${this.state['result']['accessKey']}`, requestOptions)
-    //         .then(response => response.blob())
-    //         .then(blob => {
-    //             const url = window.URL.createObjectURL(blob);
-    //             const a = document.createElement('a');
-    //             a.style.display = 'none';
-    //             a.href = url;
-    //             a.download = `${state['fileName']}`;
-    //             document.body.appendChild(a);
-    //             a.click();
-    //             window.URL.revokeObjectURL(url);
-    //         })
-    //         .catch(error => console.log('error', error));
-    // };
+    downloadFile = (evt) => {
+        evt.preventDefault();
+        let myHeaders = new Headers();
+        let accessToken = `Bearer ${this.credentials['access-token']}`;
+        // console.log(accessToken);
+        // console.log('DELETE');
+        myHeaders.append("Authorization", accessToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`https://normative-control-api.herokuapp.com/control-panel/download/${this.state['result']['document-id']}`, requestOptions)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${this.state['result']['document-id']}.docx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.log('error', error));
+    };
 
     render() {
         return (
             <div className={css.body}>
-                <form className={css.search_form} onSubmit={this.findFile} id="login_form">
-                    <p>Поиск файлов</p>
-                    <input type="text" placeholder="ID документа" name="document-id" id="document-id"/>
-                    <input type="submit" value="Найти"/>
-                    <input type="button" value="Очистить ввод" onClick={this.clearInput}/>
-                </form>
-                <div className={css.doc_inf}>
-                    <p>Ого файл найден</p>
-                    <p>ID: {this.state['result']['document-id']}</p>
-                    <p>Пароль: {this.state['result']['password']}</p>
-                    <p>Колво ошибок: {this.state['result']['mistakes'].length}</p>
-                    <button onClick={this.deleteFile}>Удалить</button>
-                </div>
-                <div className={css.errors}>
-                    <p>Ошибки</p>
-                    <RenderList elements={this.state['result']['mistakes'].map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code])}/>
+                <div className={css.content}>
+                    <div className={css.search_block}>
+                        <form className={css.search_form} onSubmit={this.findFile} id="login_form">
+                            <p>Чтобы просмотреть результат проверки файла студента, вставьте ID документа:</p>
+                            <div className={css.input_block}>
+                                <input type="text" placeholder="ID документа" name="document-id" id="document-id"/>
+                                <input type="submit" alt="Поиск" value="" title="Скачать файл"/>
+                            </div>
+                            {/*<input type="button" value="Очистить ввод" onClick={this.clearInput}/>*/}
+                        </form>
+                    </div>
+
+                    {/*<div className={css.doc_inf}>*/}
+                    {/*    <div className={css.inf_block}>*/}
+                    {/*        <h1>Найденный файл</h1>*/}
+                    {/*        <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>*/}
+                    {/*        <p>ID: {this.state['result']['document-id']}</p>*/}
+                    {/*        <p>Пароль: {this.state['result']['password']}</p>*/}
+                    {/*        <p>Колво ошибок: {this.state['result']['mistakes'].length}</p>*/}
+                    {/*        <button onClick={this.deleteFile}>Удалить</button>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+
+                    <div className={css.doc_inf}>
+                        <div className={css.inf_block}>
+                            <h1>Найденный файл</h1>
+                            <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>
+                            <div className={css.file_data}>
+                                <div className={css.file_data_block}>
+                                    <p>ID: <span
+                                        className={css.file_data_inf}>{this.state['result']['document-id']}</span></p>
+                                    <p>Пароль: <span
+                                        className={css.file_data_inf}>{this.state['result']['password']}</span></p>
+                                    <p>Найдено ошибок в файле: <span
+                                        className={css.file_data_inf}>{this.state['result']['mistakes'].length}</span>
+                                    </p>
+                                </div>
+                                <div className={css.file_data_buttons}>
+                                    <button className={css.file_data_buttons_download}
+                                            onClick={this.downloadFile}
+                                            title="Скачать файл"/>
+                                    {/*<button className={css.file_data_buttons_delete}*/}
+                                    {/*        onClick={this.deleteFile}*/}
+                                    {/*        title="Удалить файл"/>*/}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/*<div className={css.doc_inf}>*/}
+                    {/*    <div className={css.inf_block}>*/}
+                    {/*        <h1>Найденный файл</h1>*/}
+                    {/*        <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>*/}
+                    {/*        <div className={css.file_data}>*/}
+                    {/*            <div className={css.file_data_block}>*/}
+                    {/*                <p>ID: <span className={css.file_data_inf}>Y7YBV78VBO7UB45O87GFBS4I5E7GH</span></p>*/}
+                    {/*                <p>Пароль: <span*/}
+                    {/*                    className={css.file_data_inf}>dab1335d36a147bf8d242cfa42d9c26b</span></p>*/}
+                    {/*                <p>Найдено ошибок в файле: <span className={css.file_data_inf}>5</span></p>*/}
+                    {/*            </div>*/}
+                    {/*            <div className={css.file_data_buttons}>*/}
+                    {/*                <button className={css.file_data_buttons_download} title="Скачать файл"/>*/}
+                    {/*                <button className={css.file_data_buttons_delete} onClick={this.deleteFile} title="Удалить файл"/>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    <div className={css.errors}>
+                        <div className={css.errors_block}>
+                            <p className={css.error}>{'}'}</p>
+                            <RenderList
+                                elements={this.state['result']['mistakes'].map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code])}/>
+                            <p className={css.error}>{'{'}</p>
+                        </div>
+                    </div>
+                    <NavLink id="reroute" to='/auth/login' style={{display: "none"}}/>
                 </div>
             </div>
         );

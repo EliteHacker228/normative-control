@@ -2,23 +2,252 @@
     background-color: rgb(59, 59, 59);
     height: 100%;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
+
+    background-image: url("admin_background.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.content {
+    display: grid;
+    grid-template-areas:
+            "a a c c"
+            "b b c c"
+            "b b c c";
+    grid-gap: 50px;
+    height: 90%;
+    max-height: 750px;
+    width: 90%;
+}
+
+.search_block {
+    background-color: #787878;
+    border-radius: 25px;
+    grid-area: a;
+
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0);
+
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 45px;
+    letter-spacing: 0.05em;
+    text-align: center;
+
+    margin: 0 auto;
+    padding: 15px;
 }
 
 .search_form {
-    background-color: #787878;
-    height: 75%;
-    width: 50%;
-    border-radius: 25px;
+    text-align: center;
+}
+
+.input_block {
+    display: flex;
+    justify-content: center;
+}
+
+.search_form input[type="text"] {
+    width: 80%;
+    height: 50px;
+
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.search_form input[type="submit"] {
+    height: 56px;
+    width: 56px;
+
+    border-color: rgba(0, 0, 0, 0);
+
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("search ico.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.search_form input[type="submit"]:hover {
+    cursor: pointer;
 }
 
 .doc_inf {
     background-color: #787878;
     border-radius: 25px;
+    grid-area: b;
+
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.inf_block {
+    /*visibility: hidden;*/
+
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.05em;
+    text-align: left;
+
+    padding-left: 50px;
+    padding-right: 40px;
+    padding-bottom: 60px;
+    padding-top: 15px;
+}
+
+.inf_block h1 {
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 45px;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.file_data {
+    display: flex;
+}
+
+.file_data_block {
+    background-color: #FFFFFF;
+    color: black;
+
+    flex-grow: 1;
+
+
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.05em;
+    text-align: left;
+
+    padding: 25px;
+
+    border-style: solid;
+    border-color: #787878;
+    border-width: 1px;
+}
+
+.file_data_block p {
+    margin: 0;
+}
+
+.file_data_inf {
+    color: #0A8ECD;
+}
+
+.file_data_buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.file_data_buttons_download {
+    height: 100%;
+
+    border-color: rgba(0, 0, 0, 0);
+
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("download.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+.file_data_buttons_download:hover {
+    cursor: pointer;
+}
+
+.file_data_buttons_delete {
+    height: 100%;
+    width: 100px;
+
+    border-color: rgba(0, 0, 0, 0);
+
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("delete.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.file_data_buttons_delete:hover {
+    cursor: pointer;
 }
 
 .errors {
     background-color: #787878;
-    border-radius: 25px;
+    /*border-radius: 25px;*/
+    grid-area: c;
+    overflow-y: scroll;
+
+    width: 700px;
+    /*height: 750px;*/
+    background-image: url("Rectangle 17.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0);
+
+    background-color: #FFFFFF;
+}
+
+.errors_block {
+    /*visibility: hidden;*/
+
+    /*background-image: url("Rectangle 17.svg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size:cover;*/
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    /*padding-left: 20%;*/
+    /*margin: 0 auto 92px auto;*/
+
+    /*display: none;*/
+    /*height: 0;*/
+    /*height: 58vh;*/
+
+    /*transition-duration: 0.5s;*/
+
+    font-family: Montserrat;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    text-align: left;
+
+
+
+
+    /*border-style: dashed;*/
+    /*border-color: var(--main-white);*/
+    /*background-color: #FFFFFF;*/
+    /*width: 30%;*/
+    grid-area: b;
+    color: red;
+}
+
+.error {
+    font-family: Montserrat;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: black;
+    margin-left: 6%;
 }
