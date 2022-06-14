@@ -193,6 +193,8 @@ class SearchFile extends Component {
                     this.makeInvisible();
                     this.makeErrorVisible();
                     this.forceUpdate();
+                } else if(status === 401) {
+                    document.getElementById('logout').click();
                 }
             })
             .catch(error => console.log('error', error));
@@ -363,6 +365,7 @@ class SearchFile extends Component {
                         </div>
                     </div>
                     <NavLink id="reroute" to='/auth/login' style={{display: "none"}}/>
+                    <NavLink id="logout" to='/auth/logout' style={{display: "none"}}/>
                 </div>
                 <iframe id="downloader" style={{display: 'none'}}/>
             </div>
