@@ -311,9 +311,7 @@ class GetResult extends Component {
                 {/*<div className={css.statistics} id="errors_list" style={{display: 'none'}}>*/}
                 {/*<div className={css.statistics} id="errors_list" style={{height: '0px', display: 'none'}}>*/}
                 <div className={css.statistics} id="errors_list" style={{height: '0px'}}>
-                    <p className={css.errors}>{'}'}</p>
                     <RenderList elements={state['errors']}/>
-                    <p className={css.errors}>{'{'}</p>
                 </div>
                 <div id="holder" style={{height: '58vh', transition: '0.5s all'}}>
                 </div>
