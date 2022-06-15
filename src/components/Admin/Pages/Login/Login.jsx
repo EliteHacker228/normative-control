@@ -27,9 +27,14 @@ class Login extends Component {
 
         if (this.state['credentials'] !== undefined && this.state['credentials'] !== 'null') {
             setTimeout(() => {
-                document.getElementById('reroute').click();
-            }, 0);
-        }else{
+                // document.getElementById('reroute').click();
+                // window.location.reload();
+                // document.location.href = '/admin_panel/search_file';
+                // window.location.href = 'http://localhost:3000/admin_panel/search_file';
+                // window.location.replace('http://localhost:3000/admin_panel/search_file');
+                // window.location.assign('http://localhost:3000/admin_panel/search_file');
+            }, 10);
+        } else {
             console.log(this.state['credentials']);
         }
     }
@@ -62,7 +67,8 @@ class Login extends Component {
                 localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 console.log(result);
                 console.log(state);
-                document.getElementById('reroute').click();
+                // document.getElementById('reroute').click();
+                document.getElementById('login').click();
             })
             .catch(error => console.log('error', error));
     };
@@ -80,6 +86,8 @@ class Login extends Component {
                     <input type="submit" value="Войти"/>
                 </form>
                 <NavLink id="reroute" to='/admin_panel/search_file' style={{display: "none"}}/>
+                {/*<a href="http://localhost:3000/admin_panel/search_file" id="login" style={{display: "none"}}/>*/}
+                <a href="https://normative-control.herokuapp.com/admin_panel/search_file" id="login" style={{display: "none"}}/>
             </div>
         );
     }

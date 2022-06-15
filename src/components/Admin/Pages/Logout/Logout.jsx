@@ -22,6 +22,7 @@ class Logout extends Component {
         localStorage.setItem('normokontrol_state', JSON.stringify(this.state));
         setTimeout(() => {
             document.getElementById('reroute').click();
+            window.location.reload();
         }, 0);
     }
 
