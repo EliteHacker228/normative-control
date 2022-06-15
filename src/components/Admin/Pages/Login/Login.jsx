@@ -33,6 +33,7 @@ class Login extends Component {
                 // window.location.href = 'http://localhost:3000/admin_panel/search_file';
                 // window.location.replace('http://localhost:3000/admin_panel/search_file');
                 // window.location.assign('http://localhost:3000/admin_panel/search_file');
+                document.getElementById('login').click();
             }, 10);
         } else {
             console.log(this.state['credentials']);
