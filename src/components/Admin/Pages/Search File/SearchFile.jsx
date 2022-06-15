@@ -199,8 +199,7 @@ class SearchFile extends Component {
                     this.forceUpdate();
                 } else if (status === 401) {
                     if (refreshed === 0) {
-                        this.refreshToken();
-                        setTimeout(() => {this.findFile(new Event("Event", {event: false}))}, 350);
+                        this.refreshToken().then(() => this.findFile(new Event("Event", {event: false})));
                         refreshed += 1;
                     } else if (refreshed === 1) {
                         refreshed += 1;
@@ -227,7 +226,7 @@ class SearchFile extends Component {
             redirect: 'follow'
         };
 
-        fetch("https://normative-control-api.herokuapp.com/auth/refresh-token", requestOptions)
+        return fetch("https://normative-control-api.herokuapp.com/auth/refresh-token", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log("ReFrEsH rEsUlT", result);
@@ -330,12 +329,12 @@ class SearchFile extends Component {
     render() {
         return (
             <div className={css.body}>
-                <button onClick={this.breakAccessToken}>
-                    Break access token
-                </button>
-                <button onClick={this.refreshToken}>
-                    Initiate refresh
-                </button>
+                {/*<button onClick={this.breakAccessToken}>*/}
+                {/*    Break access token*/}
+                {/*</button>*/}
+                {/*<button onClick={this.refreshToken}>*/}
+                {/*    Initiate refresh*/}
+                {/*</button>*/}
                 <div className={css.content}>
                     <div className={css.search_block}>
                         <form className={css.search_form} onSubmit={this.findFile} id="login_form">
