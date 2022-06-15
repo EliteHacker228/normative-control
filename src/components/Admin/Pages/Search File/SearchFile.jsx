@@ -317,10 +317,8 @@ class SearchFile extends Component {
 
                     <div className={css.errors} id="errors">
                         <div className={css.errors_block} id="errors_block" style={{visibility: "hidden"}}>
-                            <p className={css.error}>{'}'}</p>
                             <RenderList
                                 elements={this.state['result']['mistakes'].map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code])}/>
-                            <p className={css.error}>{'{'}</p>
                         </div>
                     </div>
                     <NavLink id="reroute" to='/auth/login' style={{display: "none"}}/>
