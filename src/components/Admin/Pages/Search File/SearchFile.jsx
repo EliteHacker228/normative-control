@@ -110,7 +110,10 @@ let translations = {
     'WORD_SPELL_ERROR': 'Ошибка правописания, которую нашел Word'
 };
 
+let refreshed = 0;
+
 class SearchFile extends Component {
+
 
     // credentials = null;
     // state = null;
@@ -186,18 +189,57 @@ class SearchFile extends Component {
                 if (status === 200) {
                     this.state['result'] = result;
                     console.log("ABOBA", status, result);
+                    refreshed = 0;
                     this.makeVisible();
                     this.makeErrorInvisible();
                     this.forceUpdate();
-                } else if(status === 404) {
+                } else if (status === 404) {
                     this.makeInvisible();
                     this.makeErrorVisible();
                     this.forceUpdate();
-                } else if(status === 401) {
-                    document.getElementById('logout').click();
+                } else if (status === 401) {
+                    if (refreshed === 0) {
+                        this.refreshToken();
+                        setTimeout(() => {this.findFile(new Event("Event", {event: false}))}, 350);
+                        refreshed += 1;
+                    } else if (refreshed === 1) {
+                        refreshed += 1;
+                    } else {
+                        document.getElementById('logout').click();
+                    }
                 }
             })
             .catch(error => console.log('error', error));
+    };
+
+    refreshToken = () => {
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({
+            "refresh-token": `${this.credentials['refresh-token']}`
+        });
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://normative-control-api.herokuapp.com/auth/refresh-token", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log("ReFrEsH rEsUlT", result);
+                this.credentials['access-token'] = result['access-token'];
+                this.credentials['refresh-token'] = result['refresh-token'];
+            })
+            .catch(error => console.log('error', error));
+    };
+
+    breakAccessToken = () => {
+        this.credentials['access-token'] = 'aboba';
+        console.log('Token is broken');
     };
 
     deleteFile = (evt) => {
@@ -263,22 +305,22 @@ class SearchFile extends Component {
         document.getElementById('downloader').src = `https://normative-control-api.herokuapp.com/document/${this.state['result']['document-id']}/raw-file?access-key=${this.state['result']['access-key']}`;
     };
 
-    makeVisible () {
+    makeVisible() {
         document.getElementById("inf_block").style.visibility = "visible";
         document.getElementById("errors_block").style.display = "block";
         document.getElementById("errors_block").style.visibility = "visible";
         document.getElementById("errors").style.visibility = "hidden";
     };
 
-    makeErrorVisible () {
+    makeErrorVisible() {
         document.getElementById("wrong_id_error").style.display = "block";
     };
 
-    makeErrorInvisible () {
+    makeErrorInvisible() {
         document.getElementById("wrong_id_error").style.display = "none";
     };
 
-    makeInvisible () {
+    makeInvisible() {
         document.getElementById("inf_block").style.visibility = "hidden";
         document.getElementById("errors_block").style.display = "none";
         document.getElementById("errors_block").style.visibility = "hidden";
@@ -288,6 +330,12 @@ class SearchFile extends Component {
     render() {
         return (
             <div className={css.body}>
+                <button onClick={this.breakAccessToken}>
+                    Break access token
+                </button>
+                <button onClick={this.refreshToken}>
+                    Initiate refresh
+                </button>
                 <div className={css.content}>
                     <div className={css.search_block}>
                         <form className={css.search_form} onSubmit={this.findFile} id="login_form">
@@ -312,7 +360,8 @@ class SearchFile extends Component {
                     {/*</div>*/}
 
                     <div className={css.doc_inf}>
-                        <p id="wrong_id_error" style={{display: "none"}} className={css.wrong_id_error}>Файл с указанным ID не существует, или был удалён</p>
+                        <p id="wrong_id_error" style={{display: "none"}} className={css.wrong_id_error}>Файл с указанным
+                            ID не существует, или был удалён</p>
                         <div className={css.inf_block} id="inf_block" style={{visibility: "hidden"}}>
                             <h1>Найденный файл</h1>
                             <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>
