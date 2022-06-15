@@ -281,9 +281,9 @@ class SearchFile extends Component {
                             <p>Чтобы просмотреть результат проверки файла студента, вставьте ID документа:</p>
                             <div className={css.input_block}>
                                 <input type="text" placeholder="ID документа" name="document-id" id="document-id"/>
-                                <input type="submit" alt="Поиск" value="" title="Скачать файл"/>
+                                <input type="submit" alt="Поиск" value="" title="Найти файл"/>
+                                <input type="button" value="" title="Очистить поле ввода" className={css.clear_input} onClick={this.clearInput}/>
                             </div>
-                            {/*<input type="button" value="Очистить ввод" onClick={this.clearInput}/>*/}
                         </form>
                     </div>
 
