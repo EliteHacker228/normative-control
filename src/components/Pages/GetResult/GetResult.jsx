@@ -188,6 +188,22 @@ class GetResult extends Component {
         if (!state['errors'].length) {
             this.getResult();
         }
+
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function(){
+            let st = document.documentElement.scrollTop;
+            let list = document.getElementById('errors_list');
+            if (st > lastScrollTop && list.style.height === '0px' && window.scrollY > 230){
+                console.log('ВНИЗ');
+                console.log(st);
+                document.getElementById('toggle_title').click();
+            } else if (st < lastScrollTop && list.style.height !== '0px' && window.scrollY < 450) {
+                console.log('ВВЕРХ');
+                console.log(st);
+                document.getElementById('toggle_title').click();
+            }
+            lastScrollTop = st <= 0 ? 0 : st;
+        }, false);
     };
 
     copyId() {
