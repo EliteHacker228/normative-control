@@ -19,15 +19,13 @@ class Welcome extends Component {
         }
         this.state['renderSizeError'] = false;
         this.state['renderFormatError'] = false;
-        console.log('генерим ключ');
         let accessKey = this.generateAccessKey(128);
         localStorage.setItem('accessKey', accessKey);
         this.state['accessKey'] = localStorage.getItem('accessKey');
-        console.log(this.state['accessKey']);
     };
 
     componentDidMount() {
-        this.reservePlaceInQueue().then(() => console.log(this.state['documentId']));
+        this.reservePlaceInQueue();
     }
 
     generateAccessKey = (length) => {
@@ -59,8 +57,6 @@ class Welcome extends Component {
                         this.sendFileToCheckOnServer(file);
                         break;
                     default:
-                        console.log('Неизвестная ошибка');
-                        console.log(checkStatus);
                         break;
                 }
             }, 100);
@@ -79,11 +75,7 @@ class Welcome extends Component {
                 return response.text();
             })
             .then(result => {
-                console.log("РЕСПОООООНЗ");
-                console.log(result);
                 result = JSON.parse(result)['status'];
-                console.log("ТУТА РЕЗУЛЬТ");
-                console.log(result);
                 this.state['checkStatus'] = result;
             })
             .catch(error => console.log('error', error));
@@ -105,15 +97,11 @@ class Welcome extends Component {
 
         let response = await fetch(`https://normative-control-api.herokuapp.com/queue/reserve?access-key=${this.state['accessKey']}`, requestOptions);
         let document = await response.json();
-        console.log('=======================================');
-        console.log(document);
         this.state['documentId'] = document['document-id'];
     };
 
     sendFileToCheckOnServer = (file) => {
         let formdata = new FormData();
-        console.log('Получили файл для отправки:');
-        console.log(file);
 
         /*TODO:
          * Сделать проверку на null в файле, по итогам которой
@@ -161,9 +149,6 @@ class Welcome extends Component {
                     this.state['button_status'] = css.button_queue;
                     this.state['progressbar_status'] = css.progressbar_queue;
 
-                    console.log('Всё окей, отправляем этот стейт');
-                    console.log(this.state);
-                    // console.log(state['documentId']);
                     localStorage.setItem('normokontrol_state', JSON.stringify(this.state));
                     document.getElementById('reroute').click();
                 }
@@ -172,21 +157,18 @@ class Welcome extends Component {
 
     onDragEnter = (evt) => {
         evt.preventDefault();
-        console.log('onDragEnter');
         let uploadBlock = document.getElementById('drop_area');
         uploadBlock.style.backgroundColor = 'transparent';
     };
 
     onDragLeave = (evt) => {
         evt.preventDefault();
-        console.log('onDragLeave');
         let uploadBlock = document.getElementById('drop_area');
         uploadBlock.style.backgroundColor = 'transparent';
     };
 
     onDragOver = (evt) => {
         evt.preventDefault();
-        console.log('onDragOver');
         let uploadBlock = document.getElementById('drop_area');
         uploadBlock.style.backgroundColor = 'rgba(192, 192, 192, 0.3)';
         uploadBlock.style.borderRadius = '25px';
@@ -195,12 +177,10 @@ class Welcome extends Component {
 
     onDrop = (evt) => {
         evt.preventDefault();
-        console.log('onDrop');
         let uploadBlock = document.getElementById('drop_area');
         uploadBlock.style.backgroundColor = 'transparent';
 
         let file = evt.dataTransfer.files[0];
-        console.log(file);
 
         evt.file = file;
         evt.target.files = [file];

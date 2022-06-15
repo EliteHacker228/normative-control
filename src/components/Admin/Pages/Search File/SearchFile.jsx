@@ -114,15 +114,8 @@ let refreshed = 0;
 
 class SearchFile extends Component {
 
-
-    // credentials = null;
-    // state = null;
-
     constructor() {
         super();
-        // this.credentials = JSON.parse(state['credentials']);
-        console.log('Состояние в локал сторидже SearchFile');
-        console.log(localStorage.getItem('normokontrol_state'));
         this.state = JSON.parse(localStorage.getItem('normokontrol_state'));
         if (this.state === null) {
             this.state = state;
@@ -133,19 +126,14 @@ class SearchFile extends Component {
         this.state['result']['password'] = ""
         this.state['result']['mistakes'] = []
         this.credentials = JSON.parse(this.state['credentials']);
-        console.log(this.credentials);
     }
 
     componentDidMount() {
 
         if (this.state['credentials'] === "null") {
-            console.log('NULL CREDS');
             setTimeout(() => {
                 document.getElementById('reroute').click();
             }, 0);
-        } else {
-            console.log('CREDS');
-            console.log(this.state['credentials']);
         }
     }
 
@@ -153,22 +141,12 @@ class SearchFile extends Component {
         evt.preventDefault();
         let myHeaders = new Headers();
         let accessToken = `Bearer ${this.credentials['access-token']}`;
-        console.log('accessToken');
-        console.log(accessToken);
         myHeaders.append("Authorization", accessToken);
-
-        console.log('this.credentials');
-        console.log(this.credentials);
 
         let formData = new FormData(document.getElementById("login_form"));
         let emptyFormData = {};
         formData.forEach((value, key) => emptyFormData[key] = value);
         let raw = emptyFormData;
-
-        console.log('raw');
-        console.log(raw);
-        console.log("raw['document-id']");
-        console.log(raw['document-id']);
 
         let requestOptions = {
             method: 'GET',
@@ -180,15 +158,12 @@ class SearchFile extends Component {
 
         fetch(`https://normative-control-api.herokuapp.com/control-panel/find-by-id?document-id=${raw['document-id']}`, requestOptions)
             .then(response => {
-                console.log('response');
                 status = response['status'];
                 return response.json();
             })
-            // .then(result => console.log("ABOBA", JSON.parse(result)))
             .then(result => {
                 if (status === 200) {
                     this.state['result'] = result;
-                    console.log("ABOBA", status, result);
                     refreshed = 0;
                     this.makeVisible();
                     this.makeErrorInvisible();
@@ -229,7 +204,6 @@ class SearchFile extends Component {
         return fetch("https://normative-control-api.herokuapp.com/auth/refresh-token", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log("ReFrEsH rEsUlT", result);
                 this.credentials['access-token'] = result['access-token'];
                 this.credentials['refresh-token'] = result['refresh-token'];
             })
@@ -238,17 +212,12 @@ class SearchFile extends Component {
 
     breakAccessToken = () => {
         this.credentials['access-token'] = 'aboba';
-        console.log('Token is broken');
     };
 
     deleteFile = (evt) => {
         evt.preventDefault();
-        this.makeInvisible();
-        evt.preventDefault();
         let myHeaders = new Headers();
         let accessToken = `Bearer ${this.credentials['access-token']}`;
-        // console.log(accessToken);
-        // console.log('DELETE');
         myHeaders.append("Authorization", accessToken);
 
         var requestOptions = {
@@ -260,7 +229,7 @@ class SearchFile extends Component {
         fetch(`https://normative-control-api.herokuapp.com/control-panel/delete?document-id=${this.state['result']['document-id']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log(result);
+                this.makeInvisible();
             })
             .catch(error => console.log('error', error));
     };
@@ -269,35 +238,6 @@ class SearchFile extends Component {
         evt.preventDefault();
         document.getElementById("document-id").value = "";
     };
-
-    // downloadFile = (evt) => {
-    //     evt.preventDefault();
-    //     let myHeaders = new Headers();
-    //     let accessToken = `Bearer ${this.credentials['access-token']}`;
-    //     // console.log(accessToken);
-    //     // console.log('DELETE');
-    //     myHeaders.append("Authorization", accessToken);
-    //
-    //     var requestOptions = {
-    //         method: 'GET',
-    //         headers: myHeaders,
-    //         redirect: 'follow'
-    //     };
-    //
-    //     fetch(`https://normative-control-api.herokuapp.com/control-panel/download/${this.state['result']['document-id']}`, requestOptions)
-    //         .then(response => response.blob())
-    //         .then(blob => {
-    //             const url = window.URL.createObjectURL(blob);
-    //             const a = document.createElement('a');
-    //             a.style.display = 'none';
-    //             a.href = url;
-    //             a.download = `${this.state['result']['document-id']}.docx`;
-    //             document.body.appendChild(a);
-    //             a.click();
-    //             window.URL.revokeObjectURL(url);
-    //         })
-    //         .catch(error => console.log('error', error));
-    // };
 
     downloadFile = (evt) => {
         evt.preventDefault();
@@ -347,17 +287,6 @@ class SearchFile extends Component {
                         </form>
                     </div>
 
-                    {/*<div className={css.doc_inf}>*/}
-                    {/*    <div className={css.inf_block}>*/}
-                    {/*        <h1>Найденный файл</h1>*/}
-                    {/*        <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>*/}
-                    {/*        <p>ID: {this.state['result']['document-id']}</p>*/}
-                    {/*        <p>Пароль: {this.state['result']['password']}</p>*/}
-                    {/*        <p>Колво ошибок: {this.state['result']['mistakes'].length}</p>*/}
-                    {/*        <button onClick={this.deleteFile}>Удалить</button>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-
                     <div className={css.doc_inf}>
                         <p id="wrong_id_error" style={{display: "none"}} className={css.wrong_id_error}>Файл с указанным
                             ID не существует, или был удалён</p>
@@ -386,24 +315,6 @@ class SearchFile extends Component {
                         </div>
                     </div>
 
-                    {/*<div className={css.doc_inf}>*/}
-                    {/*    <div className={css.inf_block}>*/}
-                    {/*        <h1>Найденный файл</h1>*/}
-                    {/*        <p>Используйте указанный ниже пароль для разблокировки файла и дальнейшей проверки.</p>*/}
-                    {/*        <div className={css.file_data}>*/}
-                    {/*            <div className={css.file_data_block}>*/}
-                    {/*                <p>ID: <span className={css.file_data_inf}>Y7YBV78VBO7UB45O87GFBS4I5E7GH</span></p>*/}
-                    {/*                <p>Пароль: <span*/}
-                    {/*                    className={css.file_data_inf}>dab1335d36a147bf8d242cfa42d9c26b</span></p>*/}
-                    {/*                <p>Найдено ошибок в файле: <span className={css.file_data_inf}>5</span></p>*/}
-                    {/*            </div>*/}
-                    {/*            <div className={css.file_data_buttons}>*/}
-                    {/*                <button className={css.file_data_buttons_download} title="Скачать файл"/>*/}
-                    {/*                <button className={css.file_data_buttons_delete} onClick={this.deleteFile} title="Удалить файл"/>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                     <div className={css.errors} id="errors">
                         <div className={css.errors_block} id="errors_block" style={{visibility: "hidden"}}>
                             <p className={css.error}>{'}'}</p>

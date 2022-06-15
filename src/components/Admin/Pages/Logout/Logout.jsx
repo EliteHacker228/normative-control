@@ -8,13 +8,10 @@ class Logout extends Component {
 
     constructor() {
         super();
-        console.log('Состояние в локал сторидже Login');
-        console.log(localStorage.getItem('normokontrol_state'));
         this.state = JSON.parse(localStorage.getItem('normokontrol_state'));
         if (this.state === null) {
             this.state = state;
         }
-        console.log(this.state);
     }
 
     componentDidMount() {

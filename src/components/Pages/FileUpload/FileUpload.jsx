@@ -16,8 +16,6 @@ class FileUpload extends Component {
     constructor() {
         super();
         state = JSON.parse(localStorage.getItem('normokontrol_state'));
-        console.log('Получаем state из localStorage');
-        console.log(state)
         this.checkFileStatusOnServer(state['documentId'])
         this.updateProgressBar();
     }
@@ -33,11 +31,7 @@ class FileUpload extends Component {
                 return response.text();
             })
             .then(result => {
-                console.log("РЕСПОООООНЗ");
-                console.log(result);
                 result = JSON.parse(result)['status'];
-                console.log("ТУТА РЕЗУЛЬТ");
-                console.log(result);
                 state['checkStatus'] = result;
             })
             .catch(error => console.log('error', error));
@@ -47,21 +41,18 @@ class FileUpload extends Component {
         let checkStatus = state['checkStatus'];
         switch (checkStatus) {
             case 'QUEUE':
-                console.log('GRAY', 'Файл в очереди');
                 state['button_status'] = css.button_queue;
                 state['progressbar_status'] = css.progressbar_queue;
                 localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
                 break;
             case 'PROCESSING':
-                console.log('YELLOW', 'Файл обрабатывается');
                 state['button_status'] = css.button_processing;
                 state['progressbar_status'] = css.progressbar_processing;
                 localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
                 break;
             case 'ERROR':
-                console.log('RED', 'Ошибка во время обработки файла');
                 state['button_status'] = css.button_error;
                 state['progressbar_status'] = css.progressbar_error;
                 clearInterval(intervalId);
@@ -70,7 +61,6 @@ class FileUpload extends Component {
                 break;
             case 'SAVED':
             case 'READY':
-                console.log('GREEN', 'Файл обработан');
                 state['button_status'] = css.button_ready;
                 state['progressbar_status'] = css.progressbar_ready;
                 clearInterval(intervalId);
@@ -78,12 +68,8 @@ class FileUpload extends Component {
                 this.forceUpdate();
                 break;
             case 'UNDEFINED ':
-                console.log('Состояние неизвестно');
-                console.log('Состояние неизвестно');
                 break;
             default:
-                console.log('Неизвестная ошибка');
-                console.log(checkStatus);
                 break;
         }
     };

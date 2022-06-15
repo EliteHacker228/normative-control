@@ -125,8 +125,6 @@ class GetResult extends Component {
         state['errors'] = [];
         state['checkResult'] = {};
         state['checkResult']['document-id'] = '';
-        console.log('Имеем вот такой стейт');
-        console.log(state);
     }
 
     getResult = () => {
@@ -138,49 +136,15 @@ class GetResult extends Component {
         fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/mistakes?access-key=${state['accessKey']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log(result);
                 state['checkResult'] = JSON.parse(result);
-                // console.log(state.checkResult.errors)
                 let res = state.checkResult.errors;
-                // console.log(res);
-                console.log(res.map(x => x['mistakeType']));
-                // state['errors'] = res.map(x => x['errorType']);
-                // state['errors'] = res.map(x => x['errorType']).map(error_code => translations[error_code]).filter(x => x !== undefined);
                 state['errors'] = res.map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code]);
-                console.log('Выводим ошибки');
-                console.log(state.errors);
                 this.forceUpdate();
             })
             .catch(error => console.log('error', error));
-
-        // this.downloadResult();
     };
 
-    // getZezult = () => {
-    //     state['errors'] = [1, 2, 3, 4, 5];
-    //     this.forceUpdate();
-    // };
-
     downloadResult = () => {
-        // var requestOptions = {
-        //     method: 'GET',
-        //     redirect: 'follow'
-        // };
-        //
-        // fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`, requestOptions)
-        //     .then(response => response.blob())
-        //     .then(blob => {
-        //         const url = window.URL.createObjectURL(blob);
-        //         const a = document.createElement('a');
-        //         a.style.display = 'none';
-        //         a.href = url;
-        //         a.download = `${state['fileName']}`;
-        //         document.body.appendChild(a);
-        //         a.click();
-        //         window.URL.revokeObjectURL(url);
-        //     })
-        //     .catch(error => console.log('error', error));
-
         document.getElementById('downloader').src = `https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`;
     };
 
@@ -193,13 +157,9 @@ class GetResult extends Component {
         window.addEventListener("scroll", function(){
             let st = document.documentElement.scrollTop;
             let list = document.getElementById('errors_list');
-            if (st > lastScrollTop && list.style.height === '0px' && window.scrollY > 230){
-                console.log('ВНИЗ');
-                console.log(st);
+            if (st > lastScrollTop && list.style.height === '0px' && window.scrollY > 230){ //Скроллим вверх
                 document.getElementById('toggle_title').click();
-            } else if (st < lastScrollTop && list.style.height !== '0px' && window.scrollY < 450) {
-                console.log('ВВЕРХ');
-                console.log(st);
+            } else if (st < lastScrollTop && list.style.height !== '0px' && window.scrollY < 450) { //Скроллим вниз
                 document.getElementById('toggle_title').click();
             }
             lastScrollTop = st <= 0 ? 0 : st;

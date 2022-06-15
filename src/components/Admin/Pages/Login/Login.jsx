@@ -14,29 +14,18 @@ class Login extends Component {
 
     constructor() {
         super();
-        console.log('Состояние в локал сторидже Login');
-        console.log(localStorage.getItem('normokontrol_state'));
         this.state = JSON.parse(localStorage.getItem('normokontrol_state'));
         if (this.state === null) {
             this.state = state;
         }
-        console.log(this.state);
     }
 
     componentDidMount() {
 
         if (this.state['credentials'] !== undefined && this.state['credentials'] !== 'null') {
             setTimeout(() => {
-                // document.getElementById('reroute').click();
-                // window.location.reload();
-                // document.location.href = '/admin_panel/search_file';
-                // window.location.href = 'http://localhost:3000/admin_panel/search_file';
-                // window.location.replace('http://localhost:3000/admin_panel/search_file');
-                // window.location.assign('http://localhost:3000/admin_panel/search_file');
                 document.getElementById('login').click();
             }, 10);
-        } else {
-            console.log(this.state['credentials']);
         }
     }
 
@@ -66,9 +55,6 @@ class Login extends Component {
             .then(result => {
                 state['credentials'] = result;
                 localStorage.setItem('normokontrol_state', JSON.stringify(state));
-                console.log(result);
-                console.log(state);
-                // document.getElementById('reroute').click();
                 document.getElementById('login').click();
             })
             .catch(error => console.log('error', error));
@@ -80,9 +66,7 @@ class Login extends Component {
                 <form className={css.login_form} onSubmit={this.login} id="login_form">
                     <img className={css.admin_ico} src={admin_ico}/>
                     <p>Вход в панель управления</p>
-                    {/*<img className={css.login_ico} src={login_ico}/>*/}
                     <input type="text" placeholder="email" name="email"/>
-                    {/*<img className={css.password_ico} src={password_ico}/>*/}
                     <input type="password" placeholder="password" name="password"/>
                     <input type="submit" value="Войти"/>
                 </form>
