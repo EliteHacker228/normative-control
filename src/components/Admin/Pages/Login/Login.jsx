@@ -53,9 +53,14 @@ class Login extends Component {
         fetch("https://normative-control-api.herokuapp.com/auth/login", requestOptions)
             .then(response => response.text())
             .then(result => {
-                state['credentials'] = result;
-                localStorage.setItem('normokontrol_state', JSON.stringify(state));
-                document.getElementById('login').click();
+                let resultObj = JSON.parse(result);
+                if (resultObj['status'] === 401){
+                    document.getElementById("auth_error").style.display = "block";
+                }else {
+                    state['credentials'] = result;
+                    localStorage.setItem('normokontrol_state', JSON.stringify(state));
+                    document.getElementById('login').click();
+                }
             })
             .catch(error => console.log('error', error));
     };
@@ -66,6 +71,7 @@ class Login extends Component {
                 <form className={css.login_form} onSubmit={this.login} id="login_form">
                     <img className={css.admin_ico} src={admin_ico}/>
                     <p>Вход в панель управления</p>
+                    <p id="auth_error" style={{display: "none", color: "red"}}>Указан неверный логин и/или пароль</p>
                     <input type="text" placeholder="email" name="email"/>
                     <input type="password" placeholder="password" name="password"/>
                     <input type="submit" value="Войти"/>
