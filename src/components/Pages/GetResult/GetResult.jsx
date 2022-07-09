@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import back_arrow from "../GetResult/back_arrow.svg";
 import file_ico from "../GetResult/file_ico.svg";
 import {NavLink} from "react-router-dom";
+import config from "../../../config/config";
 
 let state;
 
@@ -153,7 +154,7 @@ class GetResult extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/mistakes?access-key=${state['accessKey']}`, requestOptions)
+        fetch(`${config['apiAddress']}/document/${state['documentId']}/mistakes?access-key=${state['accessKey']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 state['checkResult'] = JSON.parse(result);
@@ -166,7 +167,7 @@ class GetResult extends Component {
     };
 
     downloadResult = () => {
-        document.getElementById('downloader').src = `https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`;
+        document.getElementById('downloader').src = `${config['apiAddress']}/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}`;
     };
 
     componentDidMount() {
@@ -270,7 +271,7 @@ class GetResult extends Component {
         let iframe = document.getElementById("test");
         iframe = iframe.contentWindow || ( iframe.contentDocument.document || iframe.contentDocument);
 
-        fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/render?access-key=${state['accessKey']}`, requestOptions)
+        fetch(`${config['apiAddress']}/document/${state['documentId']}/render?access-key=${state['accessKey']}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                     iframe.document.open();

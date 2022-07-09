@@ -3,6 +3,7 @@ import icon from './doc.svg';
 import loading from './loading-11.gif';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
+import config from "../../../config/config";
 
 import state from "../../../storage/storage";
 
@@ -64,7 +65,7 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/document/${id}/status?access-key=${this.state['accessKey']}`, requestOptions)
+        fetch(`${config['apiAddress']}/document/${id}/status?access-key=${this.state['accessKey']}`, requestOptions)
             .then(response => {
                 return response.text();
             })
@@ -89,7 +90,7 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        let response = await fetch(`https://normative-control-api.herokuapp.com/queue/reserve?access-key=${this.state['accessKey']}`, requestOptions);
+        let response = await fetch(`${config['apiAddress']}/queue/reserve?access-key=${this.state['accessKey']}`, requestOptions);
         let document = await response.json();
         this.state['documentId'] = document['document-id'];
     };
@@ -125,7 +126,7 @@ class Welcome extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/queue/enqueue`, requestOptions)
+        fetch(`${config['apiAddress']}/queue/enqueue`, requestOptions)
             .then(response => {
                 let status = response['status'];
                 if (status === 202) {

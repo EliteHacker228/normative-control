@@ -2,6 +2,7 @@ import css from './SearchFile.module.css';
 import {NavLink} from "react-router-dom";
 import React, {Component} from "react";
 import state from "../../../../storage/storage";
+import config from "../../../../config/config";
 
 const RenderList = (props) => {
     let elements = props.elements;
@@ -156,7 +157,7 @@ class SearchFile extends Component {
 
         let status = 0;
 
-        fetch(`https://normative-control-api.herokuapp.com/control-panel/find-by-id?document-id=${raw['document-id']}`, requestOptions)
+        fetch(`${config['apiAddress']}/control-panel/find-by-id?document-id=${raw['document-id']}`, requestOptions)
             .then(response => {
                 status = response['status'];
                 return response.json();
@@ -201,7 +202,7 @@ class SearchFile extends Component {
             redirect: 'follow'
         };
 
-        return fetch("https://normative-control-api.herokuapp.com/auth/refresh-token", requestOptions)
+        return fetch(`${config['apiAddress']}/auth/refresh-token`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 this.credentials['access-token'] = result['access-token'];
@@ -222,7 +223,7 @@ class SearchFile extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/control-panel/delete?document-id=${this.state['result']['document-id']}`, requestOptions)
+        fetch(`${config['apiAddress']}/control-panel/delete?document-id=${this.state['result']['document-id']}`, requestOptions)
             .then(response => response.text())
             .then(_ => {
                 this.makeInvisible();
@@ -237,7 +238,7 @@ class SearchFile extends Component {
 
     downloadFile = (evt) => {
         evt.preventDefault();
-        document.getElementById('downloader').src = `https://normative-control-api.herokuapp.com/document/${this.state['result']['document-id']}/raw-file?access-key=${this.state['result']['access-key']}`;
+        document.getElementById('downloader').src = `${config['apiAddress']}/document/${this.state['result']['document-id']}/raw-file?access-key=${this.state['result']['access-key']}`;
     };
 
     makeVisible() {

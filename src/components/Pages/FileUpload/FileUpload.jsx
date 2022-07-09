@@ -5,6 +5,8 @@ import uploading_file_ico from './Frame.svg';
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
+import config from "../../../config/config";
+
 // import state from "../../../storage/storage";
 
 // Стейт стоит сохранять в локалсторидже, иначе при обновлении страницы всё сломается
@@ -26,7 +28,7 @@ class FileUpload extends Component {
             redirect: 'follow'
         };
 
-        fetch(`https://normative-control-api.herokuapp.com/document/${id}/status?access-key=${state['accessKey']}`, requestOptions)
+        fetch(`${config['apiAddress']}/document/${id}/status?access-key=${state['accessKey']}`, requestOptions)
             .then(response => {
                 return response.text();
             })

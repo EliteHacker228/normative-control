@@ -3,6 +3,8 @@ import logo from './normokontrol-logo-white-backgroundBlack.svg';
 import {NavLink} from "react-router-dom";
 import React from "react";
 
+import config from "../../config/config";
+
 
 const Header = () => {
     if (window.location.pathname !== "/admin_panel/search_file") {
@@ -32,47 +34,27 @@ const Header = () => {
     } else {
         return (
             <header className={css.header}>
-                {/*<NavLink to='/'>*/}
-                {/*    <img className={css.logo}*/}
-                {/*         src={logo}*/}
-                {/*         title="На главную"*/}
-                {/*    />*/}
-                {/*</NavLink>*/}
-
-                {/*<a href="http://localhost:3000/">*/}
-                <a href="https://normative-control.herokuapp.com/">
+                <a href={`${config['frontendAddress']}`}>
                     <img className={css.logo}
                          src={logo}
                          title="На главную"
                     />
                 </a>
 
-
-                {/*<NavLink to='/' className={css.linkname} title="На главную">*/}
-                {/*    <p className={css.name}>normative<br/>control</p>*/}
-                {/*</NavLink>*/}
-
-                {/*<a href="http://localhost:3000/" className={css.linkname} title="На главную">*/}
-                <a href="https://normative-control.herokuapp.com/" className={css.linkname} title="На главную">
+                <a href={`${config['frontendAddress']}`} className={css.linkname} title="На главную">
                     <p className={css.name}>normative<br/>control</p>
                 </a>
 
 
                 <div style={{width: '70%'}}/>
-                {/*<NavLink to='/faq' className={css.linkfaq}>*/}
-                {/*    <p className={css.faq}>FAQ</p>*/}
-                {/*</NavLink>*/}
 
-                {/*<a href="http://localhost:3000/faq" className={css.linkfaq}>*/}
-                <a href="https://normative-control.herokuapp.com/faq" className={css.linkfaq}>
+                <a href={`${config['frontendAddress']}/faq`} className={css.linkfaq}>
                     <p className={css.faq}>FAQ</p>
                 </a>
 
                 <NavLink to='auth/logout' className={css.linklogout}>
                     <p className={css.logout}>Выйти</p>
                 </NavLink>
-
-
             </header>
         );
     }

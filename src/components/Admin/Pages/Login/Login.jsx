@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import admin_ico from './admin_ico.png';
 import React, {Component} from "react";
 import state from "../../../../storage/storage";
+import config from "../../../../config/config";
 
 
 class Login extends Component {
@@ -41,7 +42,7 @@ class Login extends Component {
             redirect: 'follow'
         };
 
-        fetch("https://normative-control-api.herokuapp.com/auth/login", requestOptions)
+        fetch(`${config['apiAddress']}/auth/login`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 let resultObj = JSON.parse(result);
@@ -68,8 +69,7 @@ class Login extends Component {
                     <input type="submit" value="Войти"/>
                 </form>
                 <NavLink id="reroute" to='/admin_panel/search_file' style={{display: "none"}}/>
-                {/*<a href="http://localhost:3000/admin_panel/search_file" id="login" style={{display: "none"}}/>*/}
-                <a href="https://normative-control.herokuapp.com/admin_panel/search_file" id="login" style={{display: "none"}}/>
+                <a href={`${config['frontendAddress']}/admin_panel/search_file`} id="login" style={{display: "none"}}/>
             </div>
         );
     }
