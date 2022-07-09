@@ -7,6 +7,7 @@ import back_arrow from "../GetResult/back_arrow.svg";
 import file_ico from "../GetResult/file_ico.svg";
 import {NavLink} from "react-router-dom";
 import logo from "../../Header/normokontrol-logo-white-backgroundBlack.svg";
+// import testHtml from "./test.html";
 
 let state;
 
@@ -117,12 +118,36 @@ const RenderList = (props) => {
     );
 };
 
+const RenderClickableList = (props) => {
+    let elements = [];
+    if (props.elements[0].length !== 0) {
+        elements = props.elements[0];
+    }
+    console.log('props');
+    console.log(typeof props.elements[0]);
+    console.log(props.elements[0]);
+    let res = [];
+    for(let i = 0; i < elements.length; i++){
+        res.push(elements[i]);
+    }
+    return (
+        <ul>
+            {res.map(element => (
+                <li onClick={props.elements[1]} data-paragraph-id={element['paragraph-id']}>{translations[element['mistake-type']]}</li>
+            ))}
+        </ul>
+    );
+};
+
 class GetResult extends Component {
 
     constructor() {
         super();
         state = JSON.parse(localStorage.getItem('normokontrol_state'));
         state['errors'] = [];
+        state['full_errors'] = {
+            elements: []
+        };
         state['checkResult'] = {};
         state['checkResult']['document-id'] = '';
     }
@@ -138,7 +163,17 @@ class GetResult extends Component {
             .then(result => {
                 state['checkResult'] = JSON.parse(result);
                 let res = state.checkResult.errors;
+
+                // state['full_errors'] = JSON.stringify(state.checkResult.errors);
+                state['full_errors'] = state.checkResult.errors;
+
                 state['errors'] = res.map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code]);
+
+                // state['full_errors'] = JSON.parse(state['full_errors']);
+
+                console.log("BIBA");
+                console.log(state.checkResult.errors);
+                console.log(state['full_errors']);
                 this.forceUpdate();
             })
             .catch(error => console.log('error', error));
@@ -151,6 +186,7 @@ class GetResult extends Component {
     componentDidMount() {
         if (!state['errors'].length) {
             this.getResult();
+            console.log(state);
         }
 
         let lastScrollTop = 0;
@@ -164,6 +200,8 @@ class GetResult extends Component {
             }
             lastScrollTop = st <= 0 ? 0 : st;
         }, false);
+
+        this.getFileHtml();
     };
 
     copyId() {
@@ -267,6 +305,99 @@ class GetResult extends Component {
         }
     };
 
+    iframeScrollTest1(evt){
+        console.log('Тыц');
+        console.log(evt.target.attributes['data-paragraph-id'].nodeValue);
+
+        // var element = document.getElementById("test");
+        // element.scrollIntoView();
+
+        var iframe = document.getElementById("test");
+        var elmnt = iframe.contentWindow.document.getElementsByTagName("p")[evt.target.attributes['data-paragraph-id'].nodeValue];
+        elmnt.style.backgroundColor = 'cyan';
+        console.log(elmnt);
+        elmnt.scrollIntoView();
+    };
+
+    iframeScrollTest2(){
+        console.log('Тыц');
+
+        // var element = document.getElementById("test");
+        // element.scrollIntoView();
+
+        var iframe = document.getElementById("test");
+        var elmnt = iframe.contentWindow.document.getElementById("53F1B053");
+        elmnt.scrollIntoView();
+    };
+
+    iframeScrollTest3(){
+        console.log('Тыц');
+
+        // var element = document.getElementById("test");
+        // element.scrollIntoView();
+
+        var iframe = document.getElementById("test");
+        var elmnt = iframe.contentWindow.document.getElementById("3C80F3E8");
+        elmnt.scrollIntoView();
+    };
+
+    iframeScrollTest4(){
+        console.log('Тыц');
+
+        // var element = document.getElementById("test");
+        // element.scrollIntoView();
+
+        var iframe = document.getElementById("test");
+        var elmnt = iframe.contentWindow.document.getElementById("2A013C60");
+        elmnt.scrollIntoView();
+    };
+
+    iframeScrollTest5(){
+        console.log('Тыц');
+
+        // var element = document.getElementById("test");
+        // element.scrollIntoView();
+
+        var iframe = document.getElementById("test");
+        var elmnt = iframe.contentWindow.document.getElementById("7E012634");
+        elmnt.scrollIntoView();
+    };
+
+    getFileHtml(){
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        let iframe = document.getElementById("test");
+        iframe = iframe.contentWindow || ( iframe.contentDocument.document || iframe.contentDocument);
+
+        fetch(`https://normative-control-api.herokuapp.com/document/${state['documentId']}/render?access-key=${state['accessKey']}`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                    iframe.document.open();
+                    iframe.document.write(result);
+                    iframe.document.close();
+            }).then( _ => {
+                var iframe = document.getElementById("test");
+                let sdaf = state['full_errors'];
+                console.log('sdaf');
+                console.log(sdaf);
+                for(let i = 0; i < sdaf.length; i++){
+                    if (iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title === "") {
+                        iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title = translations[sdaf[i]['mistake-type']];
+                    } else {
+                        iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title =
+                            iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title + "\n" + translations[sdaf[i]['mistake-type']];
+                    }
+                    iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].style.backgroundColor = 'cyan';
+                }
+                // var elmnt = iframe.contentWindow.document.getElementsByTagName("p")[evt.target.attributes['data-paragraph-id'].nodeValue];
+            }
+            )
+            .catch(error => console.log('error', error));
+    };
+
     render() {
 
 
@@ -303,19 +434,38 @@ class GetResult extends Component {
                     </div>
                 </div>
 
-                <div className={css.toggle_statistics}>
+                <div className={css.toggle_statistics} style={{
+                    display: 'none'}}>
                     <button id="toggle_button_hide" onClick={this.toggleListDisplay}/>
                     <button id="toggle_button_show" onClick={this.toggleListDisplay}/>
                     <p id="toggle_title" onClick={this.toggleListDisplay}>Развернуть список ошибок</p>
                 </div>
-                {/*<div className={css.statistics} id="errors_list" style={{display: 'none'}}>*/}
-                {/*<div className={css.statistics} id="errors_list" style={{height: '0px', display: 'none'}}>*/}
                 <div className={css.statistics} id="errors_list" style={{height: '0px'}}>
                     <RenderList elements={state['errors']}/>
                 </div>
                 <div id="holder" style={{height: '58vh', transition: '0.5s all'}}>
                 </div>
                 <iframe id="downloader" style={{display: 'none'}}/>
+                <hr/>
+                <div className={css.test_results}>
+                    <div className={css.test_errors_list} id="errors">
+                        Ашыпки
+                        {/*<ul>*/}
+                        {/*    <li onClick={this.iframeScrollTest1}>Плохой текст</li>*/}
+                        {/*    <li onClick={this.iframeScrollTest2}>Тоже плохой текст</li>*/}
+                        {/*    <li onClick={this.iframeScrollTest3}>Очень плохой текст!!1!</li>*/}
+                        {/*    <li onClick={this.iframeScrollTest4}>Ваще ужасный текст капец блин...</li>*/}
+                        {/*    <li onClick={this.iframeScrollTest5}>Афтар ты абобус?</li>*/}
+                        {/*</ul>*/}
+                        <RenderClickableList elements={[state['full_errors'], this.iframeScrollTest1]}/>
+                    </div>
+                    <div className={css.test_document_view} id="document">
+                        Дакумент
+                        {/*<iframe title="test" id="test" name="test" src="./test2.html"/>*/}
+                        {/*<iframe title="test" id="test"  name="test" src="https://normative-control-api.herokuapp.com/document/7a4c75962c6045cd9f253e5b6a3c9ba4/render?access-key=postman"/>*/}
+                        <iframe title="test" id="test"  name="test"/>
+                    </div>
+                </div>
             </div>
         );
 

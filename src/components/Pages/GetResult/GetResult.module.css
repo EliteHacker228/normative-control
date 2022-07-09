@@ -271,3 +271,20 @@ ul {
     border-color: var(--main-gray);
     border-width: 2px;
 }
+
+.test_results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.test_errors_list {
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.test_document_view iframe {
+    height: 500px;
+    width: 800px;
+    background-color: white;
+}
