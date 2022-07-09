@@ -278,17 +278,15 @@ class GetResult extends Component {
                     iframe.document.close();
             }).then( _ => {
                 let iframe = document.getElementById("test");
-                let sdaf = state['full_errors'];
-                console.log('sdaf');
-                console.log(sdaf);
-                for(let i = 0; i < sdaf.length; i++){
-                    if (iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title === "") {
-                        iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title = translations[sdaf[i]['mistake-type']];
+                let errors = state['full_errors'];
+                for(let i = 0; i < errors.length; i++){
+                    if (iframe.contentWindow.document.getElementsByTagName("p")[errors[i]['paragraph-id']].title === "") {
+                        iframe.contentWindow.document.getElementsByTagName("p")[errors[i]['paragraph-id']].title = translations[errors[i]['mistake-type']];
                     } else {
-                        iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title =
-                            iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].title + "\n" + translations[sdaf[i]['mistake-type']];
+                        iframe.contentWindow.document.getElementsByTagName("p")[errors[i]['paragraph-id']].title =
+                            iframe.contentWindow.document.getElementsByTagName("p")[errors[i]['paragraph-id']].title + "\n" + translations[errors[i]['mistake-type']];
                     }
-                    iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].style.backgroundColor = 'cyan';
+                    iframe.contentWindow.document.getElementsByTagName("p")[errors[i]['paragraph-id']].style.backgroundColor = 'cyan';
                 }
             }
             )
