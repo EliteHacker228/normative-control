@@ -210,17 +210,13 @@ class SearchFile extends Component {
             .catch(error => console.log('error', error));
     };
 
-    breakAccessToken = () => {
-        this.credentials['access-token'] = 'aboba';
-    };
-
     deleteFile = (evt) => {
         evt.preventDefault();
         let myHeaders = new Headers();
         let accessToken = `Bearer ${this.credentials['access-token']}`;
         myHeaders.append("Authorization", accessToken);
 
-        var requestOptions = {
+        let requestOptions = {
             method: 'POST',
             headers: myHeaders,
             redirect: 'follow'
@@ -228,7 +224,7 @@ class SearchFile extends Component {
 
         fetch(`https://normative-control-api.herokuapp.com/control-panel/delete?document-id=${this.state['result']['document-id']}`, requestOptions)
             .then(response => response.text())
-            .then(result => {
+            .then(_ => {
                 this.makeInvisible();
             })
             .catch(error => console.log('error', error));
@@ -269,12 +265,6 @@ class SearchFile extends Component {
     render() {
         return (
             <div className={css.body}>
-                {/*<button onClick={this.breakAccessToken}>*/}
-                {/*    Break access token*/}
-                {/*</button>*/}
-                {/*<button onClick={this.refreshToken}>*/}
-                {/*    Initiate refresh*/}
-                {/*</button>*/}
                 <div className={css.content}>
                     <div className={css.search_block}>
                         <form className={css.search_form} onSubmit={this.findFile} id="login_form">

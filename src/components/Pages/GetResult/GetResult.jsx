@@ -1,13 +1,8 @@
 import css from './GetResult.module.css';
-import icon from "../FileUpload/Uploading.svg";
-import file from "../FileUpload/Frame.svg";
 import React, {Component} from "react";
-// import state from "../../../storage/storage";
 import back_arrow from "../GetResult/back_arrow.svg";
 import file_ico from "../GetResult/file_ico.svg";
 import {NavLink} from "react-router-dom";
-import logo from "../../Header/normokontrol-logo-white-backgroundBlack.svg";
-// import testHtml from "./test.html";
 
 let state;
 
@@ -163,17 +158,8 @@ class GetResult extends Component {
             .then(result => {
                 state['checkResult'] = JSON.parse(result);
                 let res = state.checkResult.errors;
-
-                // state['full_errors'] = JSON.stringify(state.checkResult.errors);
                 state['full_errors'] = state.checkResult.errors;
-
                 state['errors'] = res.map(x => x['mistake-type']).sort(x => x['paragraph-id']).map(error_code => translations[error_code]);
-
-                // state['full_errors'] = JSON.parse(state['full_errors']);
-
-                console.log("BIBA");
-                console.log(state.checkResult.errors);
-                console.log(state['full_errors']);
                 this.forceUpdate();
             })
             .catch(error => console.log('error', error));
@@ -205,23 +191,11 @@ class GetResult extends Component {
     };
 
     copyId() {
-        // state['checkResult']['document-id']
-        // Create a "hidden" input
-        var aux = document.createElement("input");
-
-        // Assign it the value of the specified element
+        let aux = document.createElement("input");
         aux.setAttribute("value", state['checkResult']['document-id']);
-
-        // Append it to the body
         document.body.appendChild(aux);
-
-        // Highlight its content
         aux.select();
-
-        // Copy the highlighted text
         document.execCommand("copy");
-
-        // Remove it from the body
         document.body.removeChild(aux);
 
         let copy_button = document.getElementById("copy_button");
@@ -243,31 +217,6 @@ class GetResult extends Component {
         let toggle_button_hide = document.getElementById('toggle_button_hide');
         let toggle_title = document.getElementById('toggle_title');
         let holder = document.getElementById('holder');
-        // if (list.style.display !== 'none') {
-        //     list.style.display = 'none';
-        //     toggle_button_show.style.display = 'block';
-        //     toggle_button_hide.style.display = 'none';
-        //     toggle_title.textContent = "Развернуть список ошибок";
-        // } else {
-        //     list.style.display = 'block';
-        //     toggle_button_show.style.display = 'none';
-        //     toggle_button_hide.style.display = 'block';
-        //     toggle_title.textContent = "Свернуть список ошибок";
-        // }
-
-        // if (list.style.height !== '0px') {
-        //     list.style.height = '0px';
-        //     setTimeout(()=>{list.style.display = 'none'}, 500);
-        //     toggle_button_show.style.display = 'block';
-        //     toggle_button_hide.style.display = 'none';
-        //     toggle_title.textContent = "Развернуть список ошибок";
-        // } else {
-        //     list.style.display = 'block';
-        //     setTimeout(()=>{list.style.height = '58vh';}, 10);
-        //     toggle_button_show.style.display = 'none';
-        //     toggle_button_hide.style.display = 'block';
-        //     toggle_title.textContent = "Свернуть список ошибок";
-        // }
 
         if (list.style.height !== '0px') {
             // Сворачиваем
@@ -282,7 +231,6 @@ class GetResult extends Component {
             toggle_title.textContent = "Развернуть список ошибок";
 
             holder.style.height = '58vh';
-            // document.getElementById('result_box').scrollIntoView();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -305,66 +253,16 @@ class GetResult extends Component {
         }
     };
 
-    iframeScrollTest1(evt){
-        console.log('Тыц');
-        console.log(evt.target.attributes['data-paragraph-id'].nodeValue);
-
-        // var element = document.getElementById("test");
-        // element.scrollIntoView();
-
-        var iframe = document.getElementById("test");
-        var elmnt = iframe.contentWindow.document.getElementsByTagName("p")[evt.target.attributes['data-paragraph-id'].nodeValue];
-        elmnt.style.backgroundColor = 'cyan';
-        console.log(elmnt);
-        elmnt.scrollIntoView();
-    };
-
-    iframeScrollTest2(){
-        console.log('Тыц');
-
-        // var element = document.getElementById("test");
-        // element.scrollIntoView();
-
-        var iframe = document.getElementById("test");
-        var elmnt = iframe.contentWindow.document.getElementById("53F1B053");
-        elmnt.scrollIntoView();
-    };
-
-    iframeScrollTest3(){
-        console.log('Тыц');
-
-        // var element = document.getElementById("test");
-        // element.scrollIntoView();
-
-        var iframe = document.getElementById("test");
-        var elmnt = iframe.contentWindow.document.getElementById("3C80F3E8");
-        elmnt.scrollIntoView();
-    };
-
-    iframeScrollTest4(){
-        console.log('Тыц');
-
-        // var element = document.getElementById("test");
-        // element.scrollIntoView();
-
-        var iframe = document.getElementById("test");
-        var elmnt = iframe.contentWindow.document.getElementById("2A013C60");
-        elmnt.scrollIntoView();
-    };
-
-    iframeScrollTest5(){
-        console.log('Тыц');
-
-        // var element = document.getElementById("test");
-        // element.scrollIntoView();
-
-        var iframe = document.getElementById("test");
-        var elmnt = iframe.contentWindow.document.getElementById("7E012634");
-        elmnt.scrollIntoView();
+    iframeScroll(evt){
+        let iframe = document.getElementById("test");
+        let scrollTargetElement = iframe.contentWindow.document.getElementsByTagName("p")[evt.target.attributes['data-paragraph-id'].nodeValue];
+        scrollTargetElement.style.backgroundColor = 'cyan';
+        console.log(scrollTargetElement);
+        scrollTargetElement.scrollIntoView();
     };
 
     getFileHtml(){
-        var requestOptions = {
+        let requestOptions = {
             method: 'GET',
             redirect: 'follow'
         };
@@ -379,7 +277,7 @@ class GetResult extends Component {
                     iframe.document.write(result);
                     iframe.document.close();
             }).then( _ => {
-                var iframe = document.getElementById("test");
+                let iframe = document.getElementById("test");
                 let sdaf = state['full_errors'];
                 console.log('sdaf');
                 console.log(sdaf);
@@ -392,18 +290,12 @@ class GetResult extends Component {
                     }
                     iframe.contentWindow.document.getElementsByTagName("p")[sdaf[i]['paragraph-id']].style.backgroundColor = 'cyan';
                 }
-                // var elmnt = iframe.contentWindow.document.getElementsByTagName("p")[evt.target.attributes['data-paragraph-id'].nodeValue];
             }
             )
             .catch(error => console.log('error', error));
     };
 
     render() {
-
-
-        let url = `https://docs.google.com/gview?url=https://normative-control-api.herokuapp.com/document/${state['documentId']}/raw-file?access-key=${state['accessKey']}&embedded=true`;
-        // let url = `https://view.officeapps.live.com/op/embed.aspx?src=https://normative-control-api.herokuapp.com/document/1bc7aa15d7d84912b8a246efceec5123/raw-file?access-key=DAvapNGQVoIuYQsnpzxhvOn9BXbjvQLjgisQdo1IdnU4rBctrWfe52aMablY8YQHSDjQ2xzpj6rYudcAk559Hz6ovDpyQb7RRnWfeBy8eIrlHxbupzalx9LfQJE51jlH`;
-
         return (
             <div>
                 <div id="result_box" className={css.result_box}>
@@ -449,47 +341,14 @@ class GetResult extends Component {
                 <hr/>
                 <div className={css.test_results}>
                     <div className={css.test_errors_list} id="errors">
-                        Ашыпки
-                        {/*<ul>*/}
-                        {/*    <li onClick={this.iframeScrollTest1}>Плохой текст</li>*/}
-                        {/*    <li onClick={this.iframeScrollTest2}>Тоже плохой текст</li>*/}
-                        {/*    <li onClick={this.iframeScrollTest3}>Очень плохой текст!!1!</li>*/}
-                        {/*    <li onClick={this.iframeScrollTest4}>Ваще ужасный текст капец блин...</li>*/}
-                        {/*    <li onClick={this.iframeScrollTest5}>Афтар ты абобус?</li>*/}
-                        {/*</ul>*/}
-                        <RenderClickableList elements={[state['full_errors'], this.iframeScrollTest1]}/>
+                        <RenderClickableList elements={[state['full_errors'], this.iframeScroll]}/>
                     </div>
                     <div className={css.test_document_view} id="document">
-                        Дакумент
-                        {/*<iframe title="test" id="test" name="test" src="./test2.html"/>*/}
-                        {/*<iframe title="test" id="test"  name="test" src="https://normative-control-api.herokuapp.com/document/7a4c75962c6045cd9f253e5b6a3c9ba4/render?access-key=postman"/>*/}
                         <iframe title="test" id="test"  name="test"/>
                     </div>
                 </div>
             </div>
         );
-
-        // return (
-        //     <div>
-        //         <div className={css.result_box}>
-        //             <div className={css.result_header}>
-        //                 <NavLink className={css.back_arrow_link} to='/upload'>
-        //                     <img src={back_arrow} title="На главную"/>
-        //                 </NavLink>
-        //                 <span className={css.file_block}>
-        //                 <img src={file_ico}/>
-        //                 <span>{state['fileName']}</span>
-        //             </span>
-        //             </div>
-        //             <div className={css.statistics}>
-        //                 <p className={css.errors}>Ошибки</p>
-        //                 <RenderList elements={state['errors']}/>
-        //             </div>
-        //             <iframe className={css.document_view} src={url}/>
-        //             {/*<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://vk.com/s/v1/doc/8jezo_i9TzyPHZ1Kfxm2-vYi68Zk5uQZNdIFidX5O2UoMbKOQgY'/>*/}
-        //         </div>
-        //     </div>
-        // );
     };
 }
 

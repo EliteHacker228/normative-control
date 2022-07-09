@@ -41,12 +41,6 @@ class Welcome extends Component {
 
     fileInputOnInput = (evt) => {
         let file = evt.target.files[0];
-
-        // let form = document.getElementById('upload_block');
-        // form.style.display = 'none';
-        // let load = document.getElementById('download');
-        // load.style.display = 'block';
-
         this.reservePlaceInQueue().then(() => {
             let si = setInterval(() => {
                 this.checkFileStatusOnServer(this.state['documentId'])
@@ -102,13 +96,6 @@ class Welcome extends Component {
 
     sendFileToCheckOnServer = (file) => {
         let formdata = new FormData();
-
-        /*TODO:
-         * Сделать проверку на null в файле, по итогам которой
-         * будет разблокироваться кнопка отправки.
-         * До этого будет заблокированной
-        */
-
         if (file['size'] > 20971520) { //Это 20 Мегабайт в Байтах
             this.state['renderSizeError'] = true;
             this.state['renderFormatError'] = false;

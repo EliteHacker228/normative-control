@@ -1,11 +1,6 @@
 import css from './Login.module.css';
-import file_ico from './file-ico.svg';
-import globe_ico from './glode-ico.svg';
 import {NavLink} from "react-router-dom";
-import back_arrow from "../Login/back_arrow.svg";
 import admin_ico from './admin_ico.png';
-import login_ico from './login_ico.png';
-import password_ico from './password_ico.png';
 import React, {Component} from "react";
 import state from "../../../../storage/storage";
 
@@ -28,10 +23,6 @@ class Login extends Component {
             }, 10);
         }
     }
-
-    // redirect = () => {
-    //     document.getElementById('reroute').click();
-    // };
 
     login = (evt) => {
         evt.preventDefault();
