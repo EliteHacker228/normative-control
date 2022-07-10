@@ -46,7 +46,7 @@ const Header = () => {
                 </a>
 
 
-                <div style={{width: '70%'}}/>
+                <div style={{width: '60%'}}/>
 
                 <a href={`${config['frontendAddress']}/faq`} className={css.linkfaq}>
                     <p className={css.faq}>FAQ</p>
