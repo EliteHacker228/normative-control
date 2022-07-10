@@ -88,15 +88,18 @@
     background-color: var(--main-blue);
     color: var(--main-white);
     border-radius: 38px;
-    width: 325px;
-    height: 75px;
+    max-width: 325px;
+    max-height: 75px;
+
+    width: 22vw;
+    height: 10vh;
     display: block;
     text-transform: uppercase;
-    transition: 0.5s all;
+    transition: 0.5s color;
 
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    font-size: 20px;
+    font-size: min(3vh, 20px);
     letter-spacing: 0.05em;
     line-height: 140%;
 
