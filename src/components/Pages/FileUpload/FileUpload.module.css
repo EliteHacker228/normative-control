@@ -88,7 +88,6 @@
     margin: 0 auto;
     background-color: var(--main-blue);
     color: var(--main-white);
-    border-style: none;
     border-radius: 38px;
     width: 325px;
     height: 75px;
@@ -177,7 +176,7 @@
 
 .progressbar_ready {
     background-color: var(--main-green);
-    left: 0%;
+    left: 0;
     animation: none;
 }
 
@@ -187,7 +186,7 @@
 
 .progressbar_error {
     background-color: red;
-    left: 0%;
+    left: 0;
     animation: none;
 }
 

@@ -50,13 +50,13 @@
     align-items: center;
 
     color: #FFFFFF;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 0.05em;
 
-    box-shadow: 0px 0px 226px 15px #0A8ECD;
+    box-shadow: 0 0 226px 15px #0A8ECD;
 }
 
 .login_form p {
@@ -101,7 +101,7 @@
     /*text-transform: uppercase;*/
     transition: 0.5s all;
 
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: 600;
     line-height: 22px;

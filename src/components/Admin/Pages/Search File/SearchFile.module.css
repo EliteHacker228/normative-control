@@ -34,7 +34,7 @@
     background-color: rgba(0, 0, 0, 0);
 
     color: #FFFFFF;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 32px;
     font-weight: 400;
     line-height: 45px;
@@ -78,7 +78,7 @@
     width: 80%;
     height: 50px;
 
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 500;
     line-height: 34px;
@@ -88,7 +88,7 @@
 
 .wrong_id_error {
     color: red;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 25px;
     font-weight: 500;
     line-height: 45px;
@@ -132,7 +132,7 @@
     /*visibility: hidden;*/
 
     color: #FFFFFF;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 400;
     line-height: 34px;
@@ -146,7 +146,7 @@
 }
 
 .inf_block h1 {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 32px;
     font-weight: 500;
     line-height: 45px;
@@ -165,7 +165,7 @@
     flex-grow: 1;
 
 
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 500;
     line-height: 34px;
@@ -262,7 +262,7 @@
 
     /*transition-duration: 0.5s;*/
 
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 21px;
     font-weight: 400;
     line-height: 29px;
@@ -281,7 +281,7 @@
 }
 
 .error {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 21px;
     font-weight: 400;
     line-height: 29px;

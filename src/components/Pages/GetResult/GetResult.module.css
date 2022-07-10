@@ -22,7 +22,7 @@
 }
 
 .content h1 {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 32px;
     font-weight: 600;
     line-height: 45px;
@@ -31,7 +31,7 @@
 }
 
 .content p {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 400;
     line-height: 34px;
@@ -57,7 +57,7 @@
 }
 
 .document_id p {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 32px;
     font-weight: 500;
     line-height: 45px;
@@ -83,7 +83,7 @@
 }
 
 .document_id div {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 40px;
     font-weight: 400;
     line-height: 29px;
@@ -93,7 +93,6 @@
     display: none;
     margin-left: 25px;
     margin-right: 13px;
-    color: var(--main-white);
     text-align: center;
     color: green;
     border: 0;
@@ -105,7 +104,6 @@
     margin: 0 auto;
     background-color: var(--main-blue);
     color: var(--main-white);
-    border-style: none;
     border-radius: 38px;
     width: 325px;
     height: 75px;
@@ -139,7 +137,7 @@
 }
 
 .toggle_statistics {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 400;
     line-height: 34px;
@@ -199,7 +197,7 @@
 
     transition-duration: 0.5s;
 
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 21px;
     font-weight: 400;
     line-height: 29px;
@@ -219,7 +217,7 @@
 }
 
 .errors {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-size: 21px;
     font-weight: 400;
     line-height: 29px;
@@ -281,6 +279,15 @@ ul {
 .test_errors_list {
     overflow-y: scroll;
     height: 500px;
+}
+
+.test_errors_list ul li span {
+    color: red;
+}
+
+.test_errors_list ul li span:hover {
+    color: black;
+    cursor: pointer;
 }
 
 .test_document_view iframe {
