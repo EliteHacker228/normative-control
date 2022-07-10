@@ -1,7 +1,5 @@
 .result_box {
-    /*border-style: dashed;*/
     border-radius: 15px;
-    /*border-color: var(--main-white);*/
     background-image: url("Rectangle 17.svg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,6 +17,7 @@
 .content {
     grid-area: c;
     text-align: center;
+    width: 100%;
 }
 
 .content h1 {
@@ -37,13 +36,12 @@
     line-height: 34px;
     letter-spacing: 0.05em;
     text-align: center;
-    width: 75%;
+    /*width: 75%;*/
     margin: 0 auto;
 }
 
 .document_id {
     background-color: white;
-    /*background-image: url("Rectangle 17.svg");*/
     border-style: dashed;
     border-color: #D3D3D3;
     border-width: 2px;
@@ -52,18 +50,20 @@
     margin: 50px auto 0 auto;
     display: flex;
     align-items: center;
-    width: fit-content;
-    padding: 4px 0 4px 140px;
+    width: 80%;
+    padding-top: 4px;
+    padding-right: 0;
+    padding-left: 10vw;
+    padding-bottom: 4px;
 }
 
 .document_id p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
+    font-size: 2vw;
     font-weight: 500;
     line-height: 45px;
     letter-spacing: 0.05em;
-    text-align: center;
-    width: fit-content;
+    width: 80%;
 }
 
 .document_id button {
