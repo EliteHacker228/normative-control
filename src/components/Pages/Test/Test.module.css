@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*%%PERCENTS%%*/
+
+@media (max-width: 767px) {
+    /* CSS для экранов размером: 576px – 767px */
+
+    .image_student_writing {
+        display: none;
+    }
+
+    .page {
+        display: block !important;
+    }
+
+    .upload_block {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768991px) {
+    /* CSS для: 768px – 991px */
+
+}
+
+@media (max-width: 1119px) {
+    /* CSS для: 992px – 1119px */
+}
+
+@media (min-width: 1200px) {
+    /* CSS для экранов больше 1200px */
+}
+
+.page {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 1.04vw;
+    padding-top: 17vh;
+    background: white;
+    height: calc(100% - 17vh);
+    padding-left: 6vw;
+    padding-right: 6vw;
+}
+
+.upload_block {
+    width: 43.23vw;
+    height: 35.65vh;
+
+    grid-column-start: 1;
+    grid-column-end: 6;
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 2.78vh;
+}
+
+.upload_block__header {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 2.08vw;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.015em;
+}
+
+.upload_block__notation {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 1.51vw;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+}
+
+.upload_block__notation___bold {
+    font-weight: bold;
+}
+
+.upload_block__controls {
+    display: flex;
+    align-items: center;
+    gap: 1.56vw;
+}
+
+.upload_block__button {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 1.25vw;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.015em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+
+    height: 6.94vh;
+    width: 16.93vw;
+    border-radius: 1.04vw;
+
+    background: linear-gradient(259.83deg, #0089CD -5.57%, #00BCCD 87.25%);
+    box-shadow: 0vw 0.99vw 0.57vw -0.83vw #0380B1;
+
+}
+
+.upload_block__button:hover {
+    background: linear-gradient(259.83deg, #00BCCD 67.03%, #0089CD 87.25%);
+    box-shadow: inset 0vw 0.99vw 0.57vw -0.99vw #0380B1;
+}
+
+.upload_block__button:active {
+    background: linear-gradient(237.16deg, #E7E7E7 -11.87%, #C5C5C5 73.7%);
+    box-shadow: inset 0vw 0.99vw 0.57vw -0.83vw rgba(0, 0, 0, 0.25);
+}
+
+.upload_block__drag_n_drop_tip {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 1.04vw;
+    font-weight: 300;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+}
+
+.image_student_writing {
+    grid-column-start: 7;
+    grid-column-end: -1;
+
+    width: 45.52vw;
+    height: 54.81vh;
+}
