@@ -16,8 +16,10 @@ time, mark, audio, video, button {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
+    /*font-size: 100%;*/
+    /*1rem = 10px*/
+    font-size: 62.5%;
+    /*font: inherit;*/
     vertical-align: baseline;
 }
 
@@ -52,61 +54,187 @@ table {
 
 /*%%PERCENTS%%*/
 
-@media (max-width: 767px) {
-    /* CSS для экранов размером: 576px – 767px */
+@media (max-width: 480px) { /* zoom 390%+ */
+    /* Will target mobile devices in landscape mode and up */
+
+    html {
+        font-size: 40%;
+    }
 
     .image_student_writing {
         display: none;
     }
 
     .page {
+        /*background-color: green !important;*/
+        padding-top: 9.4rem !important;
+
         display: block !important;
+
+        padding-left: 6rem !important;
+        padding-right: 6rem !important;
     }
 
     .upload_block {
-        margin: 0 auto;
+        margin: 0 auto !important;
+    }
+
+    .upload_block__header {
+    }
+
+
+    .upload_block__notation {
+
+    }
+
+    .upload_block__drag_n_drop_tip {
+
+    }
+
+    .upload_block__button {
+
     }
 }
 
-@media (max-width: 768991px) {
-    /* CSS для: 768px – 991px */
+@media (min-width: 481px) and (max-width: 767px) { /* zoom 380%-260% */
+    /* Targets tablets in portrait mode and up */
+
+    html {
+        font-size: 60%;
+    }
+
+    .image_student_writing {
+        display: none;
+    }
+
+    .page {
+        /*background-color: green !important;*/
+        padding-top: 9.4rem !important;
+
+        display: block !important;
+
+        padding-left: 6rem !important;
+        padding-right: 6rem !important;
+    }
+
+    .upload_block {
+        margin: 0 auto !important;
+    }
+
+    .upload_block__header {
+    }
+
+
+    .upload_block__notation {
+
+    }
+
+    .upload_block__drag_n_drop_tip {
+
+    }
+
+    .upload_block__button {
+
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) { /* zoom 250%-200% */
+    /*  Targets tablets in landscape mode and up */
+
+    .image_student_writing {
+        display: none;
+    }
+
+    .page {
+        /*background-color: green !important;*/
+        padding-top: 9.4rem !important;
+
+        display: block !important;
+
+        padding-left: 6rem !important;
+        padding-right: 6rem !important;
+    }
+
+    .upload_block {
+        margin: 0 auto !important;
+    }
+
+    .upload_block__header {
+    }
+
+
+    .upload_block__notation {
+
+    }
+
+    .upload_block__drag_n_drop_tip {
+
+    }
+
+    .upload_block__button {
+
+    }
 
 }
 
-@media (max-width: 1119px) {
-    /* CSS для: 992px – 1119px */
-}
+@media (min-width: 1024px) { /* zoom 190%- */
+    /* Targets the desktop view */
 
-@media (min-width: 1200px) {
-    /* CSS для экранов больше 1200px */
+    .image_student_writing {
+        /*display: none;*/
+    }
+
+    .page {
+        /*background-color: grey !important;*/
+    }
+
+    .upload_block {
+
+    }
+
+    .upload_block__header {
+    }
+
+
+    .upload_block__notation {
+
+    }
+
+    .upload_block__drag_n_drop_tip {
+
+    }
+
+    .upload_block__button {
+
+    }
 }
 
 .page {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: 1.04vw;
-    padding-top: 17vh;
+    grid-column-gap: 2rem;
+    padding-top: min(15vh, 18.4rem);
     background: white;
-    height: calc(100% - 17vh);
-    padding-left: 6vw;
-    padding-right: 6vw;
+    height: calc(100% - min(15vh, 18.4rem));
+    padding-left: min(7vw, 12rem);
+    padding-right: min(7vw, 12rem);
 }
 
 .upload_block {
-    width: 43.23vw;
-    height: 35.65vh;
+    /*width: 43.23vw;*/
+    height: 22rem;
 
     grid-column-start: 1;
-    grid-column-end: 6;
+    grid-column-end: 7;
 
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    grid-row-gap: 2.78vh;
+    grid-row-gap: 1.2rem;
 }
 
 .upload_block__header {
     font-family: 'Ubuntu', 'sans-serif';
-    font-size: 2.08vw;
+    font-size: 4rem;
     font-weight: 700;
     line-height: 140%;
     letter-spacing: 0.015em;
@@ -114,53 +242,55 @@ table {
 
 .upload_block__notation {
     font-family: 'Ubuntu', 'sans-serif';
-    font-size: 1.51vw;
+    font-size: 2.9rem;
     font-weight: 400;
     line-height: 140%;
     letter-spacing: 0.02em;
 }
 
 .upload_block__notation___bold {
+    font-size: inherit;
     font-weight: bold;
 }
 
 .upload_block__controls {
     display: flex;
     align-items: center;
-    gap: 1.56vw;
+    gap: 3rem;
 }
 
 .upload_block__button {
     font-family: 'Ubuntu', 'sans-serif';
-    font-size: 1.25vw;
+    font-size: 2.2rem;
     font-weight: 700;
     line-height: 140%;
     letter-spacing: 0.015em;
     color: #FFFFFF;
     text-transform: uppercase;
 
-    height: 6.94vh;
-    width: 16.93vw;
-    border-radius: 1.04vw;
+    height: 7.5rem;
+    width: 32.5rem;
+    border-radius: 20px;
 
     background: linear-gradient(259.83deg, #0089CD -5.57%, #00BCCD 87.25%);
-    box-shadow: 0vw 0.99vw 0.57vw -0.83vw #0380B1;
-
+    box-shadow: 0rem 1.9rem 1.1rem -1.6rem #0380B1;
 }
 
 .upload_block__button:hover {
+    cursor: pointer;
+
     background: linear-gradient(259.83deg, #00BCCD 67.03%, #0089CD 87.25%);
-    box-shadow: inset 0vw 0.99vw 0.57vw -0.99vw #0380B1;
+    box-shadow: inset 0rem 1.9rem 1.1rem -1.9rem #0380B1;
 }
 
 .upload_block__button:active {
     background: linear-gradient(237.16deg, #E7E7E7 -11.87%, #C5C5C5 73.7%);
-    box-shadow: inset 0vw 0.99vw 0.57vw -0.83vw rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0rem 1.9rem 1.1rem -1.6rem rgba(0, 0, 0, 0.25)
 }
 
 .upload_block__drag_n_drop_tip {
     font-family: 'Ubuntu', 'sans-serif';
-    font-size: 1.04vw;
+    font-size: 2rem;
     font-weight: 300;
     line-height: 140%;
     letter-spacing: 0.02em;
@@ -170,6 +300,8 @@ table {
     grid-column-start: 7;
     grid-column-end: -1;
 
-    width: 45.52vw;
-    height: 54.81vh;
+    width: 85.4rem;
+    height: auto;
+
+    /*aspect-ratio: 874/592;*/
 }

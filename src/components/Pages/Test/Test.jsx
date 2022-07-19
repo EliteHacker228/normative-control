@@ -180,7 +180,7 @@ class Test extends Component {
         return (
             <div className={css.page}>
                 <div className={css.upload_block}>
-                    <h1 className={css.upload_block__header}>Проверка вашей дипломной работы
+                    <h1 className={css.upload_block__header}>Проверка вашей выпускной квалифицированной работы
                         на наличие ошибок оформления документа</h1>
                     <p className={css.upload_block__notation}>
                         Сервис поддерживает файлы формата <b
