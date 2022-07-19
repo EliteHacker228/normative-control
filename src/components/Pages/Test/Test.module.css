@@ -54,9 +54,9 @@ table {
 
 /*%%PERCENTS%%*/
 
-@media (max-width: 480px) { /* zoom 390%+ */
+@media (max-width: 480px) {
+    /* zoom 390%+ */
     /* Will target mobile devices in landscape mode and up */
-
     html {
         font-size: 40%;
     }
@@ -96,9 +96,9 @@ table {
     }
 }
 
-@media (min-width: 481px) and (max-width: 767px) { /* zoom 380%-260% */
+@media (min-width: 481px) and (max-width: 767px) {
+    /* zoom 380%-260% */
     /* Targets tablets in portrait mode and up */
-
     html {
         font-size: 60%;
     }
@@ -138,9 +138,9 @@ table {
     }
 }
 
-@media (min-width: 768px) and (max-width: 979px) { /* zoom 250%-200% */
+@media (min-width: 768px) and (max-width: 979px) {
+    /* zoom 250%-200% */
     /*  Targets tablets in landscape mode and up */
-
     .image_student_writing {
         display: none;
     }
@@ -177,9 +177,9 @@ table {
 
 }
 
-@media (min-width: 1024px) { /* zoom 190%- */
+@media (min-width: 1024px) {
+    /* zoom 190%- */
     /* Targets the desktop view */
-
     .image_student_writing {
         /*display: none;*/
     }
@@ -257,6 +257,8 @@ table {
     display: flex;
     align-items: center;
     gap: 3rem;
+
+    height: 7.5rem;
 }
 
 .upload_block__button {
@@ -304,4 +306,14 @@ table {
     height: auto;
 
     /*aspect-ratio: 874/592;*/
+}
+
+.uploading_error {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 3.5rem;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    color: #FF0000;
+    display: none;
 }

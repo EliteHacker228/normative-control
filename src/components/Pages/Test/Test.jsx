@@ -99,23 +99,22 @@ class Test extends Component {
     sendFileToCheckOnServer = (file) => {
         let formdata = new FormData();
         if (file['size'] > 20971520) { //Это 20 Мегабайт в Байтах
-            this.state['renderSizeError'] = true;
-            this.state['renderFormatError'] = false;
+            let uploadingError = document.getElementById('uploading_error');
+            uploadingError.textContent = 'Ошибка! Файл слишком большой. Загрузите файл размером до 20 МБ';
+            uploadingError.style.display = 'block';
             this.forceUpdate();
             return;
         } else if (file['name'].split('.').pop() !== 'docx') {
-            this.state['renderSizeError'] = false;
-            this.state['renderFormatError'] = true;
+            let uploadingError = document.getElementById('uploading_error');
+            uploadingError.textContent = 'Ошибка! Неверный формат. Загрузите .docx файл';
+            uploadingError.style.display = 'block';
             this.forceUpdate();
             return;
         }
 
         this.state['file'] = file;
 
-        let form = document.getElementById('upload_block');
-        form.style.display = 'none';
-        let load = document.getElementById('download');
-        load.style.display = 'block';
+        this.startFileUploadingAnimation();
 
         formdata.append("file", file, file.name);
         formdata.append("access-key", this.state['accessKey']);
@@ -144,30 +143,92 @@ class Test extends Component {
             })
     };
 
+    startFileUploadingAnimation = () => {
+        let uploadBlockButton = document.getElementById('upload_block_controls_button');
+        uploadBlockButton.style.display = 'none';
+
+        let uploadBlockControls = document.getElementById('upload_block_controls');
+        uploadBlockControls.style.justifyContent = 'center';
+
+        let uploadBlockTip = document.getElementById('upload_block_controls_tip');
+        uploadBlockTip.textContent = 'Идёт отправка файла на сервер.';
+
+        this.forceUpdate();
+
+        let counter = 0;
+        setInterval(() => {
+            counter++;
+            switch (counter % 3) {
+                case 0:
+                    uploadBlockTip.textContent = 'Идёт отправка файла на сервер.';
+                    break;
+
+                case 1:
+                    uploadBlockTip.textContent = 'Идёт отправка файла на сервер..';
+                    break;
+
+                case 2:
+                    uploadBlockTip.textContent = 'Идёт отправка файла на сервер...';
+                    break;
+
+                default:
+                    break;
+            }
+        }, 500);
+
+    };
+
+    resetControlsAfterDragNDrop = () => {
+        let uploadBlock = document.getElementById('upload_block_controls');
+        uploadBlock.style.backgroundColor = 'transparent';
+        uploadBlock.style.border = 'none';
+
+        let uploadBlockButton = document.getElementById('upload_block_controls_button');
+        uploadBlockButton.style.display = 'block';
+
+        let uploadBlockControls = document.getElementById('upload_block_controls');
+        uploadBlockControls.style.justifyContent = 'normal';
+
+        let uploadBlockTip = document.getElementById('upload_block_controls_tip');
+        uploadBlockTip.textContent = 'или перетащите файл сюда';
+    };
+
     onDragEnter = (evt) => {
         evt.preventDefault();
-        let uploadBlock = document.getElementById('drop_area');
-        uploadBlock.style.backgroundColor = 'transparent';
+        this.resetControlsAfterDragNDrop();
     };
 
     onDragLeave = (evt) => {
         evt.preventDefault();
-        let uploadBlock = document.getElementById('drop_area');
-        uploadBlock.style.backgroundColor = 'transparent';
+        this.resetControlsAfterDragNDrop();
     };
 
     onDragOver = (evt) => {
         evt.preventDefault();
-        let uploadBlock = document.getElementById('drop_area');
+
+        let uploadBlock = document.getElementById('upload_block_controls');
         uploadBlock.style.backgroundColor = 'rgba(192, 192, 192, 0.3)';
         uploadBlock.style.borderRadius = '25px';
+        uploadBlock.style.borderStyle = 'dashed';
+        uploadBlock.style.borderWidth = '2px';
+        uploadBlock.style.borderColor = 'grey';
 
+        let uploadBlockButton = document.getElementById('upload_block_controls_button');
+        uploadBlockButton.style.display = 'none';
+
+        let uploadBlockControls = document.getElementById('upload_block_controls');
+        uploadBlockControls.style.justifyContent = 'center';
+
+        let uploadBlockTip = document.getElementById('upload_block_controls_tip');
+        uploadBlockTip.textContent = 'перетащите файл сюда';
+
+        let uploadingError = document.getElementById('uploading_error');
+        uploadingError.style.display = 'none';
     };
 
     onDrop = (evt) => {
         evt.preventDefault();
-        let uploadBlock = document.getElementById('drop_area');
-        uploadBlock.style.backgroundColor = 'transparent';
+        this.resetControlsAfterDragNDrop();
 
         let file = evt.dataTransfer.files[0];
 
@@ -187,12 +248,24 @@ class Test extends Component {
                         className={css.upload_block__notation___bold}>docx</b> объемом до <b
                         className={css.upload_block__notation___bold}>20МБ</b>.
                     </p>
-                    <div className={css.upload_block__controls}>
-                        <button className={css.upload_block__button}>Выбрать файл</button>
-                        <p className={css.upload_block__drag_n_drop_tip}>или перетащите файл сюда</p>
+                    <div id="upload_block_controls" className={css.upload_block__controls}
+                         onDragEnter={this.onDragEnter}
+                         onDragLeave={this.onDragLeave}
+                         onDragOver={this.onDragOver}
+                         onDrop={this.onDrop}
+                         onDragEnd={this.onDragEnd}
+                         onDragExit={this.onDragExit}>
+                        <button id="upload_block_controls_button" className={css.upload_block__button}
+                                onClick={this.fileSendButtonOnClick}>Выбрать файл
+                        </button>
+                        <p id="upload_block_controls_tip" className={css.upload_block__drag_n_drop_tip}>или перетащите
+                            файл сюда</p>
                     </div>
+                    <div id="uploading_error" className={css.uploading_error}>Ошибка!</div>
                 </div>
                 <img className={css.image_student_writing} src={student_writing} alt="Студент делает записи в тетради"/>
+
+                <NavLink id="reroute" to='/upload' style={{display: "none"}}/>
             </div>
         );
     }
