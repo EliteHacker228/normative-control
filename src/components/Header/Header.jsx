@@ -1,5 +1,5 @@
 import css from './Header.module.css';
-import logo from './normokontrol-logo-white-backgroundBlack.svg';
+import logo from './logo-new.png';
 import {NavLink} from "react-router-dom";
 import React from "react";
 
@@ -19,10 +19,10 @@ const Header = () => {
                 </NavLink>
 
                 <NavLink to='/' className={css.linkname} title="На главную">
-                    <p className={css.name}>normative<br/>control</p>
+                    <p className={css.name}>normative <br/> control</p>
                 </NavLink>
 
-                <div style={{width: '80%'}}/>
+                <div style={{width: '69vw'}}/>
                 <NavLink to='/faq' className={css.linkfaq}>
                     <p className={css.faq}>FAQ</p>
                 </NavLink>

@@ -7,30 +7,28 @@
 }
 
 .header {
-    background-color:var(--main-dark);
-    color: var(--main-white);
+    background-color: transparent;
+    color: #000000;
     display: flex;
-    height: 100px;
+    height: 200px;
     align-items: center;
-    padding-right: 15px;
+    padding-left: min(140px, 8vw);
+    padding-right: min(50px, 6vw);
+    grid-column-gap: 20px;
     z-index: 1;
 }
 
 .logo {
     width: 100px;
-    margin-left: 100px;
 }
 
 .linkname {
-    color: var(--main-white);
-    position: absolute;
-    margin-left: 200px;
-    padding-left: 50px;
+    color: #000000;
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     letter-spacing: 0.05em;
-    line-height: 140%;
+    line-height: 100%;
     text-decoration: none;
 }
 
@@ -39,20 +37,17 @@
 }
 
 .linkfaq{
-    width: 7%;
-    height: 100%;
+    color: #000000;
     text-align: center;
-    padding-top: 30px;
     text-decoration: none;
 }
 
 .faq {
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     letter-spacing: 0.05em;
     line-height: 140%;
-    color: var(--main-white);
 }
 
 .linklogout{
@@ -70,70 +65,4 @@
     letter-spacing: 0.05em;
     line-height: 140%;
     color: var(--main-white);
-}
-
-.linkabout{
-    width: 10%;
-    height: 100%;
-    text-align: center;
-    padding-top: 30px;
-    text-decoration: none;
-}
-
-.about {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    line-height: 140%;
-    color: var(--main-white);
-}
-
-.menu {
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    column-gap: 60px;
-    font-size: 1.2em;
-}
-
-.menu .menu_element {
-}
-
-/*.menu .menu_element:hover {*/
-/*    !*border-bottom-style: solid;*!*/
-/*    !*border-bottom-color: #F2F2F2;*!*/
-/*    !*border-bottom-width: 2px;*!*/
-/*    box-shadow: 0px 2px white;*/
-/*}*/
-
-.menu_element {
-    color: var(--main-white);
-    /*text-transform: uppercase;*/
-    text-decoration: none;
-    font-size: 1.5em;
-    /*letter-spacing: 0.15em;*/
-    /*display: inline-block;*/
-    padding: 15px;
-    position: relative;
-}
-
-.menu_element::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    /*display: block;*/
-    /*background: none repeat scroll 0 0 transparent;*/
-    height: 4px;
-    width: 0;
-    background: var(--main-white);
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-}
-
-.menu_element:hover::after {
-    width: 100%;
-    left: 0;
 }
