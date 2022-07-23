@@ -52,276 +52,71 @@ table {
     border-spacing: 0;
 }
 
-/*%%PERCENTS%%*/
-
-@media (max-width: 480px) {
-    /* zoom 390%+ */
-    /* Will target mobile devices in landscape mode and up */
-    html {
-        font-size: 40%;
-    }
-
-    .image_student_writing {
-        display: none;
-    }
-
-    .page {
-        /*background-color: green !important;*/
-        padding-top: 9.4rem !important;
-
-        display: block !important;
-
-        padding-left: 6rem !important;
-        padding-right: 6rem !important;
-    }
-
-    .upload_block {
-        margin: 0 auto !important;
-    }
-
-    .upload_block__header {
-    }
-
-
-    .upload_block__notation {
-
-    }
-
-    .upload_block__drag_n_drop_tip {
-
-    }
-
-    .upload_block__button {
-
-    }
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-    /* zoom 380%-260% */
-    /* Targets tablets in portrait mode and up */
-    html {
-        font-size: 60%;
-    }
-
-    .image_student_writing {
-        display: none;
-    }
-
-    .page {
-        /*background-color: green !important;*/
-        padding-top: 9.4rem !important;
-
-        display: block !important;
-
-        padding-left: 6rem !important;
-        padding-right: 6rem !important;
-    }
-
-    .upload_block {
-        margin: 0 auto !important;
-    }
-
-    .upload_block__header {
-    }
-
-
-    .upload_block__notation {
-
-    }
-
-    .upload_block__drag_n_drop_tip {
-
-    }
-
-    .upload_block__button {
-
-    }
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-    /* zoom 250%-200% */
-    /*  Targets tablets in landscape mode and up */
-    .image_student_writing {
-        display: none;
-    }
-
-    .page {
-        /*background-color: green !important;*/
-        padding-top: 9.4rem !important;
-
-        display: block !important;
-
-        padding-left: 6rem !important;
-        padding-right: 6rem !important;
-    }
-
-    .upload_block {
-        margin: 0 auto !important;
-    }
-
-    .upload_block__header {
-    }
-
-
-    .upload_block__notation {
-
-    }
-
-    .upload_block__drag_n_drop_tip {
-
-    }
-
-    .upload_block__button {
-
-    }
-
-}
-
-@media (min-width: 1024px) {
-    /* zoom 190%- */
-    /* Targets the desktop view */
-    .image_student_writing {
-        /*display: none;*/
-    }
-
-    .page {
-        /*background-color: grey !important;*/
-    }
-
-    .upload_block {
-
-    }
-
-    .upload_block__header {
-    }
-
-
-    .upload_block__notation {
-
-    }
-
-    .upload_block__drag_n_drop_tip {
-
-    }
-
-    .upload_block__button {
-
-    }
-}
-
-.page {
-    /*display: grid;*/
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: 2rem;
-    /*padding-top: min(15vh, 18.4rem);*/
+.page_body {
     padding-top: 6rem;
-    background: white;
-    height: calc(100% - min(15vh, 18.4rem));
-    padding-left: 10rem;
-    padding-right: 10rem;
 }
 
-.upload_block {
-    /*width: 43.23vw;*/
-    height: 22rem;
-
-    grid-column-start: 2;
-    grid-column-end: 7;
-
+.page_content {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-row-gap: 3rem;
-    margin-top: 5.5rem;
+    grid-template-columns: repeat(14, 1fr);
+    grid-column-gap: 2rem;
+    align-items:center;
+    /*padding-left: 10rem;*/
+    /*padding-right: 10rem;*/
 }
 
-.upload_block__header {
-    font-family: 'Ubuntu', 'sans-serif';
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 140%;
-    letter-spacing: 0.015em;
-}
-
-.upload_block__notation {
-    font-family: 'Ubuntu', 'sans-serif';
-    font-size: 2.9rem;
-    font-weight: 400;
-    line-height: 140%;
-    letter-spacing: 0.02em;
-}
-
-.upload_block__notation___bold {
-    font-size: inherit;
-    font-weight: bold;
-}
-
-.upload_block__controls {
-    display: flex;
-    align-items: center;
-    gap: 1.8rem;
-
-    height: 7.5rem;
-}
-
-.upload_block__button {
-    font-family: 'Ubuntu', 'sans-serif';
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 140%;
-    letter-spacing: 0.015em;
-    color: #FFFFFF;
-    text-transform: uppercase;
-
-    height: 7.5rem;
-    width: 32.5rem;
-    border-radius: 2rem;
-
-    background: linear-gradient(259.83deg, #0089CD -5.57%, #00BCCD 87.25%);
-    box-shadow: 0rem 1.9rem 1.1rem -1.6rem #0380B1;
-}
-
-.upload_block__button:hover {
-    cursor: pointer;
-
-    background: linear-gradient(259.83deg, #00BCCD 67.03%, #0089CD 87.25%);
-    box-shadow: inset 0rem 1.9rem 1.1rem -1.9rem #0380B1;
-}
-
-.upload_block__button:active {
-    background: linear-gradient(237.16deg, #E7E7E7 -11.87%, #C5C5C5 73.7%);
-    box-shadow: inset 0rem 1.9rem 1.1rem -1.6rem rgba(0, 0, 0, 0.25)
-}
-
-.upload_block__drag_n_drop_tip {
-    font-family: 'Ubuntu', 'sans-serif';
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 140%;
-    letter-spacing: 0.02em;
-}
-
-.image_student_writing {
-    grid-column-start: 7;
+.upload_progress_block {
+    grid-column-start: 2;
     grid-column-end: -1;
 
-    width: 85.4rem;
-    height: auto;
+    text-align: center;
 
-    margin-left: 1.6rem;
-    margin-top: 0.5rem;
-
-    float: left;
-
-    /*aspect-ratio: 874/592;*/
+    padding-bottom: 30px;
 }
 
-.uploading_error {
+.upload_progress_block__progress_wheel {
+
+}
+
+.upload_progress_block__progress_text {
+    color: #000000;
+    font-size: 4rem;
     font-family: 'Ubuntu', 'sans-serif';
-    font-size: 3.5rem;
     font-weight: 400;
     line-height: 140%;
     letter-spacing: 0.02em;
-    color: #FF0000;
-    display: none;
+
+    margin-top: 20px;
+    position: relative;
+    right: 65px;
+    bottom: 5px;
+}
+
+.upload_progress_block__see_result {
+
+}
+
+.img_student_sleeps {
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+.img_stack_of_books {
+    margin-top: 5rem;
+    grid-column-start: -1;
+    grid-column-end: -1;
+}
+
+.img_progressbar {
+    margin-right: 130px;
+    animation: animation_rotation 1s linear infinite;
+}
+
+@keyframes animation_rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
