@@ -4,6 +4,7 @@ import img_student_sleeps from './sleeping_student.png';
 import img_stack_of_books from './stack_of_books.png';
 import img_progressbar from './progressbar.png';
 import img_progressbar_done from './progressbar_done.png';
+import img_student_with_notebook from './student_with_notebook.png';
 import {NavLink} from "react-router-dom";
 
 import config from "../../../config/config";
@@ -69,6 +70,14 @@ class Test extends Component {
                 image.src = img_progressbar_done;
                 image.style.animation = 'none';
                 image.style.padding = '36.5px';
+
+
+                let iss = document.getElementById("img_student_sleeps");
+                iss.style.display = 'none';
+                let iswn = document.getElementById("img_student_with_notebook");
+                iswn.style.display = 'block';
+
+
                 clearInterval(intervalId);
                 localStorage.setItem('normokontrol_state', JSON.stringify(state));
                 this.forceUpdate();
@@ -92,19 +101,27 @@ class Test extends Component {
         return (
             <div className={css.page_body}>
                 <div className={css.page_content}>
-                    <img src={img_student_sleeps} className={css.img_student_sleeps} alt="Студент спит за партой"/>
+                    <img id="img_student_sleeps" src={img_student_sleeps} className={css.img_student_sleeps}
+                         alt="Студент спит за партой"/>
+                    <img id="img_student_with_notebook" src={img_student_with_notebook}
+                         className={css.img_student_with_notebook} alt="Студент сидит за ноутбуком"/>
                     <div className={css.upload_progress_block}>
                         <div className={css.upload_progress_block__progress_wheel}>
-                            <img id="img_progressbar" src={img_progressbar} className={css.img_progressbar} alt="Индикатор прогресса обработки файла"/>
+                            <img id="img_progressbar" src={img_progressbar} className={css.img_progressbar}
+                                 alt="Индикатор прогресса обработки файла"/>
                         </div>
-                        <div id="upload_progress_block__progress_text" className={css.upload_progress_block__progress_text}>
+                        <div id="upload_progress_block__progress_text"
+                             className={css.upload_progress_block__progress_text}>
                             Ваш файл в очереди на обработку
                         </div>
-                        <button className={css.upload_progress_block__see_result}>
-                            *статус* вашей работы на наличие ошибок оформления документа
-                        </button>
+                        <NavLink to='/result'>
+                            <button className={css.upload_progress_block__see_result}>
+                                Посмотреть результат
+                            </button>
+                        </NavLink>
                     </div>
-                    <img src={img_stack_of_books} className={css.img_stack_of_books} alt="Стопка учебников, шапка бакалавра, сёрнутый диплом"/>
+                    <img src={img_stack_of_books} className={css.img_stack_of_books}
+                         alt="Стопка учебников, шапка бакалавра, сёрнутый диплом"/>
                 </div>
             </div>
         );

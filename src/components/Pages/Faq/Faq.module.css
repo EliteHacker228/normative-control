@@ -1,71 +1,98 @@
-.introduction {
-    background-image: url("Rectangle 17.svg");
-    background-repeat: no-repeat;
-    padding: 17px 0 34px;
-    background-size:cover;
-    text-align: center;
-    width: 52%;
-    margin: 75px auto 80px auto;
+.page_body {
+    padding-left: 190px;
+    padding-right: 130px;
 }
 
-.introduction h1 {
-    margin: 0;
-}
-
-.introduction p {
-    margin: 0;
-}
-
-.back_arrow_link{
-    position: absolute;
-    left: 5%;
-}
-
-.introduction h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 56px;
-    letter-spacing: 0.02em;
-}
-
-.introduction p {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 34px;
-    letter-spacing: 0.02em;
-}
-
-.questions {
+.page_content {
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-column-gap: 80px;
-    width: 70%;
-    margin: 0 auto 0 auto;
+    grid-template-columns: repeat(13, 1fr);
+    grid-column-gap: 2rem;
+    /*align-items:center;*/
 }
 
-.question h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 28px;
-    letter-spacing: 0.02em;
+.page_description {
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
+
+.page_description__header {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 56px;
+    letter-spacing: 0.015em;
     text-align: left;
-    position: relative;
+
 }
 
-.question p {
-    font-family: 'Montserrat', sans-serif;
+.page_description__text {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 29px;
+    font-weight: 400;
+    line-height: 41px;
+    letter-spacing: 0.015em;
+    text-align: left;
+
+    margin-top: 2rem;
+}
+
+.page_description__image {
+    position: relative;
+    left: 70px;
+    top: 20px;
+}
+
+.questions_and_answers {
+    grid-column-start: 7;
+    grid-column-end: -1;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+
+    margin-left: 5rem;
+}
+
+.questions_and_answers__head {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.questions_and_answers__question_block {
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+    border-radius: 1.5rem;
+    padding: 1.8rem;
+}
+
+.questions_and_answers__icon {
+
+}
+
+.questions_and_answers__question {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 139.99%;
+
+    /* identical to box height, or 28px */
+    letter-spacing: 0.015em;
+
+    color: #292929;
+}
+
+.questions_and_answers__answer {
+    font-family: 'Ubuntu', 'sans-serif';
     font-size: 16px;
     font-weight: 400;
     line-height: 22px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.015em;
     text-align: left;
 }
 
-.question h2 img{
-    position: absolute;
-    left: -50px;
-    top: -5px;
+.footer {
+    height: 100px;
 }

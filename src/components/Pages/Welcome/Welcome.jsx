@@ -265,7 +265,7 @@ class Welcome extends Component {
                 </div>
                 <img className={css.image_student_writing} src={student_writing} alt="Студент делает записи в тетради"/>
 
-                <NavLink id="reroute" to='/upload' style={{display: "none"}}/>
+                <NavLink id="reroute" to='/test' style={{display: "none"}}/>
             </div>
         );
     }

@@ -1,57 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    /*font-size: 100%;*/
-    /*1rem = 10px*/
-    font-size: 62.5%;
-    /*font: inherit;*/
-    vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-body {
-    line-height: 1;
-}
-
-ol, ul {
-    list-style: none;
-}
-
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
 .page_body {
     padding-top: 6rem;
 }
@@ -71,7 +17,8 @@ table {
 
     text-align: center;
 
-    padding-bottom: 30px;
+    /*padding-bottom: 30px;*/
+    margin-bottom: 11%;
 }
 
 .upload_progress_block__progress_wheel {
@@ -93,16 +40,60 @@ table {
 }
 
 .upload_progress_block__see_result {
+    width: 394px;
+    height: 75px;
 
+
+    background: linear-gradient(259.83deg, #56DCB8 -5.57%, #56DC5F 87.25%);
+    box-shadow: 0px 19px 11px -16px #52CB82;
+    border-radius: 20px;
+
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0.015em;
+
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+    margin-right: 128px;
+    margin-top: 72px;
+}
+
+.upload_progress_block__see_result:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+}
+.upload_progress_block__see_result:active {
+    background: linear-gradient(237.16deg, #E7E7E7 -11.87%, #C5C5C5 73.7%);
+    box-shadow: inset 0rem 1.9rem 1.1rem -1.6rem rgba(0, 0, 0, 0.25);
+    color: #000000;
+}
+
+
+.img_student_sleeps {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    margin-bottom: 9rem;
+}
+
+.img_student_with_notebook {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    margin-bottom: 9rem;
+    padding-right: 45px;
+    display: none;
 }
 
 .img_student_sleeps {
     grid-column-start: 1;
     grid-column-end: 1;
+    margin-bottom: 9rem;
 }
 
 .img_stack_of_books {
-    margin-top: 5rem;
+    margin-bottom: 4.4rem;
     grid-column-start: -1;
     grid-column-end: -1;
 }
